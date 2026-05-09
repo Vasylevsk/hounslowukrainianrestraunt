@@ -1,0 +1,252 @@
+/* Prosperity menu: dark canvas, gold titles, zigzag text / oval photo (Instagram reference) */
+
+.app__menu-page {
+  min-height: 100vh;
+  background: var(--color-black);
+}
+
+.app__menu-page_container {
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.app__menu-page_content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.app__menu-page_header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.app__menu-page_h1 {
+  margin-bottom: 0.5rem;
+}
+
+.app__menu-page_spoon {
+  margin-top: 1rem;
+}
+
+.app__menu-page_intro {
+  margin: 2rem auto 0;
+  max-width: 640px;
+  text-align: center;
+  color: var(--color-grey);
+  line-height: 1.65;
+}
+
+.app__menu-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.app__menu-category {
+  position: relative;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* subtle sparkle dots */
+.app__menu-category::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 0.5rem;
+  right: 8%;
+  background: radial-gradient(circle, rgba(220, 202, 135, 0.45) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.app__menu-category-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.app__menu-category-title {
+  font-family: var(--font-base);
+  color: var(--color-white);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  margin: 0;
+  text-align: left;
+}
+
+.app__menu-category-accent {
+  flex: 1;
+  min-width: 80px;
+  max-width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(220, 202, 135, 0.5), transparent);
+  transform: skewX(-35deg);
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+
+.app__menu-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.app__menu-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem 2.5rem;
+}
+
+.app__menu-row--reverse {
+  flex-direction: row-reverse;
+}
+
+.app__menu-row-text {
+  flex: 1;
+  min-width: 0;
+  max-width: 520px;
+  text-align: left;
+}
+
+.app__menu-item-name {
+  font-family: var(--font-alt);
+  color: var(--color-golden);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.app__menu-item-description {
+  font-family: var(--font-alt);
+  color: var(--color-grey);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 0.65rem;
+  letter-spacing: 0.02em;
+}
+
+.app__menu-item-price {
+  font-family: var(--font-alt);
+  color: var(--color-golden);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.app__menu-row-visual {
+  flex-shrink: 0;
+  width: min(42vw, 340px);
+  aspect-ratio: 16 / 10;
+  position: relative;
+}
+
+.app__menu-row-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 202, 135, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.app__menu-row-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 1px dashed rgba(220, 202, 135, 0.2);
+  background: linear-gradient(145deg, rgba(220, 202, 135, 0.06), rgba(0, 0, 0, 0.4));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app__menu-row-placeholder-inner {
+  width: 40%;
+  height: 40%;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 202, 135, 0.12);
+  opacity: 0.6;
+}
+
+.app__menu-page_actions {
+  text-align: center;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(220, 202, 135, 0.15);
+}
+
+.app__menu-button {
+  text-decoration: none !important;
+  display: inline-block !important;
+  margin-bottom: 1rem;
+}
+
+.app__menu-link {
+  color: var(--color-grey);
+  text-decoration: none;
+  font-family: var(--font-alt);
+  font-size: 16px;
+  transition: color 0.3s ease;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.app__menu-link:hover {
+  color: var(--color-golden);
+}
+
+@media screen and (max-width: 800px) {
+  .app__menu-row,
+  .app__menu-row--reverse {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .app__menu-row--reverse .app__menu-row-text,
+  .app__menu-row--reverse .app__menu-row-visual {
+    order: unset;
+  }
+
+  .app__menu-row-visual {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .app__menu-row-text {
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .app__menu-page_container {
+    padding-top: 5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .app__menu-categories {
+    gap: 2.75rem;
+  }
+
+  .app__menu-rows {
+    gap: 1.85rem;
+  }
+
+  .app__menu-category-title {
+    font-size: 1.65rem;
+  }
+}

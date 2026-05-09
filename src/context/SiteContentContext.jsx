@@ -1,0 +1,86 @@
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+
+import { defaultSiteContent, SITE_CONTENT_VERSION } from '../constants/siteDefaults';
+
+const STORAGE_KEY = 'prosperity_site_content_v2';
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return clone(defaultSiteContent);
+    const parsed = JSON.parse(raw);
+    if (!parsed || parsed.version !== SITE_CONTENT_VERSION) return clone(defaultSiteContent);
+    if (!Array.isArray(parsed.workingHours) || !parsed.featuredMenu || !Array.isArray(parsed.fullMenu)) {
+      return clone(defaultSiteContent);
+    }
+    return {
+      ...clone(defaultSiteContent),
+      ...parsed,
+      workingHours: parsed.workingHours,
+      featuredMenu: {
+        ...defaultSiteContent.featuredMenu,
+        ...parsed.featuredMenu,
+        leftItems: parsed.featuredMenu.leftItems || defaultSiteContent.featuredMenu.leftItems,
+        rightItems: parsed.featuredMenu.rightItems || defaultSiteContent.featuredMenu.rightItems,
+      },
+      fullMenu: parsed.fullMenu,
+      menuIntro: typeof parsed.menuIntro === 'string' ? parsed.menuIntro : defaultSiteContent.menuIntro,
+    };
+  } catch {
+    return clone(defaultSiteContent);
+  }
+}
+
+const SiteContentContext = createContext(null);
+
+export function SiteContentProvider({ children }) {
+  const [content, setContent] = useState(() => loadFromStorage());
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+    } catch {
+      /* ignore quota */
+    }
+  }, [content]);
+
+  const patchContent = useCallback((partial) => {
+    setContent((prev) => ({ ...prev, ...partial }));
+  }, []);
+
+  const resetContent = useCallback(() => {
+    setContent(clone(defaultSiteContent));
+  }, []);
+
+  const replaceContent = useCallback((next) => {
+    setContent({
+      ...clone(defaultSiteContent),
+      ...next,
+      version: SITE_CONTENT_VERSION,
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      content,
+      patchContent,
+      resetContent,
+      replaceContent,
+    }),
+    [content, patchContent, resetContent, replaceContent]
+  );
+
+  return <SiteContentContext.Provider value={value}>{children}</SiteContentContext.Provider>;
+}
+
+export function useSiteContent() {
+  const ctx = useContext(SiteContentContext);
+  if (!ctx) {
+    throw new Error('useSiteContent must be used within SiteContentProvider');
+  }
+  return ctx;
+}

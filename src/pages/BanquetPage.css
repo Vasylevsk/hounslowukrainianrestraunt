@@ -1,0 +1,196 @@
+.app__banquet-page {
+    min-height: 100vh;
+    background: var(--color-black);
+}
+
+.app__banquet-page_container {
+    min-height: 100vh;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.app__banquet-page_content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.app__banquet-page_header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.app__banquet-page_intro {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app__banquet-page_intro p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.app__banquet-page_section {
+    margin-bottom: 4rem;
+}
+
+.app__banquet-section-title {
+    font-family: var(--font-base);
+    color: var(--color-golden);
+    font-size: 36px;
+    line-height: 46px;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+}
+
+.app__banquet-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.app__banquet-list_item {
+    padding: 1.5rem;
+    background: rgba(220, 202, 135, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(220, 202, 135, 0.1);
+}
+
+.app__banquet-list_item p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.app__banquet-venues {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.app__banquet-venue {
+    padding: 2rem;
+    background: rgba(220, 202, 135, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(220, 202, 135, 0.1);
+}
+
+.app__banquet-venue p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.app__banquet-page_contact {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: rgba(220, 202, 135, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(220, 202, 135, 0.1);
+}
+
+.app__banquet-contact-info {
+    margin: 2rem 0;
+}
+
+.app__banquet-contact-info p {
+    margin: 0.5rem 0;
+    font-size: 18px;
+}
+
+.app__banquet-actions {
+    margin-top: 2rem;
+}
+
+.app__banquet-link {
+    color: var(--color-grey);
+    text-decoration: none;
+    font-family: var(--font-alt);
+    font-size: 16px;
+    transition: color 0.3s ease;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.app__banquet-link:hover {
+    color: var(--color-golden);
+}
+
+/* Tablet styles */
+@media screen and (max-width: 1150px) {
+    .app__banquet-page_content {
+        max-width: 90%;
+    }
+
+    .app__banquet-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 850px) {
+    .app__banquet-page_container {
+        padding: 4rem 2rem;
+        padding-top: 6rem;
+    }
+
+    .app__banquet-page_content {
+        max-width: 100%;
+    }
+
+    .app__banquet-section-title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .app__banquet-list {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .app__banquet-venues {
+        grid-template-columns: 1fr;
+    }
+
+    .app__banquet-page_contact {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .app__banquet-page_container {
+        padding: 2rem 1rem;
+        padding-top: 5rem;
+    }
+
+    .app__banquet-page_header h1 {
+        font-size: 38px;
+        line-height: 48px;
+    }
+
+    .app__banquet-section-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .app__banquet-list_item,
+    .app__banquet-venue {
+        padding: 1.5rem;
+    }
+
+    .app__banquet-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .app__banquet-actions .custom__button {
+        width: 100%;
+        max-width: 300px;
+    }
+}

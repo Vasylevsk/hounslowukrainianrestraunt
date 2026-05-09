@@ -1,11 +1,13 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Prosperity",
+  "name": "Prosperity Ukrainian Restaurant",
+  "description": "Ukrainian restaurant in Twickenham, London. Authentic cuisine, banquets, and bookings.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "favicon.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
     },
     {
       "src": "logo192.png",
@@ -20,6 +22,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0C0C0C",
+  "background_color": "#0C0C0C",
+  "lang": "en-GB"
 }

@@ -1,0 +1,425 @@
+.app__hum-page {
+  min-height: 100vh;
+  background: var(--color-black);
+}
+
+.app__hum-page_wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+}
+
+.app__hum-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.app__hum-hero .headtext__cormorant {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.app__hum-hero_lead {
+  margin-top: 1.5rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--color-grey);
+}
+
+.app__hum-hero .app__hum-figure {
+  margin-top: 2rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app__hum-section {
+  margin-bottom: 2.75rem;
+  padding: 2rem 1.75rem;
+  background: rgba(220, 202, 135, 0.04);
+  border: 1px solid rgba(220, 202, 135, 0.1);
+  border-radius: 4px;
+}
+
+.app__hum-section h2 {
+  font-family: var(--font-base);
+  color: var(--color-golden);
+  font-size: 28px;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.app__hum-section_intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 1.75rem;
+  color: var(--color-grey);
+}
+
+.app__hum-section h3 {
+  font-family: var(--font-base);
+  color: var(--color-golden);
+  font-size: 22px;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.app__hum-section p,
+.app__hum-section li {
+  font-family: var(--font-alt);
+  color: var(--color-white);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.app__hum-section ul {
+  margin: 0.5rem 0 1rem 1.25rem;
+  padding: 0;
+}
+
+.app__hum-section li {
+  margin-bottom: 0.4rem;
+}
+
+.app__hum-highlight {
+  font-family: var(--font-alt);
+  color: #e8dcc4;
+  font-size: 17px;
+  line-height: 1.55;
+  font-style: italic;
+  border-left: 3px solid var(--color-golden);
+  padding: 0.75rem 0 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.app__hum-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.app__hum-fact {
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(220, 202, 135, 0.08);
+  border-radius: 4px;
+}
+
+.app__hum-fact strong {
+  display: block;
+  font-family: var(--font-base);
+  color: var(--color-golden);
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.app__hum-fact span {
+  font-family: var(--font-alt);
+  color: var(--color-grey);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.app__hum-list-block {
+  margin-top: 1rem;
+}
+
+.app__hum-list-block h4 {
+  font-family: var(--font-alt);
+  color: var(--color-golden);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.app__hum-list-block .app__hum-figure {
+  margin: 0.75rem 0 1rem;
+}
+
+.app__hum-figure {
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(220, 202, 135, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.app__hum-figure_crop {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #0c0c0c;
+}
+
+/* Mosaic / inline: uniform tiles despite different source dimensions */
+.app__hum-figure--tile .app__hum-figure_crop {
+  aspect-ratio: 4 / 3;
+}
+
+.app__hum-figure--tile .app__hum-figure_crop img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Hero strip: slightly wider frame */
+.app__hum-figure--hero .app__hum-figure_crop {
+  aspect-ratio: 16 / 9;
+}
+
+.app__hum-figure--hero .app__hum-figure_crop img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.app__hum-figure figcaption {
+  font-family: var(--font-alt);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-grey);
+  padding: 0.65rem 0.85rem 0.85rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.app__hum-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0;
+  align-items: start;
+}
+
+.app__hum-mosaic_single-narrow {
+  grid-template-columns: 1fr;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app__hum-inline-link {
+  color: var(--color-golden);
+  text-decoration: underline;
+  text-decoration-color: rgba(220, 202, 135, 0.45);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.app__hum-inline-link:hover {
+  color: #f0e6c8;
+  text-decoration-color: rgba(220, 202, 135, 0.85);
+}
+
+.app__hum-partner-note {
+  font-family: var(--font-alt);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-white);
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.15rem;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 4px;
+  border: 1px solid rgba(220, 202, 135, 0.08);
+}
+
+.app__hum-press-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.app__hum-press-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid rgba(220, 202, 135, 0.15);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.32);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.app__hum-press-card:hover {
+  border-color: rgba(220, 202, 135, 0.4);
+  background: rgba(220, 202, 135, 0.06);
+  transform: translateY(-1px);
+}
+
+.app__hum-press-card_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.app__hum-press-card_label {
+  font-family: var(--font-base);
+  color: var(--color-golden);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app__hum-press-card_date {
+  font-family: var(--font-alt);
+  font-size: 12px;
+  color: var(--color-grey);
+}
+
+.app__hum-press-card_title {
+  font-family: var(--font-alt);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-white);
+}
+
+.app__hum-press-card_hint {
+  font-family: var(--font-alt);
+  font-size: 12px;
+  color: var(--color-golden);
+  letter-spacing: 0.04em;
+}
+
+.app__hum-video {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(220, 202, 135, 0.12);
+}
+
+.app__hum-video_label {
+  text-align: center;
+  color: var(--color-golden);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.app__hum-video_frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(220, 202, 135, 0.15);
+  background: #000;
+}
+
+.app__hum-video_frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.app__hum-video_footer {
+  text-align: center;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.app__hum-video_footer a {
+  font-family: var(--font-alt);
+  font-size: 14px;
+  color: var(--color-golden);
+}
+
+.app__hum-bank {
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  border: 1px solid rgba(220, 202, 135, 0.12);
+  margin: 1rem 0;
+  white-space: pre-wrap;
+}
+
+.app__hum-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.app__hum-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-alt);
+  font-size: 15px;
+  color: var(--color-golden);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(220, 202, 135, 0.25);
+  border-radius: 4px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.app__hum-social a:hover {
+  background: rgba(220, 202, 135, 0.08);
+  border-color: rgba(220, 202, 135, 0.45);
+}
+
+.app__hum-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.app__hum-note {
+  font-family: var(--font-alt);
+  font-size: 13px;
+  color: var(--color-grey);
+  margin-top: 2rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 650px) {
+  .app__hum-page_wrap {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .app__hum-section {
+    padding: 1.5rem 1.15rem;
+  }
+
+  .app__hum-mosaic {
+    grid-template-columns: 1fr;
+  }
+}

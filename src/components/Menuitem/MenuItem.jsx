@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { formatPriceDisplay } from '../../utils/priceFormat';
 import './MenuItem.css';
 
 const MenuItem = ({ title, price, tags }) => (
@@ -10,7 +11,7 @@ const MenuItem = ({ title, price, tags }) => (
       </div>
       <div className="app__menuitem-dash" />
       <div className="app__menuitem-price">
-        <p className="p__cormorant">{price}</p>
+        <p className="p__cormorant">{formatPriceDisplay(price)}</p>
       </div>
     </div>
 
