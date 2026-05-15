@@ -24,6 +24,10 @@ Stores reservations in Google Sheets and sends email to guests and admin. Works 
 | `SITE_URL` | `https://prosperityua.uk` | Yes (links in emails) |
 | `SPREADSHEET_ID` | From step 1 | If script is not bound to a sheet |
 | `FROM_NAME` | `Prosperity Ukrainian Restaurant` | Optional |
+| `INSTAGRAM_URL` | `https://www.instagram.com/prosperity_restaurant/` | Optional (footer buttons in emails) |
+| `PHONE_LABEL` | `020 4568 0606` | Optional (shown on Call button) |
+| `PHONE_TEL` | `tel:+442045680606` | Optional (`href` for Call) |
+| `CONTACT_EMAIL` | Public enquiries e.g. `hello@…` | Optional (hides Email button if empty) |
 
 ## 4. Authorize and test
 
