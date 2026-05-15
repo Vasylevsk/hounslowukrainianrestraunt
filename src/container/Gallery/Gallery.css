@@ -16,7 +16,12 @@
     padding-right: 2rem;
 }
 
-.app__gallery-content button {
+.app__gallery-intro {
+    color: #aaaaaa;
+    margin-top: 2rem;
+}
+
+.app__gallery-content .custom__button {
     margin-top: 1rem;
 }
 
@@ -46,6 +51,67 @@
     min-width: 301px;
     height: 447px;
     margin-right: 2rem;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid rgba(220, 202, 135, 0.15);
+}
+
+.app__gallery-images_card--ended img {
+    filter: grayscale(0.35);
+}
+
+.app__gallery-event-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    padding: 0.35rem 0.75rem;
+    font-family: var(--font-alt);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 4px;
+}
+
+.app__gallery-event-badge--active {
+    color: #171717;
+    background: var(--color-golden);
+}
+
+.app__gallery-event-badge--ended {
+    color: var(--color-white);
+    background: rgba(0, 0, 0, 0.72);
+    border: 1px solid rgba(220, 202, 135, 0.35);
+}
+
+.app__gallery-event-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem 1rem;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.88));
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    pointer-events: none;
+}
+
+.app__gallery-event-caption-title {
+    font-family: var(--font-base);
+    color: var(--color-golden);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+}
+
+.app__gallery-event-caption-sub {
+    font-family: var(--font-alt);
+    color: var(--color-grey);
+    font-size: 12px;
+    line-height: 1.4;
 }
 
 .gallery__image-icon {
@@ -66,11 +132,15 @@
 }
 
 .app__gallery-images_card:hover img {
-    opacity: .35;
+    opacity: 0.4;
 }
 
 .app__gallery-images_card:hover .gallery__image-icon {
     opacity: 1;
+}
+
+.app__gallery-images_card--ended:hover img {
+    opacity: 0.55;
 }
 
 .app__gallery-images_arrows {
@@ -97,7 +167,7 @@
 }
 
 @media screen and (min-width: 2000px) {
-    .app__gallery-content button {
+    .app__gallery-content .custom__button {
         margin-top: 2rem;
     }
 

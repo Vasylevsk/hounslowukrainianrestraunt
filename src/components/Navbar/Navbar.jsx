@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
@@ -7,6 +7,15 @@ import './Navbar.css';
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    if (toggleMenu) {
+      document.body.classList.add('nav-overlay-open');
+    } else {
+      document.body.classList.remove('nav-overlay-open');
+    }
+    return () => document.body.classList.remove('nav-overlay-open');
+  }, [toggleMenu]);
 
   const handleAnchorClick = (e, anchor) => {
     e.preventDefault();
@@ -39,6 +48,7 @@ const Navbar = () => {
           <li className="p__opensans"><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')}>Home</a></li>
           <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
           <li className="p__opensans"><Link to="/menu">Menu</Link></li>
+          <li className="p__opensans"><Link to="/breakfast">Breakfast</Link></li>
           <li className="p__opensans"><Link to="/banquet">Banquet</Link></li>
           <li className="p__opensans"><Link to="/humanitarian-aid">Ukraine aid</Link></li>
           <li className="p__opensans"><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a></li>
@@ -56,6 +66,7 @@ const Navbar = () => {
                 <li className="p__opensans"><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')}>Home</a></li>
                 <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
                 <li className="p__opensans"><Link to="/menu" onClick={() => setToggleMenu(false)}>Menu</Link></li>
+                <li className="p__opensans"><Link to="/breakfast" onClick={() => setToggleMenu(false)}>Breakfast</Link></li>
                 <li className="p__opensans"><Link to="/banquet" onClick={() => setToggleMenu(false)}>Banquet</Link></li>
                 <li className="p__opensans"><Link to="/humanitarian-aid" onClick={() => setToggleMenu(false)}>Ukraine aid</Link></li>
                 <li className="p__opensans"><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a></li>

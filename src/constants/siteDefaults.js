@@ -1,106 +1,92 @@
 /** Default site copy: hours, featured blocks on home, full menu page. Version must match persisted JSON. */
 
-export const SITE_CONTENT_VERSION = 2;
+export const SITE_CONTENT_VERSION = 8;
 
 const img = () => ({ image: '' });
 
 export const defaultWorkingHours = [
   { day: 'Monday', hours: 'Closed' },
-  { day: 'Tuesday', hours: '12:00-21:30' },
+  { day: 'Tuesday', hours: '09:00-21:00' },
   { day: 'Wednesday', hours: '09:00-21:30' },
   { day: 'Thursday', hours: '09:00-21:30' },
   { day: 'Friday', hours: '09:00-21:30' },
   { day: 'Saturday', hours: '09:00-22:00' },
-  { day: 'Sunday', hours: '12:00-22:00' },
+  { day: 'Sunday', hours: '12:00-21:00' },
 ];
 
 export const defaultFeaturedMenu = {
-  leftTitle: 'Ukrainian Classics',
-  rightTitle: 'From our kitchen',
+  sectionSubTitle: 'Menu Highlights',
+  sectionTitle: 'Prosperity Classics',
+  leftTitle: 'Guest Favourites',
+  rightTitle: 'Ukrainian Classics',
   leftItems: [
-    { title: 'Ukrainian Borsch', price: '£6.50', tags: 'Beetroot, cabbage, chicken, herbs' },
-    { title: 'Chicken Kiev', price: '£12.20', tags: 'Cheese, herbs, served with potatoes or rice' },
-    { title: 'Varenyky with Potatoes', price: '£6.20', tags: 'With cracklings, sour cream or tomato sauce' },
-    { title: 'Beef Stroganoff', price: '£12.90', tags: 'Beef in sauce with mashed potato and salad' },
-    { title: 'Syrniki (Cheese Pancake)', price: '£5.10', tags: 'Three pieces, served with sour cream' },
+    { title: 'Beef Steak with Salad', price: '£18', tags: 'Served with fresh salad' },
+    { title: 'Salmon in Creamy Spinach Sauce', price: '£18', tags: 'Salmon, spinach, double cream, served with salad' },
+    { title: 'Pork Shank with Braised Cabbage', price: '£22', tags: 'Slow-cooked pork shank with braised cabbage' },
+    { title: 'Mixed Meat Solyanka', price: '£11', tags: 'Ham, sausage, bacon, frankfurters, olives and lemon' },
+    { title: 'Party Platter for 6', price: '£80', tags: 'Steaks, skewers, wings, sausage, potatoes and braised cabbage' },
   ],
   rightItems: [
-    { title: 'Salo with Garlic', price: '£4.50', tags: 'With black bread' },
-    { title: 'Sea Bass', price: '£14.80', tags: 'Grilled, with potatoes or rice or chips and salad' },
-    { title: 'Siberian Pelmeni', price: '£6.90', tags: 'With sour cream or tomato sauce' },
-    { title: 'Large Breakfast', price: '£7.90', tags: 'Eggs, bacon, sausages, beans, toast' },
-    { title: 'Pancakes with Cottage Cheese', price: '£4.90', tags: 'Three pieces and sour cream' },
+    {
+      title: 'Borscht with Salo & Sour Cream',
+      price: '£9',
+      tags: 'Served with salo, bread and onions',
+    },
+    { title: 'Chicken Kyiv', price: '£17', tags: 'Herb butter, cheese, breadcrumbs, served with salad' },
+    { title: 'Ukrainian Poltava Galushky', price: 'from £15', tags: 'Traditional dumplings — choose your filling' },
+    { title: 'Chanakhy', price: '£10', tags: 'Pork, beef, beans, mushrooms and potatoes' },
+    { title: 'Banosh', price: '£6', tags: 'Cornmeal with double cream, served with salad' },
   ],
 };
 
-/** Menu aligned with Prosperity printed / Instagram menus. Optional `image`: public URL e.g. /menu/dish.jpg */
+/** Canonical category order for the menu page (starters → mains → extras → desserts). */
+export const MENU_CATEGORY_ORDER = [
+  'Appetizers',
+  'Salads',
+  'Soups',
+  'Main Courses',
+  'Dumplings & Pancakes',
+  'Sides',
+  'Banosh',
+  'Sauces',
+  'Desserts',
+];
+
+export function sortMenuCategories(categories) {
+  return [...categories].sort((a, b) => {
+    const ia = MENU_CATEGORY_ORDER.indexOf(a.title);
+    const ib = MENU_CATEGORY_ORDER.indexOf(b.title);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
+}
+
+/** Full menu. Optional `image`: public URL e.g. /menu/dish.jpg. Optional `variants`: { name, price }[] */
 export const defaultFullMenu = [
   {
     title: 'Appetizers',
     items: [
-      { name: 'Marinated Vegetable Platter', price: '£4.95', description: '', ...img() },
-      { name: 'Kryzhalka', price: '£3.60', description: '', ...img() },
-      { name: 'Meat Platter', price: '£9.80', description: '', ...img() },
-      { name: 'Salo with Garlic and black bread', price: '£4.50', description: '', ...img() },
-      { name: 'Pancakes with Salmon Caviar', price: '£10.80', description: '', ...img() },
-    ],
-  },
-  {
-    title: 'Breakfast',
-    items: [
       {
-        name: 'Large Breakfast',
-        price: '£7.90',
-        description:
-          'Two fried eggs, 2 bacon rashers, 2 sausages, black pudding, 2 hash brown, baked beans, mushroom, tomato, 2 slices of toast with butter.',
+        name: 'Salo with Black Bread',
+        price: '£10',
+        description: 'Pickled cucumber and Korean-style carrots.',
         ...img(),
       },
       {
-        name: 'Omelette Breakfast',
-        price: '£6.80',
-        description: 'Two eggs omelette with cheese, baked beans, chips and salad.',
+        name: 'Herring with Potatoes & Pickles',
+        price: '£12',
+        description: 'Traditional cured herring served with boiled potatoes and pickles.',
         ...img(),
       },
       {
-        name: 'Vegetarian Breakfast',
-        price: '£5.90',
-        description: 'Two fried eggs or 2 poached eggs, baked beans, hash brown, mushroom, tomato, slice of toast.',
-        ...img(),
-      },
-    ],
-  },
-  {
-    title: 'Soups',
-    items: [
-      {
-        name: 'Ukrainian Borsch',
-        price: '£6.50',
-        description:
-          'Beetroot, cabbage, potatoes, carrots, chicken meat, chopped tomato, red pepper, salt, pepper, potherbs.',
+        name: 'Pickled Assortment',
+        price: '£9',
+        description: 'Korean-style carrots, cucumber and mushrooms.',
         ...img(),
       },
       {
-        name: 'Mushroom Soup',
-        price: '£5.20',
-        description: 'Mushrooms, melted cheese, salt, pepper, and potherbs.',
-        ...img(),
-      },
-      {
-        name: 'Chicken Soup with Noodles',
-        price: '£5.80',
-        description: 'Chicken meat, noodles, potherbs.',
-        ...img(),
-      },
-      {
-        name: 'Solyanka',
-        price: '£7.20',
-        description: 'Six types of meat, potatoes, tomato puree, pickles, olives, lemon, capers, sour cream.',
-        ...img(),
-      },
-      {
-        name: 'Vegetable Cream Soup',
-        price: '£4.10',
-        description: 'Seasonal vegetables, cream, herbs.',
+        name: 'Cheese & Meat Platter',
+        price: '£13',
+        description: 'Selection of cheeses and cured meats, served with adjika.',
         ...img(),
       },
     ],
@@ -109,275 +95,422 @@ export const defaultFullMenu = [
     title: 'Salads',
     items: [
       {
-        name: 'Vinegret',
-        price: '£5.20',
-        description: 'Beetroot, potatoes, carrots, red beans, pickles, olive oil, salt and pepper.',
+        name: 'Olivier Salad',
+        price: '£7',
+        description: 'Sausage, potatoes, carrots, pickled cucumber, egg, green peas, mayonnaise.',
         ...img(),
       },
       {
-        name: 'Summer Salads',
-        price: '£5.60',
-        description: 'Cucumber, tomatoes, pepper, olives, feta, salt, pepper, olive oil and lemon juice.',
+        name: 'Beetroot Salad',
+        price: '£8',
+        description: 'Mixed greens, cucumber, beetroot, stuffed pepper, dressing, pistachios.',
         ...img(),
       },
       {
-        name: 'Olivie',
-        price: '£6.05',
-        description: 'Potatoes, boiled sausage, peas, pickles, egg, salt, pepper, mayonnaise.',
-        ...img(),
-      },
-    ],
-  },
-  {
-    title: 'Fish & seafood',
-    items: [
-      {
-        name: 'Fish and Chips, Green Peas, Tartare Sauce',
-        price: '£10.80',
-        description: 'Fillet of white fish batter, chips, green peas, tartare sauce.',
+        name: 'Warm Eggplant Salad',
+        price: '£9',
+        description: 'Mixed greens, cherry tomatoes, roasted eggplant, parmesan, dressing.',
         ...img(),
       },
       {
-        name: 'Sea Bass',
-        price: '£14.80',
-        description: 'Grilled sea bass, served with potatoes or rice or French fries and salad.',
-        ...img(),
-      },
-      {
-        name: 'Siberian Pelmeni, Dumplings',
-        price: '£6.90',
-        description: 'Meat dumplings served with sour cream or tomato sauce.',
-        ...img(),
-      },
-      {
-        name: 'Dumpling-Varenyky with Potatoes',
-        price: '£6.20',
-        description: 'Dumplings served with cracklings, sour cream or tomato sauce.',
-        ...img(),
-      },
-      {
-        name: 'Dumpling-Varenyky with Cabbage',
-        price: '£5.95',
-        description: 'Dumplings served with cracklings, sour cream or tomato sauce.',
-        ...img(),
-      },
-      {
-        name: 'Chicken Stripes',
-        price: '£7.80',
-        description: 'Chicken fillet stripes, 5 pieces, with French fries and salad.',
+        name: 'Warm Chicken Salad',
+        price: '£11',
+        description: 'Mixed greens, cherry tomatoes, cucumber, grilled chicken, mozzarella, dressing.',
         ...img(),
       },
     ],
   },
   {
-    title: 'Ukrainian mains',
+    title: 'Soups',
     items: [
       {
-        name: 'Chicken with Sauce On The Village',
-        price: '£9.80',
-        description: 'Chicken fillet with white sauce served with potatoes or rice or French fries and salad.',
-        ...img(),
-      },
-      {
-        name: 'Chicken Cutlets',
-        price: '£7.80',
-        description: 'Chicken fillet fried in egg with flour, served with potatoes or rice or French fries and salad.',
-        ...img(),
-      },
-      {
-        name: 'Chicken Kiev',
-        price: '£12.20',
+        name: 'Borscht with Salo & Sour Cream',
+        price: '£9',
         description:
-          'Chicken fillet, cheese, fried in egg with breadcrumbs, salt, pepper, potherbs, served with potatoes or rice or French fries and salad.',
+          'Chicken, beetroot, cabbage, carrots, potatoes. Served with salo, bread and onions.',
         ...img(),
       },
       {
-        name: 'Hutsul Chop',
-        price: '£10.95',
-        description: 'Pork chop, tomatoes, cheese served with potatoes or French fries or rice and salad.',
+        name: 'Seasonal Vegetable Cream Soup with Bruschetta',
+        price: '£8',
+        description: 'Cauliflower, potatoes, carrot, onions and pumpkin, finished with sour cream.',
         ...img(),
       },
       {
-        name: 'Pork Cutlets',
-        price: '£9.90',
-        description: 'Pork fillet fried in egg with flour, served with potatoes or rice or French fries and salad.',
+        name: 'Seasonal Traditional Okroshka',
+        price: '£9',
+        description: 'Cold kefir soup with fresh vegetables, herbs, eggs and tender meat.',
         ...img(),
       },
       {
-        name: 'Beef Stroganoff',
-        price: '£12.90',
-        description: 'Beef in sauce served with mashed potatoes and salad.',
+        name: 'Mixed Meat Solyanka',
+        price: '£11',
+        description: 'Ham, sausage, bacon, frankfurters, onion, olives and lemon.',
         ...img(),
       },
       {
-        name: 'Liver Under Home Made Sauce',
-        price: '£7.60',
-        description: 'Chicken liver, sour cream, onion, served with garnish.',
-        ...img(),
-      },
-      {
-        name: 'Cabbage Rolls',
-        price: '£7.10',
-        description: 'Stuffed cabbage with meat and rice, tomato sauce.',
+        name: 'Chanakhy',
+        price: '£10',
+        description: 'Pork, beef, beans, mushrooms and potatoes.',
         ...img(),
       },
     ],
   },
   {
-    title: 'Pasta',
+    title: 'Main Courses',
     items: [
       {
-        name: 'Spaghetti & Meatballs',
-        price: '£8.50',
-        description: 'Beef meatballs served with spaghetti tomato sauce.',
+        name: 'Caramelized Chicken Steak',
+        price: '£12',
+        description: 'Marinated chicken fillet, served with salad.',
         ...img(),
       },
       {
-        name: 'Pasta Penne with Tomatoes & White Beans',
-        price: '£7.80',
-        description: 'Penne, diced tomatoes, cannellini beans, fresh spinach, grated cheese.',
+        name: 'Chicken Kyiv',
+        price: '£17',
+        description: 'Chicken fillet, herb butter, cheese, breadcrumbs, served with salad.',
         ...img(),
       },
       {
-        name: 'Pasta Bolognese',
-        price: '£8.80',
-        description: 'Penne, beef minced, red beans, tomato sauce with cheese.',
+        name: 'Verkhovyna-style Schnitzel',
+        price: '£13',
+        description: 'Pork in egg and breadcrumbs, served with salad.',
         ...img(),
       },
       {
-        name: 'Spaghetti Pasta Carbonara',
-        price: '£8.05',
-        description: 'Bacon, spaghetti, carbonara sauce.',
+        name: 'Braised Pork Steak',
+        price: '£15',
+        description: 'Marinated pork neck fillet, served with salad.',
         ...img(),
       },
       {
-        name: 'Creamy Garlic Mix Seafood Pasta',
-        price: '£10.50',
-        description: 'Tagliatelle with mixed seafood, creamy garlic sauce.',
+        name: 'Pork Shashlik',
+        price: '£15',
+        description: 'Grilled pork skewers, served with salad.',
+        ...img(),
+      },
+      {
+        name: 'Pork Shank with Braised Cabbage',
+        price: '£22',
+        description: 'Slow-cooked pork shank with braised cabbage.',
+        ...img(),
+      },
+      {
+        name: 'Black Pudding Sausage with Braised Cabbage',
+        price: '£11',
+        description: '',
+        ...img(),
+      },
+      {
+        name: 'Beef Steak with Salad',
+        price: '£18',
+        description: '',
+        ...img(),
+      },
+      {
+        name: 'Beef Liver Cutlets in Sour Cream Sauce',
+        price: '£14',
+        description: 'Served with salad and potatoes.',
+        ...img(),
+      },
+      {
+        name: 'Chopped Lamb Cutlet',
+        price: '£16',
+        description: 'Served with potatoes and salad.',
+        ...img(),
+      },
+      {
+        name: 'Bukovyna-style Lamb',
+        price: '£18',
+        description: 'Bone-in lamb with vegetables and brynza cheese.',
+        ...img(),
+      },
+      {
+        name: 'Roasted Crispy Quail',
+        price: '£17',
+        description: 'Served with salad.',
+        ...img(),
+      },
+      {
+        name: 'Crispy Fried Carp',
+        price: '£17',
+        description: 'Half carp fillet, served with sauce and salad.',
+        ...img(),
+      },
+      {
+        name: 'Salmon in Creamy Spinach Sauce',
+        price: '£18',
+        description: 'Salmon fillet, spinach, double cream, served with salad.',
+        ...img(),
+      },
+      {
+        name: 'Stuffed Cabbage Rolls with Mushroom Sauce',
+        price: '£9',
+        description: '5 pieces. Cabbage, rice, pork & beef mince, carrots, onion.',
+        ...img(),
+      },
+      {
+        name: 'Vegetarian Stuffed Cabbage Rolls',
+        price: '£8',
+        description: '5 pieces. Cabbage, potatoes, buckwheat, carrots, onion.',
+        ...img(),
+      },
+      {
+        name: 'Party Platter for 6',
+        price: '£80',
+        description:
+          'Steak, sausages, chicken skewers, pork skewers, chicken wings, black pudding sausage, potatoes and braised cabbage.',
         ...img(),
       },
     ],
   },
   {
-    title: 'Burgers, sandwiches & panini',
+    title: 'Dumplings & Pancakes',
     items: [
       {
-        name: 'Beef Burger with Chips',
-        price: '£7.80',
-        description: 'Buns with cheese, beef minced, lettuce, tomato, golden crispy chips.',
+        name: 'Varenyky',
+        price: '',
+        description:
+          'Served with fried onions & pork cracklings or butter. Choice of sour cream, machanka sauce or carbonara sauce.',
+        variants: [
+          { name: 'Potatoes & cheese, 10 pcs', price: '£10' },
+          { name: 'Cabbage, 10 pcs', price: '£10' },
+          { name: 'Fish with special sauce, 5 pcs', price: '£15' },
+        ],
         ...img(),
       },
       {
-        name: 'Open-Faced Sandwich (Zapiekanka)',
-        price: '£4.50',
-        description: 'With mushroom and cheese, ketchup.',
+        name: 'Pelmeni, 18 pcs',
+        price: '£13',
+        description:
+          'Pork & beef or chicken. Served with butter & sour cream or machanka sauce.',
         ...img(),
       },
       {
-        name: 'Open-Faced Sandwich (Zapiekanka)',
-        price: '£5.80',
-        description: 'With chicken, pickled cucumber, cheese, tomato.',
+        name: 'Ukrainian Poltava Galushky',
+        price: '',
+        description: 'Traditional dumplings — choose your filling.',
+        variants: [
+          { name: 'With seasonal vegetables', price: '£15' },
+          { name: 'With braised meat', price: '£16' },
+          { name: 'With veal meat', price: '£16' },
+          { name: 'With seafood', price: '£18' },
+          { name: 'With rabbit', price: '£19' },
+        ],
         ...img(),
       },
       {
-        name: 'Open-Faced Sandwich (Zapiekanka)',
-        price: '£6.50',
-        description: 'With cooked beef minced, red beans, cheese, tomato.',
+        name: 'Potato Pancakes, 5 pcs',
+        price: '£9',
+        description: 'Served with fried onions & pork cracklings or sour cream.',
         ...img(),
       },
       {
-        name: 'Panini with Bacon, Sausage, Egg, Tomato, Green Salad',
-        price: '£3.50',
+        name: 'Potato Pancakes in a Clay Pot',
+        price: '£12',
+        description: 'With mushrooms & cheese, served with salad.',
+        ...img(),
+      },
+      {
+        name: 'Stuffed Crepes (Benderyky), 3 pcs',
+        price: '',
         description: '',
-        ...img(),
-      },
-      {
-        name: 'Panini with Chicken, Cheese, Tomato, Green Salad',
-        price: '£4.20',
-        description: '',
-        ...img(),
-      },
-      {
-        name: 'Panini with Tuna, Salad and Sweetcorn',
-        price: '£3.10',
-        description: '',
-        ...img(),
-      },
-      {
-        name: 'Panini with Smoked Salmon, Tomato, Green Salad',
-        price: '£5.80',
-        description: '',
+        variants: [
+          { name: 'With cabbage', price: '£7' },
+          { name: 'With chicken & mushroom sauce', price: '£9' },
+        ],
         ...img(),
       },
     ],
   },
   {
-    title: 'Palyanyzza',
+    title: 'Sides',
+    items: [
+      { name: 'French Fries', price: '£4', description: '', ...img() },
+      { name: 'Rice', price: '£4', description: '', ...img() },
+      { name: 'Rustic Potatoes', price: '£5', description: '', ...img() },
+      { name: 'Potato Gratin or Mashed Potatoes', price: '£5', description: '', ...img() },
+    ],
+  },
+  {
+    title: 'Banosh',
     items: [
       {
-        name: 'Palyanyzza with Pepperoni and Cheese',
-        price: '£5.50',
-        description: '',
+        name: 'Banosh',
+        price: '£6',
+        description: 'Cornmeal with double cream, served with salad.',
         ...img(),
       },
       {
-        name: 'Palyanyzza with Chicken, Cheese, Sweet Corn',
-        price: '£6.20',
-        description: '',
-        ...img(),
-      },
-      {
-        name: 'Palyanyzza with 3 Cheese and Herbs',
-        price: '£4.80',
-        description: '',
+        name: 'Banosh Add-ons',
+        price: '',
+        description: 'Add to your banosh.',
+        variants: [
+          { name: 'With brynza cheese', price: '£3' },
+          { name: 'With pork cracklings', price: '£3' },
+          { name: 'With mushrooms', price: '£3' },
+        ],
         ...img(),
       },
     ],
   },
   {
-    title: 'Side dishes',
+    title: 'Sauces',
     items: [
-      { name: 'French fries', price: '£2.90', description: '', ...img() },
-      { name: 'Mashed Potatoes', price: '£2.90', description: '', ...img() },
-      { name: 'Rice', price: '£2.90', description: '', ...img() },
+      { name: 'Adjika', price: '£4', description: '', ...img() },
+      { name: 'BBQ Sauce', price: '£4', description: '', ...img() },
+      { name: 'Tartar Sauce', price: '£4', description: '', ...img() },
     ],
   },
   {
-    title: 'Eggs Benedict',
+    title: 'Desserts',
     items: [
       {
-        name: 'Eggs Benedict with Crispy Parma Ham',
-        price: '£6.20',
+        name: 'Crepes in Creamy Orange Sauce',
+        price: '£9',
         description: '',
         ...img(),
       },
       {
-        name: 'Eggs Benedict with Smoked Salmon',
-        price: '£7.50',
-        description: '',
+        name: 'Crepes with Cottage Cheese',
+        price: '£9',
+        description: 'With strawberry jam or sour cream.',
         ...img(),
       },
       {
-        name: 'Eggs Benedict with Mushrooms and Spinach',
-        price: '£5.50',
-        description: '',
+        name: 'Syrnyky (Cheese Pancakes)',
+        price: '£9',
+        description: 'With strawberry jam or sour cream.',
+        ...img(),
+      },
+      {
+        name: 'Cherry Varenyky, 3 pcs',
+        price: '£9',
+        description: 'Served with sour cream.',
+        ...img(),
+      },
+      {
+        name: 'Cake of the Day',
+        price: '£9',
+        description: 'Ask your server for today\'s selection.',
+        ...img(),
+      },
+    ],
+  },
+];
+
+export const defaultMenuIntro =
+  'Authentic Ukrainian cuisine in Twickenham — from borscht and varenyky to grilled meats and banosh. All prices in GBP. Dishes with options are listed below each item; ask our team if you need help choosing.';
+
+export const BREAKFAST_CATEGORY_ORDER = [
+  'House Breakfasts',
+  'Omelette',
+  'Skillets & Eggs',
+  'Pancakes / Benderyky',
+  'Burgers & More',
+  'Desserts',
+];
+
+export function sortBreakfastCategories(categories) {
+  return [...categories].sort((a, b) => {
+    const ia = BREAKFAST_CATEGORY_ORDER.indexOf(a.title);
+    const ib = BREAKFAST_CATEGORY_ORDER.indexOf(b.title);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
+}
+
+export const defaultBreakfastIntro =
+  'Start your day the Ukrainian way — hearty plates, omelettes, skillets, and sweet finishes. All prices in GBP.';
+
+export const defaultBreakfastBadge = 'Until 4:00 PM';
+
+/** Breakfast menu (served until 4:00 PM). Same item shape as fullMenu. */
+export const defaultBreakfastMenu = [
+  {
+    title: 'House Breakfasts',
+    items: [
+      {
+        name: 'Full House',
+        price: '£14',
+        description:
+          'Eggs x2, bacon x2, sausages x2, black pudding x2, potato pancakes x2, mushrooms, tomatoes, beans, toast.',
+        ...img(),
+      },
+      {
+        name: 'Green House',
+        price: '£10',
+        description: 'Potato pancakes x2, mushrooms, beans, tomatoes, toast.',
         ...img(),
       },
     ],
   },
   {
-    title: 'Sweet varenyky',
+    title: 'Omelette',
     items: [
       {
-        name: 'Dumpling - Varenyky with Strawberries',
-        price: '£6.10',
-        description: 'Dumplings served with sour cream.',
+        name: 'Omelette',
+        price: '',
+        description: 'Served with chips or potato pancakes x2.',
+        variants: [
+          { name: 'With cheese', price: '£10' },
+          { name: 'With ham', price: '£11' },
+          { name: 'With salmon', price: '£13' },
+        ],
+        ...img(),
+      },
+    ],
+  },
+  {
+    title: 'Skillets & Eggs',
+    items: [
+      {
+        name: 'Cossack Strength Skillet',
+        price: '£12',
+        description: 'Potatoes, bacon, sausage, tomatoes, eggs, greens.',
         ...img(),
       },
       {
-        name: 'Dumpling - Varenyky with Cottage Cheese',
-        price: '£6.10',
-        description: 'Dumplings served with sour cream.',
+        name: "Nobleman's Egg",
+        price: '',
+        description: 'Bruschetta x2, poached eggs x2, rocket, hollandaise sauce.',
+        variants: [
+          { name: 'With mushrooms', price: '£9' },
+          { name: 'With bacon', price: '£11' },
+          { name: 'With salmon', price: '£13' },
+        ],
+        ...img(),
+      },
+    ],
+  },
+  {
+    title: 'Pancakes / Benderyky',
+    items: [
+      {
+        name: 'Pancakes / Benderyky',
+        price: '',
+        description: '',
+        variants: [
+          { name: 'With cabbage, 3 pcs', price: '£7' },
+          { name: 'With chicken & mushroom sauce, 3 pcs', price: '£9' },
+        ],
+        ...img(),
+      },
+    ],
+  },
+  {
+    title: 'Burgers & More',
+    items: [
+      {
+        name: 'Burger + Chips',
+        price: '£14',
+        description:
+          'Cheese, green salad, tomato, pickled cucumber or caramelized onion. Chicken or beef.',
+        ...img(),
+      },
+      {
+        name: 'Cheburaky',
+        price: '£7',
+        description: 'With minced pork and chicken.',
         ...img(),
       },
     ],
@@ -385,49 +518,39 @@ export const defaultFullMenu = [
   {
     title: 'Desserts',
     items: [
-      { name: 'Cake of Day', price: '£3.50', description: 'Ask your server for today\'s choice.', ...img() },
       {
-        name: 'Syrniki (Cheese Pancake)',
-        price: '£5.10',
-        description: 'Three pieces. Served with sour cream.',
+        name: 'Pancakes in Orange Sauce with Ice Cream',
+        price: '£9',
+        description: '3 pieces.',
         ...img(),
       },
       {
         name: 'Pancakes with Cottage Cheese',
-        price: '£4.90',
-        description: 'Three pieces, cottage cheese and sour cream.',
+        price: '£9',
+        description: '2 pieces. Served with strawberry jam or sour cream.',
         ...img(),
       },
       {
-        name: 'Pancakes with Strawberry Jam',
-        price: '£4.65',
-        description: 'Three pieces and strawberry jam.',
+        name: 'Syrnyky (Cheese Pancakes)',
+        price: '£9',
+        description: '3 pieces. Served with strawberry jam or sour cream.',
         ...img(),
       },
       {
-        name: 'Pancakes with Cherries Jam',
-        price: '£4.65',
-        description: 'Three pieces and cherries jam.',
+        name: 'Cherry Dumplings',
+        price: '£9',
+        description: '',
         ...img(),
       },
-    ],
-  },
-  {
-    title: 'Cold drinks',
-    items: [
-      { name: 'Apple Juice', price: '£3.00', description: '1L', ...img() },
-      { name: 'Orange Juice', price: '£3.00', description: '1L', ...img() },
-      { name: 'Tomato Juice', price: '£3.00', description: '1L', ...img() },
-      { name: 'Coca-Cola Original Taste', price: '£4.50', description: '1.5L', ...img() },
-      { name: 'Sparkling Water', price: '£3.00', description: '1.5L', ...img() },
-      { name: 'Still Water', price: '£1.50', description: '0.5L', ...img() },
-      { name: 'Lemonade', price: '£2.50', description: '0.5L', ...img() },
+      {
+        name: 'Cake of the Day',
+        price: '£9',
+        description: 'Ask your server for today\'s selection.',
+        ...img(),
+      },
     ],
   },
 ];
-
-export const defaultMenuIntro =
-  'Traditional Ukrainian home cooking in Twickenham. Dark bread, borsch, varenyky, and grills - cooked with heart.';
 
 export const defaultSiteContent = {
   version: SITE_CONTENT_VERSION,
@@ -435,4 +558,7 @@ export const defaultSiteContent = {
   featuredMenu: defaultFeaturedMenu,
   fullMenu: defaultFullMenu,
   menuIntro: defaultMenuIntro,
+  breakfastMenu: defaultBreakfastMenu,
+  breakfastIntro: defaultBreakfastIntro,
+  breakfastBadge: defaultBreakfastBadge,
 };

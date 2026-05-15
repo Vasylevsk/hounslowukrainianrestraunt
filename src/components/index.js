@@ -4,6 +4,7 @@ import MenuItem from './Menuitem/MenuItem';
 import Navbar from './Navbar/Navbar';
 import SEO from './SEO/SEO';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
+import BookingForm from './BookingForm/BookingForm';
 
 export {
   SubHeading,
@@ -12,4 +13,5 @@ export {
   Navbar,
   SEO,
   ScrollToTop,
+  BookingForm,
 };

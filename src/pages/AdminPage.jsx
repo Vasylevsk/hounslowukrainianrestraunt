@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { defaultSiteContent, SITE_CONTENT_VERSION } from '../constants/siteDefaults';
 import { useSiteContent } from '../context/SiteContentContext';
+import AdminBookings from '../components/AdminBookings/AdminBookings';
+import { adminPassword } from '../utils/adminAuth';
 import { priceFromInput, priceInputValue } from '../utils/priceFormat';
 import './AdminPage.css';
 
@@ -27,15 +29,12 @@ function AdminPriceInput({ value, onChange, ariaLabel }) {
 
 const SESSION_KEY = 'prosperity_admin_session';
 
-function adminPassword() {
-  return process.env.REACT_APP_ADMIN_PASSWORD || 'prosperity';
-}
-
 function cloneJson(x) {
   return JSON.parse(JSON.stringify(x));
 }
 
 const TABS = [
+  { id: 'bookings', label: 'Bookings' },
   { id: 'hours', label: 'Hours' },
   { id: 'featured', label: 'Home picks' },
   { id: 'menu', label: 'Menu' },
@@ -444,10 +443,36 @@ const AdminPage = () => {
       ) : null}
 
       <div className="adm-body">
+        {tab === 'bookings' && <AdminBookings />}
+
         {tab === 'hours' && <HoursEditor rows={hoursDraft} onChange={setHoursDraft} />}
 
         {tab === 'featured' && (
-          <div className="adm-grid-2">
+          <>
+            <div className="adm-panel adm-panel--mb">
+              <h2 className="adm-panel-title">Homepage menu section</h2>
+              <div className="adm-grid-2 adm-grid-2--tight">
+                <div className="adm-field">
+                  <label className="adm-label">Small title (above spoon)</label>
+                  <input
+                    className="adm-input"
+                    value={featuredDraft.sectionSubTitle || ''}
+                    onChange={(e) => setFeaturedDraft({ ...featuredDraft, sectionSubTitle: e.target.value })}
+                    placeholder="Menu Highlights"
+                  />
+                </div>
+                <div className="adm-field">
+                  <label className="adm-label">Main heading</label>
+                  <input
+                    className="adm-input"
+                    value={featuredDraft.sectionTitle || ''}
+                    onChange={(e) => setFeaturedDraft({ ...featuredDraft, sectionTitle: e.target.value })}
+                    placeholder="Prosperity Classics"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="adm-grid-2">
             <PicksTableEditor
               label="Left column (homepage)"
               sectionTitle={featuredDraft.leftTitle}
@@ -463,6 +488,7 @@ const AdminPage = () => {
               onItems={(rightItems) => setFeaturedDraft({ ...featuredDraft, rightItems })}
             />
           </div>
+          </>
         )}
 
         {tab === 'menu' && (

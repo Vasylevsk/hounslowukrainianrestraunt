@@ -29,6 +29,11 @@ export const SEO_BY_ROUTE = {
     description:
       'Browse the Prosperity Ukrainian Restaurant menu: Ukrainian classics, soups, grilled dishes, desserts, and drinks. Prices and descriptions for our Twickenham, London location.',
   },
+  '/breakfast': {
+    title: `Breakfast Menu | ${SITE_NAME}`,
+    description:
+      'Breakfast at Prosperity Ukrainian Restaurant, Twickenham: Full House, omelettes, skillets, pancakes, burgers, and desserts. Served until 4:00 PM.',
+  },
   '/booking': {
     title: `Book a Table | ${SITE_NAME}`,
     description:

@@ -25,12 +25,14 @@ const AboutUs = () => (
       </div>
 
       <div className="app__aboutus-content_history">
-        <h1 className="headtext__cormorant">Our Menu</h1>
+        <h1 className="headtext__cormorant">Breakfast</h1>
         <img src={images.spoon} alt="about_spoon" className="spoon__img" />
-        <p className="p__opensans">Traditional Ukrainian dishes with modern presentation. Authentic recipes passed through generations.</p>
-        <p className="p__opensans">Experience the rich flavors of Ukraine in every dish, every detail. Authentic Ukrainian cuisine at your table.</p>
-        <p className="p__opensans">From classic khinkali and khachapuri to grilled meats and traditional stews - something special for every taste.</p>
-        <Link to="/banquet" className="custom__button app__aboutus-button">Know More</Link>
+        <p className="p__opensans">Start your day with a proper Ukrainian breakfast — served until 4:00 PM.</p>
+        <p className="p__opensans">Full House and Green House platters, omelettes, skillets, potato pancakes, and sweet finishes.</p>
+        <p className="p__opensans">Hearty plates for a slow morning or a late brunch — cooked with care, just like at home.</p>
+        <Link to="/breakfast" className="custom__button app__aboutus-button">
+          View Breakfast Menu
+        </Link>
       </div>
     </div>
   </div>

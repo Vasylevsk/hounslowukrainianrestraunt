@@ -1,10 +1,6 @@
 import bg from '../assets/bg.png';
 import chef from '../assets/chef.webp';
 import G from '../assets/P.webp';
-import gallery01 from '../assets/gallery01.png';
-import gallery02 from '../assets/gallery02.png';
-import gallery03 from '../assets/gallery03.png';
-import gallery04 from '../assets/gallery04.png';
 import knife from '../assets/knife.png';
 import logo from '../assets/logo.png';
 import menu from '../assets/menu.webp';
@@ -25,10 +21,6 @@ export default {
   bg,
   chef,
   G,
-  gallery01,
-  gallery02,
-  gallery03,
-  gallery04,
   knife,
   logo,
   menu,

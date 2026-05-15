@@ -97,9 +97,26 @@
 .app__booking-input[type="date"],
 .app__booking-input[type="time"] {
     cursor: pointer;
+    color-scheme: dark;
+    min-height: 48px;
+    position: relative;
+    z-index: 1;
+    text-transform: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.app__booking-input select {
+.app__booking-input[type="date"]::-webkit-calendar-picker-indicator,
+.app__booking-input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.85) sepia(0.35) saturate(4) hue-rotate(5deg);
+    cursor: pointer;
+    opacity: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.25rem;
+}
+
+select.app__booking-input {
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
@@ -108,9 +125,10 @@
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
+    min-height: 48px;
 }
 
-.app__booking-input option {
+select.app__booking-input option {
     background: var(--color-black);
     color: var(--color-white);
 }
@@ -139,6 +157,54 @@
 
 .app__booking-link:hover {
     color: var(--color-golden);
+}
+
+.app__booking-error {
+    padding: 0.875rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #6b2d2d;
+    background: rgba(107, 45, 45, 0.25);
+    color: #f5d0d0;
+}
+
+.app__booking-notice {
+    margin-bottom: 1rem;
+    color: var(--color-golden);
+}
+
+.app__booking-hours-hint {
+    margin: -0.5rem 0 1rem;
+    font-size: 14px;
+    color: var(--color-grey);
+}
+
+.app__booking-hours-hint--warn {
+    color: #e8b4b4;
+}
+
+.app__booking-success {
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 1px solid var(--color-golden);
+    border-radius: 4px;
+}
+
+.app__booking-success-title {
+    font-family: var(--font-base);
+    color: var(--color-golden);
+    font-size: 28px;
+    margin: 0 0 1rem;
+}
+
+.app__booking-success-text,
+.app__booking-success-meta {
+    margin-bottom: 1rem;
+}
+
+.app__booking-success-btn {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
 }
 
 /* Tablet styles */

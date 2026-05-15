@@ -24,11 +24,21 @@ function loadFromStorage() {
       featuredMenu: {
         ...defaultSiteContent.featuredMenu,
         ...parsed.featuredMenu,
+        sectionSubTitle:
+          parsed.featuredMenu.sectionSubTitle || defaultSiteContent.featuredMenu.sectionSubTitle,
+        sectionTitle: parsed.featuredMenu.sectionTitle || defaultSiteContent.featuredMenu.sectionTitle,
+        leftTitle: parsed.featuredMenu.leftTitle || defaultSiteContent.featuredMenu.leftTitle,
+        rightTitle: parsed.featuredMenu.rightTitle || defaultSiteContent.featuredMenu.rightTitle,
         leftItems: parsed.featuredMenu.leftItems || defaultSiteContent.featuredMenu.leftItems,
         rightItems: parsed.featuredMenu.rightItems || defaultSiteContent.featuredMenu.rightItems,
       },
       fullMenu: parsed.fullMenu,
       menuIntro: typeof parsed.menuIntro === 'string' ? parsed.menuIntro : defaultSiteContent.menuIntro,
+      breakfastMenu: Array.isArray(parsed.breakfastMenu) ? parsed.breakfastMenu : defaultSiteContent.breakfastMenu,
+      breakfastIntro:
+        typeof parsed.breakfastIntro === 'string' ? parsed.breakfastIntro : defaultSiteContent.breakfastIntro,
+      breakfastBadge:
+        typeof parsed.breakfastBadge === 'string' ? parsed.breakfastBadge : defaultSiteContent.breakfastBadge,
     };
   } catch {
     return clone(defaultSiteContent);
