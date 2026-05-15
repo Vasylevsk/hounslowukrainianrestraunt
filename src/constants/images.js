@@ -1,4 +1,4 @@
-import bg from '../assets/bg.png';
+import bg from '../assets/bg.jpg';
 import chef from '../assets/chef.webp';
 import G from '../assets/P.webp';
 import knife from '../assets/knife.png';
