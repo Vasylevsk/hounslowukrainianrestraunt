@@ -26,6 +26,48 @@ function prop_(key, fallback) {
   return v && String(v).trim() ? String(v).trim() : fallback || '';
 }
 
+/** UK — avoids Date.toString() (Russian locale in Gmail, "1899" time glitches from Sheets). */
+var TZ_BOOKING_ = 'Europe/London';
+
+function formatDateForEmail_(value) {
+  if (value == null || value === '') return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    var d = value;
+    if (isNaN(d.getTime())) return '';
+    if (d.getFullYear() < 1901) return '';
+    return Utilities.formatDate(d, TZ_BOOKING_, 'd MMM yyyy');
+  }
+  var s = String(value).trim();
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) {
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var mo = parseInt(m[2], 10) - 1;
+    var day = parseInt(m[3], 10);
+    var yr = m[1];
+    if (mo >= 0 && mo < 12 && day >= 1 && day <= 31) return day + ' ' + months[mo] + ' ' + yr;
+  }
+  return s;
+}
+
+function formatTimeForEmail_(value) {
+  if (value == null || value === '') return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    var d = value;
+    if (isNaN(d.getTime())) return '';
+    return Utilities.formatDate(d, TZ_BOOKING_, 'HH:mm');
+  }
+  var s = String(value).trim();
+  var mm = s.match(/^(\d{1,2}):(\d{2})/);
+  if (mm) {
+    return Utilities.formatDate(
+      new Date(2000, 0, 1, parseInt(mm[1], 10), parseInt(mm[2], 10)),
+      TZ_BOOKING_,
+      'HH:mm'
+    );
+  }
+  return s;
+}
+
 function jsonResponse_(obj, statusCode) {
   var output = ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
     ContentService.MimeType.JSON
@@ -71,7 +113,22 @@ function getSheet_() {
 function rowToBooking_(row, rowIndex) {
   var o = {};
   for (var i = 0; i < HEADERS.length; i++) {
-    o[HEADERS[i]] = row[i] != null ? String(row[i]) : '';
+    var key = HEADERS[i];
+    var val = row[i];
+    if (key === 'date') {
+      o[key] = formatDateForEmail_(val);
+    } else if (key === 'time') {
+      o[key] = formatTimeForEmail_(val);
+    } else if (key === 'createdAt') {
+      o[key] =
+        Object.prototype.toString.call(val) === '[object Date]' && !isNaN(val.getTime())
+          ? Utilities.formatDate(val, TZ_BOOKING_, 'd MMM yyyy, HH:mm')
+          : val != null
+            ? String(val)
+            : '';
+    } else {
+      o[key] = val != null ? String(val) : '';
+    }
   }
   o.rowIndex = rowIndex;
   delete o.token;
@@ -114,11 +171,11 @@ function bookingFromRow_(row) {
     name: String(row[2]),
     email: String(row[3]),
     phone: String(row[4]),
-    date: String(row[5]),
-    time: String(row[6]),
-    guests: String(row[7]),
-    message: String(row[8]),
-    status: String(row[9]),
+    date: formatDateForEmail_(row[5]),
+    time: formatTimeForEmail_(row[6]),
+    guests: row[7] != null ? String(row[7]) : '',
+    message: String(row[8] != null ? row[8] : ''),
+    status: String(row[9] != null ? row[9] : ''),
   };
 }
 
@@ -255,9 +312,9 @@ function buildCustomerPendingEmail_(b) {
     '<tr><td style="padding:20px 22px;">' +
     '<p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.12em;color:#9a7b2e;">Reservation details</p>' +
     '<p style="margin:0;font-size:16px;line-height:1.7;"><strong>Date &amp; time:</strong> ' +
-    escapeHtml_(b.date) +
+    escapeHtml_(formatDateForEmail_(b.date)) +
     ' at ' +
-    escapeHtml_(b.time) +
+    escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
     '</p></td></tr></table>' +
@@ -280,9 +337,9 @@ function buildCustomerConfirmedEmail_(b) {
     '<tr><td style="padding:22px 24px;">' +
     '<p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.12em;color:#2d6a3e;">Confirmed reservation</p>' +
     '<p style="margin:0;font-size:17px;line-height:1.7;color:#1a1a1a;"><strong>When:</strong> ' +
-    escapeHtml_(b.date) +
+    escapeHtml_(formatDateForEmail_(b.date)) +
     ' at ' +
-    escapeHtml_(b.time) +
+    escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
     '</p></td></tr></table>' +
@@ -291,14 +348,14 @@ function buildCustomerConfirmedEmail_(b) {
 }
 
 function buildCustomerRejectedEmail_(b, note) {
+  var dateShown = formatDateForEmail_(b.date);
+  if (!dateShown) dateShown = 'your requested date';
   var inner =
     '<p style="margin:0 0 16px;font-size:17px;line-height:1.5;">Dear ' +
     escapeHtml_(b.name) +
     ',</p>' +
-    '<p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:#333;">We are sorry we are unable to accommodate your request for <strong>' +
-    escapeHtml_(b.date) +
-    '</strong> at <strong>' +
-    escapeHtml_(b.time) +
+    '<p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:#333;">We are sorry we cannot accommodate your reservation on <strong>' +
+    escapeHtml_(dateShown) +
     '</strong>.</p>';
   if (note) {
     inner +=
@@ -334,9 +391,9 @@ function buildAdminNewEmail_(b, token) {
     '<br><strong>Phone:</strong> ' +
     escapeHtml_(b.phone) +
     '<br><strong>When:</strong> ' +
-    escapeHtml_(b.date) +
+    escapeHtml_(formatDateForEmail_(b.date)) +
     ' at ' +
-    escapeHtml_(b.time) +
+    escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
     (b.message
