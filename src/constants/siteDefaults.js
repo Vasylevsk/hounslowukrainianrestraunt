@@ -2,13 +2,13 @@
 
 import menuDishImages from './menuImages';
 
-export const SITE_CONTENT_VERSION = 9;
+export const SITE_CONTENT_VERSION = 10;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
 export const defaultWorkingHours = [
   { day: 'Monday', hours: 'Closed' },
-  { day: 'Tuesday', hours: '09:00-21:00' },
+  { day: 'Tuesday', hours: '17:00-21:00' },
   { day: 'Wednesday', hours: '09:00-21:30' },
   { day: 'Thursday', hours: '09:00-21:30' },
   { day: 'Friday', hours: '09:00-21:30' },
