@@ -1,0 +1,249 @@
+.lounge-promo--section {
+  position: relative;
+  overflow: hidden;
+}
+
+.lounge-promo--section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(220, 202, 135, 0.08), transparent 65%);
+  pointer-events: none;
+}
+
+.lounge-promo__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lounge-promo__visual {
+  flex: 0 1 340px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(220, 202, 135, 0.28);
+  background: linear-gradient(155deg, rgba(220, 202, 135, 0.1) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.85) 100%);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+}
+
+.lounge-promo__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.lounge-promo__orb--1 {
+  width: 140px;
+  height: 140px;
+  top: 10%;
+  left: 8%;
+  background: rgba(220, 202, 135, 0.35);
+}
+
+.lounge-promo__orb--2 {
+  width: 100px;
+  height: 100px;
+  bottom: 12%;
+  right: 10%;
+  background: rgba(154, 123, 46, 0.4);
+}
+
+.lounge-promo__visual-label {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-alt);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(220, 202, 135, 0.7);
+}
+
+.lounge-promo__copy {
+  flex: 1;
+  min-width: 0;
+  max-width: 560px;
+  text-align: left;
+}
+
+.lounge-promo__eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-alt);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-golden);
+}
+
+.lounge-promo__title {
+  margin: 0 0 1rem;
+  color: var(--color-golden);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.15;
+}
+
+.lounge-promo__lead {
+  margin: 0 0 1.25rem;
+  color: var(--color-grey);
+  line-height: 1.65;
+  max-width: 48ch;
+}
+
+.lounge-promo__perks {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-white);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.lounge-promo__perks li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.lounge-promo__perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-golden);
+}
+
+.lounge-promo__perks strong {
+  color: var(--color-golden);
+  font-weight: 700;
+}
+
+.lounge-promo__cta {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.lounge-promo__price {
+  margin: 0;
+  text-align: center;
+}
+
+.lounge-promo__price--hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.lounge-promo__price-value {
+  font-family: var(--font-base);
+  font-size: clamp(2.5rem, 6vw, 3.25rem);
+  line-height: 1;
+  color: var(--color-golden);
+  letter-spacing: 0.02em;
+}
+
+.lounge-promo__price-caption {
+  font-family: var(--font-alt);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(220, 202, 135, 0.65);
+}
+
+/* Inline card (booking page / form) */
+.lounge-promo--inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  border: 1px solid rgba(220, 202, 135, 0.35);
+  background: linear-gradient(135deg, rgba(220, 202, 135, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+.lounge-promo__inline-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.lounge-promo__inline-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-base);
+  font-size: 1.15rem;
+  color: var(--color-golden);
+  letter-spacing: 0.03em;
+}
+
+.lounge-promo--inline .lounge-promo__eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 10px;
+}
+
+.lounge-promo__inline-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-grey);
+}
+
+.lounge-promo--inline .lounge-promo__price-value {
+  font-size: 1.75rem;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 900px) {
+  .lounge-promo__inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .lounge-promo__copy {
+    max-width: none;
+    text-align: center;
+  }
+
+  .lounge-promo__lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lounge-promo__perks {
+    align-items: center;
+  }
+
+  .lounge-promo__visual {
+    flex: none;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .lounge-promo--inline {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}

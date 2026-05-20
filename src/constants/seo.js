@@ -37,7 +37,7 @@ export const SEO_BY_ROUTE = {
   '/booking': {
     title: `Book a Table | ${SITE_NAME}`,
     description:
-      'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham. Call 020 4568 0606 or 07853 514567, or use our online booking form.',
+      'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham — restaurant or lounge. Hookah in the lounge £27. Call 020 4568 0606 or book online.',
   },
   '/banquet': {
     title: `Banquets & Celebrations | ${SITE_NAME}`,

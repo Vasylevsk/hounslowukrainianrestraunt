@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { defaultWorkingHours } from '../../constants/siteDefaults';
 import { useSiteContent } from '../../context/SiteContentContext';
+import LoungePromo from '../LoungePromo/LoungePromo';
 import { createBooking, isBookingApiConfigured } from '../../services/bookingApi';
 import {
   getTimeBoundsForDate,
@@ -291,6 +292,8 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
           </select>
         </div>
       )}
+
+      {compact && form.area === 'Lounge' ? <LoungePromo variant="inline" /> : null}
 
       <div className="app__booking-form_row">
         {compact ? (

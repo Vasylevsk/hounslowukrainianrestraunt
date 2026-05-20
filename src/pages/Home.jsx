@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { LoungePromo } from '../components';
 import { AboutUs, Chef, FindUs, Gallery, Header, HumanitarianTeaser, SpecialMenu } from '../container';
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
       <AboutUs />
       <SpecialMenu />
       <Chef />
+      <LoungePromo />
       <Gallery />
       <FindUs />
       <HumanitarianTeaser />

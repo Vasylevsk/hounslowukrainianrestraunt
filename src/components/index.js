@@ -5,6 +5,7 @@ import Navbar from './Navbar/Navbar';
 import SEO from './SEO/SEO';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
 import BookingForm from './BookingForm/BookingForm';
+import LoungePromo from './LoungePromo/LoungePromo';
 
 export {
   SubHeading,
@@ -14,4 +15,5 @@ export {
   SEO,
   ScrollToTop,
   BookingForm,
+  LoungePromo,
 };
