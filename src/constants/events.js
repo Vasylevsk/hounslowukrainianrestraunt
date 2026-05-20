@@ -1,4 +1,5 @@
 import eventUsyk from '../assets/event/USYK.jpeg';
+import eventUkrainianCultural from '../assets/event/Ukrainian Cultural Event.jpeg';
 import eventJanna from '../assets/event/janna.png';
 import eventVictoria from '../assets/event/victoria.png';
 import eventChristmas from '../assets/event/christmas2026.jpg';
@@ -16,6 +17,17 @@ export const EVENT_HIGHLIGHTS = [
     href: SOCIAL_LINKS.instagram,
     linkType: 'instagram',
     badge: 'Follow on Instagram',
+    ended: false,
+  },
+  {
+    id: 'ukrainian-cultural',
+    image: eventUkrainianCultural,
+    alt: 'Ukrainian Cultural Event at Prosperity Ukrainian Restaurant',
+    title: 'Ukrainian Cultural Event',
+    subtitle: 'Culture & celebration at Prosperity',
+    href: 'https://www.instagram.com/p/DYj_kePCOY-/',
+    linkType: 'instagram',
+    badge: 'See on Instagram',
     ended: false,
   },
   {
