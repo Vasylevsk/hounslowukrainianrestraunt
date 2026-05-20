@@ -34,7 +34,11 @@ Stores reservations in Google Sheets and sends email to guests and admin. Works 
 1. Run `getSheet_` once from the editor (select function → Run) and approve Gmail + Sheets access.
 2. A **Bookings** sheet tab will be created with headers (including **area**: Restaurant or Lounge).
 
-If you already have a **Bookings** sheet from an older script, add a column **`area`** after `adminNote`, or delete the tab and let the script recreate it (you will lose old rows).
+If you already have a **Bookings** sheet from an older script: on **row 1**, columns must be exactly (A→M):  
+`id | createdAt | name | email | phone | date | time | guests | message | status | token | adminNote | area`  
+**`area` must be column M (13th), after `adminNote`.** Do not insert `area` in the middle — values will land in the wrong column. The script can fix the header row automatically; redeploy after updating `Code.gs`.
+
+**Website:** the live site must include the “Dining area” dropdown (deploy latest `main` from Git). Old builds do not send `area` to Apps Script.
 
 ## 5. Deploy as web app
 

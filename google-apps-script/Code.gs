@@ -108,7 +108,31 @@ function getSheet_() {
   } else if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
   }
+  ensureBookingHeaders_(sheet);
   return sheet;
+}
+
+/** Keeps row 1 aligned with HEADERS (adds missing columns e.g. area). */
+function ensureBookingHeaders_(sheet) {
+  var width = Math.max(sheet.getLastColumn(), HEADERS.length);
+  var row1 = sheet.getRange(1, 1, 1, width).getValues()[0];
+  var needsFix = false;
+  for (var i = 0; i < HEADERS.length; i++) {
+    if (String(row1[i] || '').trim() !== HEADERS[i]) {
+      needsFix = true;
+      break;
+    }
+  }
+  if (needsFix) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+  }
+}
+
+function bookingRowFromObject_(data) {
+  return HEADERS.map(function (key) {
+    return data[key] != null ? data[key] : '';
+  });
 }
 
 function rowToBooking_(row, rowIndex) {
@@ -486,18 +510,39 @@ function actionCreate_(body) {
   var time = String(body.time || '').trim();
   var guests = String(body.guests || '').trim();
   var message = String(body.message || '').trim();
-  var areaRaw = String(body.area || '').trim();
+  var areaRaw = String(body.area || body.diningArea || body.venue || '').trim();
   var area = areaRaw === 'Lounge' ? 'Lounge' : areaRaw === 'Restaurant' ? 'Restaurant' : '';
 
-  if (!name || !email || !phone || !date || !time || !guests || !area) {
+  if (!name || !email || !phone || !date || !time || !guests) {
     throw new Error('Please fill in all required fields.');
+  }
+  if (!area) {
+    throw new Error(
+      'Missing dining area (Restaurant or Lounge). Update the booking page on the website, then try again.'
+    );
   }
 
   var id = generateId_();
   var token = generateToken_();
   var createdAt = new Date().toISOString();
   var sheet = getSheet_();
-  sheet.appendRow([id, createdAt, name, email, phone, date, time, guests, message, 'pending', token, '', area]);
+  sheet.appendRow(
+    bookingRowFromObject_({
+      id: id,
+      createdAt: createdAt,
+      name: name,
+      email: email,
+      phone: phone,
+      date: date,
+      time: time,
+      guests: guests,
+      message: message,
+      status: 'pending',
+      token: token,
+      adminNote: '',
+      area: area,
+    })
+  );
 
   var booking = {
     id: id,
