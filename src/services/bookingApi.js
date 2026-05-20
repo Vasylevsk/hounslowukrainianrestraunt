@@ -39,6 +39,7 @@ export function createBooking(fields) {
     name: fields.name,
     email: fields.email,
     phone: fields.phone,
+    area: fields.area,
     date: fields.date,
     time: fields.time,
     guests: fields.guests,

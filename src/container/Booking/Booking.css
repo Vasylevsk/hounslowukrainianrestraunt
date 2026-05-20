@@ -4,6 +4,14 @@
     flex-direction: column;
 }
 
+.app__booking-form_field--area {
+    margin-bottom: 1rem;
+}
+
+.app__booking-input--area {
+    width: 100%;
+}
+
 .app__booking-form_row {
     display: flex;
     gap: 1rem;

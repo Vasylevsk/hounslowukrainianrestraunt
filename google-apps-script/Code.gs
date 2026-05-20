@@ -19,6 +19,7 @@ var HEADERS = [
   'status',
   'token',
   'adminNote',
+  'area',
 ];
 
 function prop_(key, fallback) {
@@ -176,6 +177,7 @@ function bookingFromRow_(row) {
     guests: row[7] != null ? String(row[7]) : '',
     message: String(row[8] != null ? row[8] : ''),
     status: String(row[9] != null ? row[9] : ''),
+    area: String(row[12] != null ? row[12] : ''),
   };
 }
 
@@ -317,6 +319,8 @@ function buildCustomerPendingEmail_(b) {
     escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
+    '<br><strong>Area:</strong> ' +
+    escapeHtml_(b.area || 'Restaurant') +
     '</p></td></tr></table>' +
     '<p style="margin:0 0 20px;font-size:15px;color:#6b5c32;">Status: <strong style="color:#9a7b2e;">Pending confirmation</strong></p>' +
     '<p style="margin:0;text-align:center;">' +
@@ -342,6 +346,8 @@ function buildCustomerConfirmedEmail_(b) {
     escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
+    '<br><strong>Area:</strong> ' +
+    escapeHtml_(b.area || 'Restaurant') +
     '</p></td></tr></table>' +
     '<p style="margin:0;font-size:15px;line-height:1.65;color:#444;">If your plans change, please call us as soon as possible so we can offer your table to another guest.</p>';
   return emailLayout_('Booking confirmed', inner);
@@ -396,6 +402,8 @@ function buildAdminNewEmail_(b, token) {
     escapeHtml_(formatTimeForEmail_(b.time)) +
     '<br><strong>Guests:</strong> ' +
     escapeHtml_(b.guests) +
+    '<br><strong>Area:</strong> ' +
+    escapeHtml_(b.area || 'Restaurant') +
     (b.message
       ? '<br><strong>Notes:</strong> ' + escapeHtml_(b.message)
       : '') +
@@ -478,8 +486,10 @@ function actionCreate_(body) {
   var time = String(body.time || '').trim();
   var guests = String(body.guests || '').trim();
   var message = String(body.message || '').trim();
+  var areaRaw = String(body.area || '').trim();
+  var area = areaRaw === 'Lounge' ? 'Lounge' : areaRaw === 'Restaurant' ? 'Restaurant' : '';
 
-  if (!name || !email || !phone || !date || !time || !guests) {
+  if (!name || !email || !phone || !date || !time || !guests || !area) {
     throw new Error('Please fill in all required fields.');
   }
 
@@ -487,9 +497,19 @@ function actionCreate_(body) {
   var token = generateToken_();
   var createdAt = new Date().toISOString();
   var sheet = getSheet_();
-  sheet.appendRow([id, createdAt, name, email, phone, date, time, guests, message, 'pending', token, '']);
+  sheet.appendRow([id, createdAt, name, email, phone, date, time, guests, message, 'pending', token, '', area]);
 
-  var booking = { id: id, name: name, email: email, phone: phone, date: date, time: time, guests: guests, message: message };
+  var booking = {
+    id: id,
+    name: name,
+    email: email,
+    phone: phone,
+    date: date,
+    time: time,
+    guests: guests,
+    message: message,
+    area: area,
+  };
 
   try {
     sendMail_(email, 'We received your reservation — Prosperity', buildCustomerPendingEmail_(booking));
@@ -500,7 +520,11 @@ function actionCreate_(body) {
   var adminEmail = prop_('ADMIN_EMAIL');
   if (adminEmail) {
     try {
-      sendMail_(adminEmail, 'New booking: ' + name + ' · ' + date + ' ' + time, buildAdminNewEmail_(booking, token));
+      sendMail_(
+        adminEmail,
+        'New booking: ' + name + ' · ' + area + ' · ' + date + ' ' + time,
+        buildAdminNewEmail_(booking, token)
+      );
     } catch (mailErr2) {
       Logger.log('Admin mail error: ' + mailErr2);
     }
@@ -554,6 +578,7 @@ function actionGetStatus_(body) {
       date: b.date,
       time: b.time,
       guests: b.guests,
+      area: b.area,
       name: b.name,
       createdAt: b.createdAt,
     },

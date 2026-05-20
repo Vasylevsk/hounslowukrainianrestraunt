@@ -115,6 +115,7 @@ const AdminBookings = () => {
               <th>Guest</th>
               <th>Contact</th>
               <th>Guests</th>
+              <th>Area</th>
               <th>Status</th>
               <th>Note to guest (decline)</th>
               <th className="adm-th-actions">Actions</th>
@@ -123,7 +124,7 @@ const AdminBookings = () => {
           <tbody>
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={7} className="adm-empty-cell">
+                <td colSpan={8} className="adm-empty-cell">
                   {loading ? 'Loading…' : 'No bookings in this view.'}
                 </td>
               </tr>
@@ -142,6 +143,7 @@ const AdminBookings = () => {
                     <a href={`tel:${b.phone}`}>{b.phone}</a>
                   </td>
                   <td>{b.guests}</td>
+                  <td>{b.area || '—'}</td>
                   <td>
                     <span className={statusClass(b.status)}>{b.status}</span>
                     {b.message ? (

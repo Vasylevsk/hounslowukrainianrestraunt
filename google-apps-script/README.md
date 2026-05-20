@@ -32,7 +32,9 @@ Stores reservations in Google Sheets and sends email to guests and admin. Works 
 ## 4. Authorize and test
 
 1. Run `getSheet_` once from the editor (select function → Run) and approve Gmail + Sheets access.
-2. A **Bookings** sheet tab will be created with headers.
+2. A **Bookings** sheet tab will be created with headers (including **area**: Restaurant or Lounge).
+
+If you already have a **Bookings** sheet from an older script, add a column **`area`** after `adminNote`, or delete the tab and let the script recreate it (you will lose old rows).
 
 ## 5. Deploy as web app
 

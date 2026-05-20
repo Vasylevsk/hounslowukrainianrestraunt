@@ -105,6 +105,12 @@ const BookingStatusPage = () => {
                     <dt>Guests</dt>
                     <dd>{booking.guests}</dd>
                   </div>
+                  {booking.area ? (
+                    <div>
+                      <dt>Area</dt>
+                      <dd>{booking.area}</dd>
+                    </div>
+                  ) : null}
                 </dl>
                 {statusKey === 'pending' ? (
                   <p className="p__opensans booking-status-message">

@@ -14,6 +14,7 @@ import {
 } from '../../utils/bookingHours';
 
 const EMPTY = {
+  area: '',
   name: '',
   email: '',
   phone: '',
@@ -22,6 +23,11 @@ const EMPTY = {
   guests: '',
   message: '',
 };
+
+const AREA_OPTIONS = [
+  { value: 'Restaurant', label: 'Restaurant' },
+  { value: 'Lounge', label: 'Lounge' },
+];
 
 function TimeField({ form, timeSlots, timeBounds, submitting, onChange, id, label, compact }) {
   const common = {
@@ -173,7 +179,7 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
       return;
     }
 
-    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.guests) {
+    if (!form.area || !form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.guests) {
       setError('Please fill in all required fields.');
       return;
     }
@@ -181,6 +187,7 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
     setSubmitting(true);
     try {
       const result = await createBooking({
+        area: form.area,
         name: form.name.trim(),
         email: form.email.trim(),
         phone: form.phone.trim(),
@@ -243,6 +250,47 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
           {error}
         </p>
       ) : null}
+
+      {compact ? (
+        <select
+          name="area"
+          value={form.area}
+          onChange={onChange}
+          required
+          className="app__booking-input app__booking-input--area"
+          disabled={submitting}
+          style={{ marginBottom: '1rem' }}
+        >
+          <option value="">Restaurant or Lounge</option>
+          {AREA_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <div className="app__booking-form_field app__booking-form_field--area">
+          <label className="app__booking-label" htmlFor="booking-area">
+            Dining area
+          </label>
+          <select
+            id="booking-area"
+            name="area"
+            value={form.area}
+            onChange={onChange}
+            required
+            className="app__booking-input app__booking-input--area"
+            disabled={submitting}
+          >
+            <option value="">Select Restaurant or Lounge</option>
+            {AREA_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <div className="app__booking-form_row">
         {compact ? (
