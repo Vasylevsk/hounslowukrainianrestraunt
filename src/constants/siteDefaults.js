@@ -2,7 +2,7 @@
 
 import menuDishImages from './menuImages';
 
-export const SITE_CONTENT_VERSION = 10;
+export const SITE_CONTENT_VERSION = 11;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -130,7 +130,7 @@ export const defaultFullMenu = [
         price: '£9',
         description:
           'Chicken, beetroot, cabbage, carrots, potatoes. Served with salo, bread and onions.',
-        ...img(),
+        ...img('Borscht with Salo & Sour Cream'),
       },
       {
         name: 'Seasonal Vegetable Cream Soup with Bruschetta',
@@ -341,7 +341,7 @@ export const defaultFullMenu = [
         name: 'Banosh',
         price: '£6',
         description: 'Cornmeal with double cream, served with salad.',
-        ...img(),
+        ...img('Banosh'),
       },
       {
         name: 'Banosh Add-ons',
@@ -383,7 +383,7 @@ export const defaultFullMenu = [
         name: 'Syrnyky (Cheese Pancakes)',
         price: '£9',
         description: 'With strawberry jam or sour cream.',
-        ...img(),
+        ...img('Syrnyky (Cheese Pancakes)'),
       },
       {
         name: 'Cherry Varenyky, 3 pcs',
@@ -513,7 +513,7 @@ export const defaultBreakfastMenu = [
         name: 'Cheburaky',
         price: '£7',
         description: 'With minced pork and chicken.',
-        ...img(),
+        ...img('Cheburaky'),
       },
     ],
   },
@@ -536,7 +536,7 @@ export const defaultBreakfastMenu = [
         name: 'Syrnyky (Cheese Pancakes)',
         price: '£9',
         description: '3 pieces. Served with strawberry jam or sour cream.',
-        ...img(),
+        ...img('Syrnyky (Cheese Pancakes)'),
       },
       {
         name: 'Cherry Dumplings',

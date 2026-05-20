@@ -1,3 +1,4 @@
+import eventUsyk from '../assets/event/USYK.jpeg';
 import eventJanna from '../assets/event/janna.png';
 import eventVictoria from '../assets/event/victoria.png';
 import eventChristmas from '../assets/event/christmas2026.jpg';
@@ -6,6 +7,17 @@ import { SOCIAL_LINKS } from './social';
 
 /** Homepage event carousel — order: upcoming → past → seasonal */
 export const EVENT_HIGHLIGHTS = [
+  {
+    id: 'usyk',
+    image: eventUsyk,
+    alt: 'USYK vs RICO — WBO World Heavyweight Championship viewing at Prosperity',
+    title: 'USYK vs RICO',
+    subtitle: '23 May · WBO World Heavyweight · Giza',
+    href: SOCIAL_LINKS.instagram,
+    linkType: 'instagram',
+    badge: 'Follow on Instagram',
+    ended: false,
+  },
   {
     id: 'janna',
     image: eventJanna,
