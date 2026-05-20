@@ -414,7 +414,7 @@ body.nav-overlay-open .app__menu-nav {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     border-bottom: 1px solid rgba(220, 202, 135, 0.1);
   }
 
@@ -423,11 +423,27 @@ body.nav-overlay-open .app__menu-nav {
     order: unset;
   }
 
+  /* Photo on top, card frame — avoids stretched “pill” ovals on narrow screens */
   .app__menu-row-visual:not(.app__menu-row-visual--empty) {
+    order: -1;
     width: 100%;
     max-width: none;
-    margin: 0.75rem 0 0;
-    aspect-ratio: 16 / 9;
+    margin: 0 0 1rem;
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(220, 202, 135, 0.18);
+  }
+
+  .app__menu-row-img {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    object-fit: cover;
+    object-position: center 42%;
   }
 
   .app__menu-row-text {
@@ -510,5 +526,17 @@ body.nav-overlay-open {
 
   .app__menu-category-title {
     font-size: 1.5rem;
+  }
+
+  .app__menu-row-visual:not(.app__menu-row-visual--empty) {
+    width: min(100%, 340px);
+    margin-left: auto;
+    margin-right: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+  }
+
+  .app__menu-row-img {
+    object-position: center center;
   }
 }

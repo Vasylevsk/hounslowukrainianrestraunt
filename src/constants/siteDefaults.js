@@ -1,8 +1,10 @@
 /** Default site copy: hours, featured blocks on home, full menu page. Version must match persisted JSON. */
 
-export const SITE_CONTENT_VERSION = 8;
+import menuDishImages from './menuImages';
 
-const img = () => ({ image: '' });
+export const SITE_CONTENT_VERSION = 9;
+
+const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
 export const defaultWorkingHours = [
   { day: 'Monday', hours: 'Closed' },
@@ -134,7 +136,7 @@ export const defaultFullMenu = [
         name: 'Seasonal Vegetable Cream Soup with Bruschetta',
         price: '£8',
         description: 'Cauliflower, potatoes, carrot, onions and pumpkin, finished with sour cream.',
-        ...img(),
+        ...img('Seasonal Vegetable Cream Soup with Bruschetta'),
       },
       {
         name: 'Seasonal Traditional Okroshka',
@@ -146,7 +148,7 @@ export const defaultFullMenu = [
         name: 'Mixed Meat Solyanka',
         price: '£11',
         description: 'Ham, sausage, bacon, frankfurters, onion, olives and lemon.',
-        ...img(),
+        ...img('Mixed Meat Solyanka'),
       },
       {
         name: 'Chanakhy',
@@ -169,7 +171,7 @@ export const defaultFullMenu = [
         name: 'Chicken Kyiv',
         price: '£17',
         description: 'Chicken fillet, herb butter, cheese, breadcrumbs, served with salad.',
-        ...img(),
+        ...img('Chicken Kyiv'),
       },
       {
         name: 'Verkhovyna-style Schnitzel',
@@ -187,7 +189,7 @@ export const defaultFullMenu = [
         name: 'Pork Shashlik',
         price: '£15',
         description: 'Grilled pork skewers, served with salad.',
-        ...img(),
+        ...img('Pork Shashlik'),
       },
       {
         name: 'Pork Shank with Braised Cabbage',
@@ -260,7 +262,7 @@ export const defaultFullMenu = [
         price: '£80',
         description:
           'Steak, sausages, chicken skewers, pork skewers, chicken wings, black pudding sausage, potatoes and braised cabbage.',
-        ...img(),
+        ...img('Party Platter for 6'),
       },
     ],
   },
@@ -277,7 +279,7 @@ export const defaultFullMenu = [
           { name: 'Cabbage, 10 pcs', price: '£10' },
           { name: 'Fish with special sauce, 5 pcs', price: '£15' },
         ],
-        ...img(),
+        ...img('Varenyky'),
       },
       {
         name: 'Pelmeni, 18 pcs',
@@ -297,7 +299,7 @@ export const defaultFullMenu = [
           { name: 'With seafood', price: '£18' },
           { name: 'With rabbit', price: '£19' },
         ],
-        ...img(),
+        ...img('Ukrainian Poltava Galushky'),
       },
       {
         name: 'Potato Pancakes, 5 pcs',
@@ -369,13 +371,13 @@ export const defaultFullMenu = [
         name: 'Crepes in Creamy Orange Sauce',
         price: '£9',
         description: '',
-        ...img(),
+        ...img('Crepes in Creamy Orange Sauce'),
       },
       {
         name: 'Crepes with Cottage Cheese',
         price: '£9',
         description: 'With strawberry jam or sour cream.',
-        ...img(),
+        ...img('Crepes with Cottage Cheese'),
       },
       {
         name: 'Syrnyky (Cheese Pancakes)',
@@ -434,7 +436,7 @@ export const defaultBreakfastMenu = [
         price: '£14',
         description:
           'Eggs x2, bacon x2, sausages x2, black pudding x2, potato pancakes x2, mushrooms, tomatoes, beans, toast.',
-        ...img(),
+        ...img('Full House'),
       },
       {
         name: 'Green House',
@@ -467,7 +469,7 @@ export const defaultBreakfastMenu = [
         name: 'Cossack Strength Skillet',
         price: '£12',
         description: 'Potatoes, bacon, sausage, tomatoes, eggs, greens.',
-        ...img(),
+        ...img('Cossack Strength Skillet'),
       },
       {
         name: "Nobleman's Egg",
@@ -522,13 +524,13 @@ export const defaultBreakfastMenu = [
         name: 'Pancakes in Orange Sauce with Ice Cream',
         price: '£9',
         description: '3 pieces.',
-        ...img(),
+        ...img('Pancakes in Orange Sauce with Ice Cream'),
       },
       {
         name: 'Pancakes with Cottage Cheese',
         price: '£9',
         description: '2 pieces. Served with strawberry jam or sour cream.',
-        ...img(),
+        ...img('Pancakes with Cottage Cheese'),
       },
       {
         name: 'Syrnyky (Cheese Pancakes)',
