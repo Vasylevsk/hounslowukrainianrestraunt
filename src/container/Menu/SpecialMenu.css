@@ -115,7 +115,13 @@
 
 .app__specialMenu-menu_img img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 999px;
+    border: 1px solid rgba(220, 202, 135, 0.28);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .app__specialMenu_menu_items {

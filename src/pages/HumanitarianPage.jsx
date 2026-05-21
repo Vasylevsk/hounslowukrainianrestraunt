@@ -5,7 +5,14 @@ import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { SubHeading } from '../components';
 import { images } from '../constants';
 import { DONATION_IMAGES } from '../constants/donationImages';
-import { HUMANITARIAN_VIDEO_EMBED, HUMANITARIAN_VIDEO_URL, PRESS_BY_ID, PRESS_COVERAGE } from '../constants/pressCoverage';
+import {
+  HUMANITARIAN_FEATURED_VIDEO_EMBED,
+  HUMANITARIAN_FEATURED_VIDEO_URL,
+  HUMANITARIAN_VIDEO_EMBED,
+  HUMANITARIAN_VIDEO_URL,
+  PRESS_BY_ID,
+  PRESS_COVERAGE,
+} from '../constants/pressCoverage';
 import { SOCIAL_LINKS } from '../constants/social';
 import './HumanitarianPage.css';
 
@@ -19,6 +26,26 @@ const HumFigure = ({ src, alt, caption, variant = 'tile' }) => (
   </figure>
 );
 
+const HumVideo = ({ embed, url, label, caption, featured = false }) => (
+  <div className={`app__hum-video${featured ? ' app__hum-video--featured' : ''}`}>
+    <p className="app__hum-video_label p__opensans">{label}</p>
+    {caption ? <p className="app__hum-video_caption p__opensans">{caption}</p> : null}
+    <div className="app__hum-video_frame">
+      <iframe
+        title={label}
+        src={`${embed}?rel=0`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
+    </div>
+    <p className="app__hum-video_footer">
+      <a href={url} target="_blank" rel="noopener noreferrer">
+        Open on YouTube
+      </a>
+    </p>
+  </div>
+);
+
 const HumanitarianPage = () => (
   <article className="app__hum-page">
     <div className="app__hum-page_wrap app__bg">
@@ -27,7 +54,8 @@ const HumanitarianPage = () => (
         <h1 className="headtext__cormorant">Humanitarian aid for Ukraine</h1>
         <img src={images.spoon} alt="" className="spoon__img" style={{ marginTop: '1rem' }} />
         <p className="p__opensans app__hum-hero_lead">
-          Prosperity Restaurant, located in Twickenham, started from humble beginnings serving delicious Ukrainian home cooking to its customers.
+          Prosperity Restaurant in Twickenham began as a place for Ukrainian home cooking. During the first years of the full-scale war it also became
+          a humanitarian aid hub for Ukraine — a chapter we now look back on with gratitude to the community.
         </p>
         <HumFigure
           variant="hero"
@@ -41,7 +69,7 @@ const HumanitarianPage = () => (
         <h2>Press &amp; partners</h2>
         <p className="app__hum-section_intro">
           From the first days of the full-scale invasion, journalists and partners documented how Twickenham rallied around Prosperity. These
-          articles and the film below help tell that story.
+          articles and the films below tell that story.
         </p>
         <ul className="app__hum-press-list">
           {PRESS_COVERAGE.map((item) => (
@@ -57,21 +85,20 @@ const HumanitarianPage = () => (
             </li>
           ))}
         </ul>
-        <div className="app__hum-video" id="video">
-          <p className="app__hum-video_label p__opensans">Video</p>
-          <div className="app__hum-video_frame">
-            <iframe
-              title="Prosperity humanitarian aid - YouTube"
-              src={`${HUMANITARIAN_VIDEO_EMBED}?rel=0`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-          <p className="app__hum-video_footer">
-            <a href={HUMANITARIAN_VIDEO_URL} target="_blank" rel="noopener noreferrer">
-              Open on YouTube
-            </a>
-          </p>
+        <div className="app__hum-videos" id="video">
+          <HumVideo
+            featured
+            embed={HUMANITARIAN_FEATURED_VIDEO_EMBED}
+            url={HUMANITARIAN_FEATURED_VIDEO_URL}
+            label="Film"
+            caption="Twickenham community volunteers, collections at Prosperity, and lorries of aid sent to Ukraine."
+          />
+          <HumVideo
+            embed={HUMANITARIAN_VIDEO_EMBED}
+            url={HUMANITARIAN_VIDEO_URL}
+            label="Earlier coverage"
+            caption="Additional footage from the early months of the aid hub."
+          />
         </div>
       </section>
 
@@ -100,25 +127,24 @@ const HumanitarianPage = () => (
           caption="Team photo - volunteers and regular helpers at the donation hub."
         />
         <p>
-          Prosperity has become one of the central donation hubs for humanitarian aid for Ukraine in the South-East of England. Run solely by a
-          dedicated team of volunteers, our humanitarian aid is delivered directly into Ukraine, to the cities and towns where it is needed most.
+          Prosperity became one of the central donation hubs for humanitarian aid for Ukraine in the South-East of England. Run solely by a dedicated
+          team of Twickenham community volunteers, aid was delivered directly into Ukraine, to the cities and towns where it was needed most.
         </p>
         <p>
-          On our donations section below you can see what type of aid you can donate. The collection lists are based on demand from our partner
-          warehouses in Ukraine. With the support of donations and sponsors, volunteers across Richmond and Twickenham collect, package, and transport
-          tonnes of humanitarian aid to Ukrainian cities most in need of help.
+          The collection lists were based on demand from partner warehouses in Ukraine. With the support of donations and sponsors, volunteers across
+          Richmond and Twickenham collected, packaged, and transported tonnes of humanitarian aid to Ukrainian cities most in need of help.
         </p>
         <p>
-          With increased shelling of Ukrainian infrastructure and power stations, many cities have been left without electricity, water, and heating.
-          Donations you make today can provide items such as power banks, blankets, and heaters, helping families survive the colder months ahead.
+          As shelling damaged Ukrainian infrastructure and power stations, many cities were left without electricity, water, and heating. Donations
+          brought power banks, blankets, heaters, and generators, helping families through the colder months.
         </p>
         <HumFigure
           src={DONATION_IMAGES.generators}
           alt="Generators collected for Ukraine"
-          caption="Generators - part of the power and warmth kit we send when the grid is under stress."
+          caption="Generators - part of the power and warmth kit sent when the grid was under stress."
         />
         <p>
-          Munira Wilson, MP for Twickenham, has expressed support for the humanitarian work undertaken at Prosperity Restaurant.
+          Munira Wilson, MP for Twickenham, expressed support for the humanitarian work undertaken at Prosperity Restaurant.
         </p>
         <HumFigure
           src={DONATION_IMAGES.mpMunira}
@@ -135,25 +161,25 @@ const HumanitarianPage = () => (
         <div className="app__hum-facts">
           <div className="app__hum-fact">
             <strong>Central hub</strong>
-            <span>The Twickenham restaurant is the central point for all incoming donations.</span>
+            <span>The Twickenham restaurant was the central point for all incoming donations.</span>
           </div>
           <div className="app__hum-fact">
             <strong>Off-site partners</strong>
-            <span>Two local organisations kindly provide space off site to sort and pack donations.</span>
+            <span>Two local organisations kindly provided space off site to sort and pack donations.</span>
           </div>
           <div className="app__hum-fact">
             <strong>Volunteers every day</strong>
-            <span>A dedicated team works daily to ensure donations reach Ukraine.</span>
+            <span>A dedicated Twickenham community team worked daily to ensure donations reached Ukraine.</span>
           </div>
           <div className="app__hum-fact">
             <strong>Direct delivery</strong>
-            <span>We work with partners and deliver aid to Kyiv, Ternopil, Lviv, Stryi, Ivano-Frankivsk, and Berezhany.</span>
+            <span>We worked with partners and delivered aid to Kyiv, Ternopil, Lviv, Stryi, Ivano-Frankivsk, and Berezhany.</span>
           </div>
           <div className="app__hum-fact" style={{ gridColumn: '1 / -1' }}>
             <strong>Scale of help</strong>
             <span>
-              Since the start of the war we have sent <strong>144 twenty-tonne lorries</strong> packed with donations direct to Ukraine (last updated:
-              February 2024).
+              Over the course of the campaign we sent <strong>150 twenty-tonne lorries</strong> packed with donations direct to Ukraine, organised
+              with Twickenham community volunteers.
             </span>
           </div>
         </div>
@@ -174,26 +200,27 @@ const HumanitarianPage = () => (
           alt="Leader - Maria"
           caption="Leader - Maria, on site helping steer collections and sorting."
         />
+        <p className="app__hum-closed-note">
+          The Prosperity Centre for Humanitarian Aid for Ukraine has now closed. Prosperity operates again as a restaurant; we are no longer
+          collecting donations. The sections below describe how the community helped during the campaign.
+        </p>
       </section>
 
       <section className="app__hum-section" id="donate">
-        <h2>Donations</h2>
+        <h2>How the community helped</h2>
         <p>
-          At the <strong>Prosperity Centre for Humanitarian Aid for Ukraine</strong> we currently accept three types of support: humanitarian goods
-          (which we transport to Ukraine), monetary donations towards transport costs, and community support including a JustGiving for Prosperity
-          Caf&eacute; and Restaurant set up by a local resident to help cover ongoing costs while the venue operates as an aid centre.
+          At the <strong>Prosperity Centre for Humanitarian Aid for Ukraine</strong> we welcomed three types of support: humanitarian goods (which we
+          transported to Ukraine), monetary donations towards transport costs, and community fundraising including a JustGiving for Prosperity
+          Caf&eacute; and Restaurant set up by a local resident to help cover running costs while the venue operated as an aid centre.
         </p>
         <p>
-          All physical donations should be brought to <strong>Prosperity Caf&eacute; and Restaurant, 59 York Street, Twickenham, London, TW1 3LP</strong>.
-        </p>
-        <p>
-          The caf&eacute; is normally open every day, but please <strong>phone to confirm</strong> current opening hours before you travel.
+          Physical donations were brought to <strong>Prosperity Caf&eacute; and Restaurant, 59 York Street, Twickenham, London, TW1 3LP</strong>.
         </p>
         <div className="app__hum-mosaic">
           <HumFigure
             src={DONATION_IMAGES.amazon1}
             alt="Amazon delivery"
-            caption="Amazon delivery - wish-list parcels arriving at Prosperity (use our address at checkout)."
+            caption="Amazon delivery - wish-list parcels arriving at Prosperity."
           />
           <HumFigure
             src={DONATION_IMAGES.amazon2}
@@ -202,29 +229,22 @@ const HumanitarianPage = () => (
           />
         </div>
         <p>
-          Our humanitarian request list is updated when our counterparts in Ukraine tell us what is needed. If you have arranged a local collection and
-          need help, or wish to make a bulk donation, please contact us by phone.
-        </p>
-        <p>
-          If you share our request list on social media, please link to <strong>this page</strong> so everyone sees the most up-to-date information.
+          Our humanitarian request list was updated when our counterparts in Ukraine told us what was needed. Local collections and bulk donations were
+          coordinated by phone.
         </p>
         <div className="app__hum-highlight">
-          Amazon: you can donate essential items via our Amazon wish list (contact us for the current link). Choose our address for delivery before
-          checkout so items arrive straight at Prosperity to be packed for lorries. The list reflects priority goods from our contacts in Ukraine and is
-          updated regularly.
+          Amazon: supporters donated essential items via our Amazon wish list, using our York Street address at checkout so parcels arrived straight at
+          Prosperity to be packed for lorries. The list reflected priority goods from our contacts in Ukraine.
         </div>
         <HumFigure
           src={DONATION_IMAGES.itemsForSale}
           alt="Items for sale"
           caption="Items for sale - fundraising goods on the stall to help cover running costs."
         />
-        <p>
-          <strong>Prosperity Restaurant is open again</strong>, but we are still collecting the following urgently needed items.
-        </p>
       </section>
 
       <section className="app__hum-section" id="items">
-        <h2>Humanitarian aid request list</h2>
+        <h2>What we collected</h2>
 
         <div className="app__hum-mosaic">
           <HumFigure
@@ -239,7 +259,7 @@ const HumanitarianPage = () => (
           />
         </div>
         <p className="app__hum-partner-note">
-          Ukrainian institutions have received shipments coordinated from London - for example,{' '}
+          Ukrainian institutions received shipments coordinated from London — for example,{' '}
           <a href={PRESS_BY_ID.tdmu.href} target="_blank" rel="noopener noreferrer" className="app__hum-inline-link">
             Ternopil National Medical University reported receiving 22 tonnes of humanitarian cargo from Prosperity and partners in March 2022
           </a>
@@ -285,7 +305,8 @@ const HumanitarianPage = () => (
       <section className="app__hum-section" id="social">
         <h2>Follow our work</h2>
         <p style={{ textAlign: 'center', marginBottom: 0 }}>
-          Updates, collections, and community news on Facebook, Instagram, and YouTube - and the press links above for longer reads.
+          During the campaign we shared updates, collections, and community news on Facebook, Instagram, and YouTube — and the press links above for
+          longer reads.
         </p>
         <div className="app__hum-social">
           <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer">
@@ -310,7 +331,7 @@ const HumanitarianPage = () => (
       </div>
 
       <p className="app__hum-note">
-        Questions about donations, bulk collections, or the Amazon list? Call <a href="tel:+442045680606">020 4568 0606</a> or{' '}
+        To book a table or ask about the restaurant, call <a href="tel:+442045680606">020 4568 0606</a> or{' '}
         <a href="tel:+447853514567">07853 514567</a>.
       </p>
     </div>

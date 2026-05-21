@@ -14,12 +14,12 @@ const HumanitarianTeaser = () => (
           <div className="app__humanitarian-teaser_visualCrop">
             <img
               src={DONATION_IMAGES.team}
-              alt="Volunteers sorting and packing donations at Prosperity, Twickenham"
+              alt="Volunteers who sorted and packed donations at Prosperity, Twickenham"
               loading="lazy"
               decoding="async"
             />
           </div>
-          <p className="app__humanitarian-teaser_visualCaption">Team photo - volunteers packing aid at Prosperity</p>
+          <p className="app__humanitarian-teaser_visualCaption">Team photo — Twickenham community volunteers packing aid at Prosperity</p>
         </div>
       </div>
 
@@ -30,11 +30,12 @@ const HumanitarianTeaser = () => (
           From our kitchen to those who need it most
         </h2>
         <p className="app__humanitarian-teaser_tagline">
-          Prosperity: from a small cafe to London&apos;s key humanitarian aid hub.
+          Prosperity: from a small cafe to one of London&apos;s key humanitarian aid hubs.
         </p>
         <p className="app__humanitarian-teaser_lead">
-          What began as home-style Ukrainian cooking in Twickenham grew into a lifeline: today Prosperity is one of the South-East&apos;s central
-          donation hubs for aid to Ukraine, run by volunteers who pack and ship tonnes of help straight to where it is needed.
+          What began as home-style Ukrainian cooking in Twickenham grew into a lifeline. For two years Prosperity was one of the South-East&apos;s
+          central donation hubs for aid to Ukraine, run by Twickenham community volunteers who packed and shipped tonnes of help to where it was
+          needed most.
         </p>
         <p className="app__humanitarian-teaser_press">
           Featured by the{' '}

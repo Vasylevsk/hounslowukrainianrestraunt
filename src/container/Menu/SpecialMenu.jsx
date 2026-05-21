@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { SubHeading, MenuItem } from '../../components';
-import { images } from '../../constants';
+import { menuShowcaseImage } from '../../constants/menuImages';
 import { useSiteContent } from '../../context/SiteContentContext';
 import './SpecialMenu.css';
 
@@ -31,7 +31,7 @@ const SpecialMenu = () => {
         </div>
 
         <div className="app__specialMenu-menu_img">
-          <img src={images.menu} alt="menu__img" />
+          <img src={menuShowcaseImage} alt="Seasonal Traditional Okroshka at Prosperity Ukrainian Restaurant" />
         </div>
 
         <div className="app__specialMenu-menu_cocktails flex__center">

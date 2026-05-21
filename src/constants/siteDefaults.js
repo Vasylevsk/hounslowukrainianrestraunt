@@ -2,7 +2,7 @@
 
 import menuDishImages from './menuImages';
 
-export const SITE_CONTENT_VERSION = 11;
+export const SITE_CONTENT_VERSION = 12;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -100,7 +100,7 @@ export const defaultFullMenu = [
         name: 'Olivier Salad',
         price: '£7',
         description: 'Sausage, potatoes, carrots, pickled cucumber, egg, green peas, mayonnaise.',
-        ...img(),
+        ...img('Olivier Salad'),
       },
       {
         name: 'Beetroot Salad',
@@ -142,7 +142,7 @@ export const defaultFullMenu = [
         name: 'Seasonal Traditional Okroshka',
         price: '£9',
         description: 'Cold kefir soup with fresh vegetables, herbs, eggs and tender meat.',
-        ...img(),
+        ...img('Seasonal Traditional Okroshka'),
       },
       {
         name: 'Mixed Meat Solyanka',
@@ -225,7 +225,7 @@ export const defaultFullMenu = [
         name: 'Bukovyna-style Lamb',
         price: '£18',
         description: 'Bone-in lamb with vegetables and brynza cheese.',
-        ...img(),
+        ...img('Bukovyna-style Lamb'),
       },
       {
         name: 'Roasted Crispy Quail',
@@ -249,7 +249,7 @@ export const defaultFullMenu = [
         name: 'Stuffed Cabbage Rolls with Mushroom Sauce',
         price: '£9',
         description: '5 pieces. Cabbage, rice, pork & beef mince, carrots, onion.',
-        ...img(),
+        ...img('Stuffed Cabbage Rolls with Mushroom Sauce'),
       },
       {
         name: 'Vegetarian Stuffed Cabbage Rolls',
@@ -305,13 +305,13 @@ export const defaultFullMenu = [
         name: 'Potato Pancakes, 5 pcs',
         price: '£9',
         description: 'Served with fried onions & pork cracklings or sour cream.',
-        ...img(),
+        ...img('Potato Pancakes, 5 pcs'),
       },
       {
         name: 'Potato Pancakes in a Clay Pot',
         price: '£12',
         description: 'With mushrooms & cheese, served with salad.',
-        ...img(),
+        ...img('Potato Pancakes in a Clay Pot'),
       },
       {
         name: 'Stuffed Crepes (Benderyky), 3 pcs',

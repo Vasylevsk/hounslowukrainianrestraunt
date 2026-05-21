@@ -47,7 +47,7 @@ export const SEO_BY_ROUTE = {
   '/humanitarian-aid': {
     title: `Humanitarian Aid for Ukraine | ${SITE_NAME_SHORT}`,
     description:
-      'Prosperity for Ukraine: Twickenham donation hub - BBC & press coverage, how to donate goods and funds, lorries to Ukraine, St Erconwald partnership, photos, and YouTube.',
+      'Prosperity for Ukraine: the story of Twickenham\'s humanitarian aid hub — 150 lorries with community volunteers, BBC & press coverage, photos, and film.',
   },
   '/admin': {
     title: `Content | ${SITE_NAME_SHORT}`,
