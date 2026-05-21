@@ -16,7 +16,8 @@ import seasonalOkroshka from '../assets/menu/Seasonal Traditional Okroshka.png';
 import seasonalSoup from '../assets/menu/Seasonal Vegetable Cream Soup with Bruschetta.jpeg';
 import stuffedCabbage from '../assets/menu/Stuffed Cabbage Rolls with Mushroom Sauce.png';
 import syrnyky from '../assets/menu/Syrnyky (Cheese Pancakes).jpeg';
-import ukrainianGalushky from '../assets/menu/Ukrainian Poltava Galushky.png';
+import galushkyClassic from '../assets/menu/Ukrainian Poltava Galushky.jpeg';
+import galushkySeafood from '../assets/menu/Ukrainian Poltava Galushky.png';
 import varenyky from '../assets/menu/Varenyky.jpeg';
 
 /** Dish name → bundled photo (must match menu item `name` in siteDefaults). */
@@ -36,17 +37,20 @@ const menuDishImages = {
   'Pancakes in Orange Sauce with Ice Cream': crepesOrange,
   'Pancakes with Cottage Cheese': crepesCottageCheese,
   'Potato Pancakes, 5 pcs': potatoPancakes,
-  'Potato Pancakes in a Clay Pot': potatoPancakes,
   'Pork Shashlik': porkShashlik,
   'Seasonal Traditional Okroshka': seasonalOkroshka,
   'Seasonal Vegetable Cream Soup with Bruschetta': seasonalSoup,
   'Stuffed Cabbage Rolls with Mushroom Sauce': stuffedCabbage,
   'Syrnyky (Cheese Pancakes)': syrnyky,
-  'Ukrainian Poltava Galushky': ukrainianGalushky,
+  'Ukrainian Poltava Galushky': galushkyClassic,
+  'Ukrainian Poltava Galushky With seafood': galushkySeafood,
   Varenyky: varenyky,
 };
 
-/** Centre image for home menu highlights (branded okroshka & menu stand). */
-export const menuShowcaseImage = seasonalOkroshka;
+/** Two studio shots for the galushky menu row (fillings vary — photos show two popular styles). */
+export const ukrainianGalushkyGallery = [
+  { src: galushkyClassic, label: 'Traditional' },
+  { src: galushkySeafood, label: 'With seafood' },
+];
 
 export default menuDishImages;

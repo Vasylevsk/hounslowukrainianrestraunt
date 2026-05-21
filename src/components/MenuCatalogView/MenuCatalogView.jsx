@@ -177,7 +177,9 @@ const MenuCatalogView = ({
 
                 <div className="app__menu-rows">
                   {category.items.map((item, itemIndex) => {
-                    const hasImage = Boolean(item.image);
+                    const gallery = Array.isArray(item.gallery) ? item.gallery.filter((p) => p?.src) : [];
+                    const hasGallery = gallery.length > 0;
+                    const hasImage = Boolean(item.image) || hasGallery;
                     const hasVariants = Array.isArray(item.variants) && item.variants.length > 0;
                     const showInlinePrice = item.price && !hasVariants;
 
@@ -219,7 +221,25 @@ const MenuCatalogView = ({
                             </p>
                           ) : null}
                         </div>
-                        {hasImage ? (
+                        {hasGallery ? (
+                          <div
+                            className={`app__menu-row-visual app__menu-row-visual--gallery${
+                              gallery.length > 1 ? ' app__menu-row-visual--gallery-duo' : ''
+                            }`}
+                          >
+                            {gallery.map((photo, photoIndex) => (
+                              <figure key={photo.label || photoIndex} className="app__menu-row-photo">
+                                <img
+                                  src={photo.src}
+                                  alt={photo.label ? `${item.name} — ${photo.label}` : item.name}
+                                  className="app__menu-row-img"
+                                  loading="lazy"
+                                />
+                                {photo.label ? <figcaption className="app__menu-row-photo-label">{photo.label}</figcaption> : null}
+                              </figure>
+                            ))}
+                          </div>
+                        ) : hasImage ? (
                           <div className="app__menu-row-visual">
                             <img src={item.image} alt={item.name} className="app__menu-row-img" loading="lazy" />
                           </div>

@@ -1,8 +1,8 @@
 /** Default site copy: hours, featured blocks on home, full menu page. Version must match persisted JSON. */
 
-import menuDishImages from './menuImages';
+import menuDishImages, { ukrainianGalushkyGallery } from './menuImages';
 
-export const SITE_CONTENT_VERSION = 12;
+export const SITE_CONTENT_VERSION = 13;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -300,6 +300,7 @@ export const defaultFullMenu = [
           { name: 'With rabbit', price: '£19' },
         ],
         ...img('Ukrainian Poltava Galushky'),
+        gallery: ukrainianGalushkyGallery,
       },
       {
         name: 'Potato Pancakes, 5 pcs',
@@ -311,7 +312,7 @@ export const defaultFullMenu = [
         name: 'Potato Pancakes in a Clay Pot',
         price: '£12',
         description: 'With mushrooms & cheese, served with salad.',
-        ...img('Potato Pancakes in a Clay Pot'),
+        ...img(),
       },
       {
         name: 'Stuffed Crepes (Benderyky), 3 pcs',
