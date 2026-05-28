@@ -1,6 +1,8 @@
 import banosh from '../assets/menu/Banosh.jpeg';
 import borscht from '../assets/menu/Borscht with Salo & Sour Cream.jpeg';
 import bukovynaLamb from '../assets/menu/Bukovyna-style Lamb.png';
+import cakeOfTheDay from '../assets/menu/Cake of the Day.png';
+import chanakhy from '../assets/menu/Chanakhy.png';
 import cheburaky from '../assets/menu/Cheburaky.jpeg';
 import chickenKyiv from '../assets/menu/Chicken Kyiv.jpeg';
 import cossackSkillet from '../assets/menu/Cossack Strength Skillet.jpeg';
@@ -12,6 +14,7 @@ import olivierSalad from '../assets/menu/Olivier Salad.png';
 import partyPlatter from '../assets/menu/Party Platter for 6.jpeg';
 import porkShashlik from '../assets/menu/Pork Shashlik.jpeg';
 import potatoPancakes from '../assets/menu/Potato Pancakes, 5 pcs.png';
+import roastedCrispyQuail from '../assets/menu/Roasted Crispy Quail.png';
 import seasonalOkroshka from '../assets/menu/Seasonal Traditional Okroshka.png';
 import seasonalSoup from '../assets/menu/Seasonal Vegetable Cream Soup with Bruschetta.jpeg';
 import stuffedCabbage from '../assets/menu/Stuffed Cabbage Rolls with Mushroom Sauce.png';
@@ -25,6 +28,8 @@ const menuDishImages = {
   Banosh: banosh,
   'Borscht with Salo & Sour Cream': borscht,
   'Bukovyna-style Lamb': bukovynaLamb,
+  'Cake of the Day': cakeOfTheDay,
+  Chanakhy: chanakhy,
   Cheburaky: cheburaky,
   'Chicken Kyiv': chickenKyiv,
   'Cossack Strength Skillet': cossackSkillet,
@@ -38,6 +43,7 @@ const menuDishImages = {
   'Pancakes with Cottage Cheese': crepesCottageCheese,
   'Potato Pancakes, 5 pcs': potatoPancakes,
   'Pork Shashlik': porkShashlik,
+  'Roasted Crispy Quail': roastedCrispyQuail,
   'Seasonal Traditional Okroshka': seasonalOkroshka,
   'Seasonal Vegetable Cream Soup with Bruschetta': seasonalSoup,
   'Stuffed Cabbage Rolls with Mushroom Sauce': stuffedCabbage,

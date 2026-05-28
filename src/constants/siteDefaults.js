@@ -2,7 +2,7 @@
 
 import menuDishImages, { ukrainianGalushkyGallery } from './menuImages';
 
-export const SITE_CONTENT_VERSION = 13;
+export const SITE_CONTENT_VERSION = 14;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -186,6 +186,12 @@ export const defaultFullMenu = [
         ...img(),
       },
       {
+        name: 'BBQ Roasted Ribs with Braised Cabbage',
+        price: '£18',
+        description: '',
+        ...img(),
+      },
+      {
         name: 'Pork Shashlik',
         price: '£15',
         description: 'Grilled pork skewers, served with salad.',
@@ -275,8 +281,8 @@ export const defaultFullMenu = [
         description:
           'Served with fried onions & pork cracklings or butter. Choice of sour cream, machanka sauce or carbonara sauce.',
         variants: [
-          { name: 'Potatoes & cheese, 10 pcs', price: '£10' },
-          { name: 'Cabbage, 10 pcs', price: '£10' },
+          { name: 'Potatoes & cheese, 6 pcs', price: '£10' },
+          { name: 'Cabbage, 6 pcs', price: '£10' },
           { name: 'Fish with special sauce, 5 pcs', price: '£15' },
         ],
         ...img('Varenyky'),
@@ -322,6 +328,12 @@ export const defaultFullMenu = [
           { name: 'With cabbage', price: '£7' },
           { name: 'With chicken & mushroom sauce', price: '£9' },
         ],
+        ...img(),
+      },
+      {
+        name: 'Knydli - Tender Potato Dumplings with Cheese, Dill and Mushroom Sauce',
+        price: '£9',
+        description: '',
         ...img(),
       },
     ],
@@ -387,9 +399,21 @@ export const defaultFullMenu = [
         ...img('Syrnyky (Cheese Pancakes)'),
       },
       {
-        name: 'Cherry Varenyky, 3 pcs',
+        name: 'Cherry dumplings (11 pieces boiled)',
+        price: '£9',
+        description: '',
+        ...img(),
+      },
+      {
+        name: 'Steamed cherry dumplings (3 pieces)',
         price: '£9',
         description: 'Served with sour cream.',
+        ...img(),
+      },
+      {
+        name: 'Dumplings with sweet cheese (9 pieces)',
+        price: '£9',
+        description: '',
         ...img(),
       },
       {
