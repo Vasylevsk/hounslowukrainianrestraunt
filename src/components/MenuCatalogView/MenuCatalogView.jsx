@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import SubHeading from '../SubHeading/SubHeading';
 import { images } from '../../constants';
+import menuDishImages from '../../constants/menuImages';
 import { formatPriceDisplay } from '../../utils/priceFormat';
 import '../../pages/MenuPage.css';
 
@@ -179,7 +180,8 @@ const MenuCatalogView = ({
                   {category.items.map((item, itemIndex) => {
                     const gallery = Array.isArray(item.gallery) ? item.gallery.filter((p) => p?.src) : [];
                     const hasGallery = gallery.length > 0;
-                    const hasImage = Boolean(item.image) || hasGallery;
+                    const resolvedImage = item.image || menuDishImages[item.name] || '';
+                    const hasImage = Boolean(resolvedImage) || hasGallery;
                     const hasVariants = Array.isArray(item.variants) && item.variants.length > 0;
                     const showInlinePrice = item.price && !hasVariants;
 
@@ -211,7 +213,7 @@ const MenuCatalogView = ({
                                 </li>
                               ))}
                             </ul>
-                          ) : item.price ? (
+                          ) : item.price && !showInlinePrice ? (
                             <p
                               className={`app__menu-item-price ${
                                 showInlinePrice ? 'app__menu-item-price--below' : ''
@@ -241,7 +243,7 @@ const MenuCatalogView = ({
                           </div>
                         ) : hasImage ? (
                           <div className="app__menu-row-visual">
-                            <img src={item.image} alt={item.name} className="app__menu-row-img" loading="lazy" />
+                            <img src={resolvedImage} alt={item.name} className="app__menu-row-img" loading="lazy" />
                           </div>
                         ) : (
                           <div className="app__menu-row-visual app__menu-row-visual--empty" aria-hidden>
