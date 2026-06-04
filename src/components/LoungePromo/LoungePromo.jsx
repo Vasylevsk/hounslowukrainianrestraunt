@@ -42,11 +42,11 @@ const LoungePromo = ({ variant = 'section' }) => {
             Hookah in the Lounge
           </h2>
           <p className="lounge-promo__lead p__opensans">
-            After dinner or for a late evening with friends — enjoy a premium hookah in our lounge. Ukrainian warmth,
+            After dinner or for a late evening with friends - enjoy a premium hookah in our lounge. Ukrainian warmth,
             calm atmosphere, and attentive service.
           </p>
           <ul className="lounge-promo__perks p__opensans">
-            <li>Premium hookah — <strong>£27</strong></li>
+            <li>Premium hookah - <strong>£27</strong></li>
             <li>Available in the Lounge area</li>
             <li>Reserve &quot;Lounge&quot; when booking a table</li>
           </ul>

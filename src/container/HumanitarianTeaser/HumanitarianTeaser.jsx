@@ -19,7 +19,7 @@ const HumanitarianTeaser = () => (
               decoding="async"
             />
           </div>
-          <p className="app__humanitarian-teaser_visualCaption">Team photo — Twickenham community volunteers packing aid at Prosperity</p>
+          <p className="app__humanitarian-teaser_visualCaption">Team photo - Twickenham community volunteers packing aid at Prosperity</p>
         </div>
       </div>
 

@@ -1,8 +1,9 @@
 /** Default site copy: hours, featured blocks on home, full menu page. Version must match persisted JSON. */
 
+import { defaultDrinksIntro, defaultDrinksMenu } from './drinksMenu';
 import menuDishImages, { ukrainianGalushkyGallery } from './menuImages';
 
-export const SITE_CONTENT_VERSION = 14;
+export const SITE_CONTENT_VERSION = 17;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -35,7 +36,7 @@ export const defaultFeaturedMenu = {
       tags: 'Served with salo, bread and onions',
     },
     { title: 'Chicken Kyiv', price: '£17', tags: 'Herb butter, cheese, breadcrumbs, served with salad' },
-    { title: 'Ukrainian Poltava Galushky', price: 'from £15', tags: 'Traditional dumplings — choose your filling' },
+    { title: 'Ukrainian Poltava Galushky', price: 'from £15', tags: 'Traditional dumplings - choose your filling' },
     { title: 'Chanakhy', price: '£10', tags: 'Pork, beef, beans, mushrooms and potatoes' },
     { title: 'Banosh', price: '£6', tags: 'Cornmeal with double cream, served with salad' },
   ],
@@ -297,7 +298,7 @@ export const defaultFullMenu = [
       {
         name: 'Ukrainian Poltava Galushky',
         price: '',
-        description: 'Traditional dumplings — choose your filling.',
+        description: 'Traditional dumplings - choose your filling.',
         variants: [
           { name: 'With seasonal vegetables', price: '£15' },
           { name: 'With braised meat', price: '£16' },
@@ -427,7 +428,7 @@ export const defaultFullMenu = [
 ];
 
 export const defaultMenuIntro =
-  'Authentic Ukrainian cuisine in Twickenham — from borscht and varenyky to grilled meats and banosh. All prices in GBP. Dishes with options are listed below each item; ask our team if you need help choosing.';
+  'Authentic Ukrainian cuisine in Twickenham - from borscht and varenyky to grilled meats and banosh. All prices in GBP. Dishes with options are listed below each item; ask our team if you need help choosing.';
 
 export const BREAKFAST_CATEGORY_ORDER = [
   'House Breakfasts',
@@ -447,7 +448,7 @@ export function sortBreakfastCategories(categories) {
 }
 
 export const defaultBreakfastIntro =
-  'Start your day the Ukrainian way — hearty plates, omelettes, skillets, and sweet finishes. All prices in GBP.';
+  'Start your day the Ukrainian way - hearty plates, omelettes, skillets, and sweet finishes. All prices in GBP.';
 
 export const defaultBreakfastBadge = 'Until 4:00 PM';
 
@@ -585,6 +586,8 @@ export const defaultSiteContent = {
   featuredMenu: defaultFeaturedMenu,
   fullMenu: defaultFullMenu,
   menuIntro: defaultMenuIntro,
+  drinksMenu: defaultDrinksMenu,
+  drinksIntro: defaultDrinksIntro,
   breakfastMenu: defaultBreakfastMenu,
   breakfastIntro: defaultBreakfastIntro,
   breakfastBadge: defaultBreakfastBadge,

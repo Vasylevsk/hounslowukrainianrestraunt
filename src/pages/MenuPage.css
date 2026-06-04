@@ -1,14 +1,20 @@
 /* Prosperity menu: dark canvas, gold titles, zigzag text / oval photo (Instagram reference) */
 
 .app__menu-page {
-  min-height: 100vh;
-  background: var(--color-black);
+  background: transparent;
 }
 
 .app__menu-page_container {
-  min-height: 100vh;
+  --menu-gutter-x: 6rem;
+  min-height: calc(100vh - var(--site-header-height, 72px));
   padding-top: 6rem;
   padding-bottom: 4rem;
+  overflow: visible;
+}
+
+.app__menu-page,
+.app__menu-page_content {
+  overflow: visible;
 }
 
 .app__menu-page_content {
@@ -18,7 +24,7 @@
 
 .app__menu-page_header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .app__menu-page_h1 {
@@ -73,54 +79,215 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-.app__menu-page_spoon {
-  margin-top: 1rem;
-}
-
 .app__menu-page_intro {
   margin: 2rem auto 0;
   max-width: 640px;
   text-align: center;
   color: var(--color-grey);
   line-height: 1.65;
+  text-transform: none;
 }
 
-/* Sticky category jump nav — sits below site header (--site-header-height set in MenuPage) */
-.app__menu-nav {
-  position: sticky;
-  top: var(--site-header-height, 72px);
-  z-index: 90;
-  margin: 0 0 2rem;
-  padding: 0.85rem 0 1rem;
-  background: linear-gradient(180deg, var(--color-black) 85%, rgba(0, 0, 0, 0.92) 100%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+/* Food / Drinks switcher (standalone on breakfast etc.) */
+.app__menu-zone-toggle {
+  display: inline-flex;
+  margin: 1.25rem auto 0;
+  padding: 4px;
+  border: 1px solid rgba(220, 202, 135, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.45);
+  gap: 4px;
 }
 
-.app__menu-nav-placeholder {
+/* Food / Drinks: stays in page flow (does not pin); symmetric vertical padding */
+.app__menu-zone-toggle.app__menu-zone-toggle--bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 1.25rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  gap: 4px;
+}
+
+.app__menu-zone-toggle.app__menu-zone-toggle--bar .app__menu-zone-toggle__btn {
+  min-width: 7.5rem;
+  padding: 0.55rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.app__menu-zone-toggle__btn {
+  min-width: 8.5rem;
+  padding: 0.7rem 2rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-base);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app__menu-zone-toggle__btn:hover {
+  color: var(--color-white);
+}
+
+.app__menu-zone-toggle__btn--active {
+  background: var(--color-golden);
+  color: var(--color-black);
+  box-shadow: 0 4px 18px rgba(220, 202, 135, 0.35);
+}
+
+.app__menu-zone-panel--hidden {
   display: none;
 }
 
-body.nav-overlay-open .app__menu-nav {
-  visibility: hidden;
-  pointer-events: none;
+/* Drinks table (wine, vodka columns) */
+.app__drinks-table-head {
+  display: grid;
+  grid-template-columns: 1fr repeat(var(--drinks-cols, 2), 5.5rem);
+  gap: 0.75rem 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(220, 202, 135, 0.22);
 }
 
-.app__menu-nav-hint {
-  margin: 0 0 0.55rem;
+.app__drinks-table-head__item,
+.app__drinks-table-head__col {
   font-family: var(--font-alt);
   font-size: 11px;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(220, 202, 135, 0.55);
+  color: rgba(220, 202, 135, 0.65);
+}
+
+.app__drinks-table-head__col {
+  text-align: right;
+}
+
+.app__drinks-table-row {
+  display: grid;
+  grid-template-columns: 1fr repeat(var(--drinks-cols, 2), 5.5rem);
+  gap: 0.75rem 1rem;
+  align-items: start;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(220, 202, 135, 0.08);
+}
+
+.app__drinks-table-row:last-child {
+  border-bottom: none;
+}
+
+.app__drinks-table-row__item .app__menu-item-name {
+  margin-bottom: 0.2rem;
+}
+
+.app__drinks-table-row__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  text-align: right;
+}
+
+.app__drinks-table-row__price-label {
+  display: none;
+}
+
+.app__drinks-table-row__price .app__menu-item-price {
+  margin: 0;
+}
+
+.app__menu-row--drink .app__menu-row-visual--empty {
+  display: none;
+}
+
+.app__menu-rows--drinks .app__menu-row--drink {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(220, 202, 135, 0.08);
+}
+
+@media screen and (max-width: 800px) {
+  .app__drinks-table-head {
+    display: none;
+  }
+
+  .app__drinks-table-row {
+    display: block;
+    padding: 1rem 0;
+  }
+
+  .app__drinks-table-row__price {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0.5rem 1rem 0 0;
+    text-align: left;
+  }
+
+  .app__drinks-table-row__price-label {
+    display: block;
+    font-family: var(--font-alt);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(220, 202, 135, 0.65);
+  }
+}
+
+.app__menu-nav-anchor {
+  margin: 0 0 1.5rem;
+}
+
+/* Category chips: in flow until scrolled, then fixed flush under navbar */
+.app__menu-nav {
+  position: relative;
+  z-index: 90;
+  margin: 0;
+  padding: 0;
+  background: rgba(10, 10, 10, 0.98);
+  border-bottom: 1px solid rgba(220, 202, 135, 0.18);
+}
+
+.app__menu-nav--fixed {
+  position: fixed;
+  left: var(--menu-gutter-x, 6rem);
+  right: var(--menu-gutter-x, 6rem);
+  width: auto;
+  top: var(--site-header-height, 72px);
+  margin: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.app__menu-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.55rem 0;
+}
+
+body.nav-overlay-open .app__menu-nav,
+body.nav-overlay-open .app__menu-nav--fixed {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .app__menu-nav-scroll {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 0.35rem;
+  overflow-y: visible;
+  padding-bottom: 2px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -143,6 +310,7 @@ body.nav-overlay-open .app__menu-nav {
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app__menu-nav-chip:hover {
@@ -424,20 +592,12 @@ body.nav-overlay-open .app__menu-nav {
     font-size: 14px;
   }
 
-  /* Sticky (not fixed): nav stays below title until you scroll — avoids covering "Menu" + spoon */
-  .app__menu-nav {
-    position: sticky;
-    top: var(--site-header-height, 64px);
-    z-index: 90;
+  .app__menu-nav-anchor {
     margin: 0 0 1.25rem;
-    padding: 0.65rem 0 0.75rem;
-    background: var(--color-black);
-    border-bottom: 1px solid rgba(220, 202, 135, 0.18);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
   }
 
-  .app__menu-nav-placeholder {
-    display: none;
+  .app__menu-nav-inner {
+    padding: 0.5rem 0;
   }
 
   .app__menu-nav-chip {
@@ -544,13 +704,15 @@ body.nav-overlay-open .app__menu-nav {
   }
 }
 
-body.nav-overlay-open {
-  overflow: hidden;
-  touch-action: none;
+@media screen and (max-width: 850px) {
+  .app__menu-page_container {
+    --menu-gutter-x: 4rem;
+  }
 }
 
 @media screen and (max-width: 650px) {
   .app__menu-page_container {
+    --menu-gutter-x: 1.25rem;
     padding-top: 5rem;
     padding-left: 1.25rem;
     padding-right: 1.25rem;

@@ -55,7 +55,7 @@ const HumanitarianPage = () => (
         <img src={images.spoon} alt="" className="spoon__img" style={{ marginTop: '1rem' }} />
         <p className="p__opensans app__hum-hero_lead">
           Prosperity Restaurant in Twickenham began as a place for Ukrainian home cooking. During the first years of the full-scale war it also became
-          a humanitarian aid hub for Ukraine — a chapter we now look back on with gratitude to the community.
+          a humanitarian aid hub for Ukraine - a chapter we now look back on with gratitude to the community.
         </p>
         <HumFigure
           variant="hero"
@@ -259,7 +259,7 @@ const HumanitarianPage = () => (
           />
         </div>
         <p className="app__hum-partner-note">
-          Ukrainian institutions received shipments coordinated from London — for example,{' '}
+          Ukrainian institutions received shipments coordinated from London - for example,{' '}
           <a href={PRESS_BY_ID.tdmu.href} target="_blank" rel="noopener noreferrer" className="app__hum-inline-link">
             Ternopil National Medical University reported receiving 22 tonnes of humanitarian cargo from Prosperity and partners in March 2022
           </a>
@@ -305,7 +305,7 @@ const HumanitarianPage = () => (
       <section className="app__hum-section" id="social">
         <h2>Follow our work</h2>
         <p style={{ textAlign: 'center', marginBottom: 0 }}>
-          During the campaign we shared updates, collections, and community news on Facebook, Instagram, and YouTube — and the press links above for
+          During the campaign we shared updates, collections, and community news on Facebook, Instagram, and YouTube - and the press links above for
           longer reads.
         </p>
         <div className="app__hum-social">

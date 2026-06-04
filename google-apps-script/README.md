@@ -15,7 +15,7 @@ Stores reservations in Google Sheets and sends email to guests and admin. Works 
 
 ## 3. Script properties
 
-**Project Settings → Script properties** — add:
+**Project Settings → Script properties** - add:
 
 | Property | Example | Required |
 |----------|---------|----------|
@@ -36,7 +36,7 @@ Stores reservations in Google Sheets and sends email to guests and admin. Works 
 
 If you already have a **Bookings** sheet from an older script: on **row 1**, columns must be exactly (A→M):  
 `id | createdAt | name | email | phone | date | time | guests | message | status | token | adminNote | area`  
-**`area` must be column M (13th), after `adminNote`.** Do not insert `area` in the middle — values will land in the wrong column. The script can fix the header row automatically; redeploy after updating `Code.gs`.
+**`area` must be column M (13th), after `adminNote`.** Do not insert `area` in the middle - values will land in the wrong column. The script can fix the header row automatically; redeploy after updating `Code.gs`.
 
 **Website:** the live site must include the “Dining area” dropdown (deploy latest `main` from Git). Old builds do not send `area` to Apps Script.
 

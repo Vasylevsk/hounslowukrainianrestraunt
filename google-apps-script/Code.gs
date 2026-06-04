@@ -1,5 +1,5 @@
 /**
- * Prosperity — table reservations API (Google Apps Script Web App)
+ * Prosperity - table reservations API (Google Apps Script Web App)
  *
  * Setup: see google-apps-script/README.md
  * Script Properties: ADMIN_PASSWORD, ADMIN_EMAIL, SITE_URL, SPREADSHEET_ID (optional)
@@ -27,7 +27,7 @@ function prop_(key, fallback) {
   return v && String(v).trim() ? String(v).trim() : fallback || '';
 }
 
-/** UK — avoids Date.toString() (Russian locale in Gmail, "1899" time glitches from Sheets). */
+/** UK - avoids Date.toString() (Russian locale in Gmail, "1899" time glitches from Sheets). */
 var TZ_BOOKING_ = 'Europe/London';
 
 function formatDateForEmail_(value) {
@@ -360,7 +360,7 @@ function buildCustomerConfirmedEmail_(b) {
     '<p style="margin:0 0 16px;font-size:17px;line-height:1.5;">Dear ' +
     escapeHtml_(b.name) +
     ',</p>' +
-    '<p style="margin:0 0 24px;font-size:18px;line-height:1.55;color:#2d6a3e;font-weight:600;">Your table is confirmed — we look forward to seeing you.</p>' +
+    '<p style="margin:0 0 24px;font-size:18px;line-height:1.55;color:#2d6a3e;font-weight:600;">Your table is confirmed - we look forward to seeing you.</p>' +
     '<table role="presentation" width="100%" style="background:#f0f7f1;border:1px solid #c3e0c8;border-radius:8px;margin:0 0 24px;">' +
     '<tr><td style="padding:22px 24px;">' +
     '<p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.12em;color:#2d6a3e;">Confirmed reservation</p>' +
@@ -395,7 +395,7 @@ function buildCustomerRejectedEmail_(b, note) {
       '</p></div>';
   }
   inner +=
-    '<p style="margin:0;font-size:15px;line-height:1.65;color:#444;">We would love to welcome you on another date — please book again on our website or get in touch.</p>';
+    '<p style="margin:0;font-size:15px;line-height:1.65;color:#444;">We would love to welcome you on another date - please book again on our website or get in touch.</p>';
   return emailLayout_('Booking update', inner);
 }
 
@@ -411,7 +411,7 @@ function buildAdminNewEmail_(b, token) {
     'display:inline-block;padding:14px 28px;margin:8px 0 8px 0;background:#8b3a3a;color:#fff;text-decoration:none;border-radius:8px;font-size:15px;font-weight:600;';
   var inner =
     '<p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.12em;color:#9a7b2e;">Action required</p>' +
-    '<p style="margin:0 0 20px;font-size:17px;line-height:1.5;">New table reservation — please choose <strong>Confirm</strong> or <strong>Decline</strong>. You can use each link safely more than once: if a decision was already recorded, the page will say so and no duplicate emails are sent.</p>' +
+    '<p style="margin:0 0 20px;font-size:17px;line-height:1.5;">New table reservation - please choose <strong>Confirm</strong> or <strong>Decline</strong>. You can use each link safely more than once: if a decision was already recorded, the page will say so and no duplicate emails are sent.</p>' +
     '<table role="presentation" width="100%" style="background:#fff;border:1px solid #e8e2d6;border-radius:8px;margin:0 0 28px;">' +
     '<tr><td style="padding:20px 22px;font-size:15px;line-height:1.65;">' +
     '<strong>Guest:</strong> ' +
@@ -490,11 +490,11 @@ function updateStatus_(id, token, newStatus, adminNote, skipTokenCheck) {
   booking.status = newStatus;
 
   if (ns === 'confirmed') {
-    sendMail_(booking.email, 'Your table is confirmed — Prosperity', buildCustomerConfirmedEmail_(booking));
+    sendMail_(booking.email, 'Your table is confirmed - Prosperity', buildCustomerConfirmedEmail_(booking));
   } else if (ns === 'rejected') {
     sendMail_(
       booking.email,
-      'Update on your reservation — Prosperity',
+      'Update on your reservation - Prosperity',
       buildCustomerRejectedEmail_(booking, adminNote || '')
     );
   }
@@ -557,7 +557,7 @@ function actionCreate_(body) {
   };
 
   try {
-    sendMail_(email, 'We received your reservation — Prosperity', buildCustomerPendingEmail_(booking));
+    sendMail_(email, 'We received your reservation - Prosperity', buildCustomerPendingEmail_(booking));
   } catch (mailErr) {
     Logger.log('Customer mail error: ' + mailErr);
   }
@@ -694,7 +694,7 @@ function htmlPage_(title, message, isSuccess, kind) {
   var extra = '';
   if (kind === 'repeat') {
     extra =
-      '<p style="color:#9a7b2e;font-size:15px;margin:16px 0 0;">No further action is needed — you can close this page.</p>';
+      '<p style="color:#9a7b2e;font-size:15px;margin:16px 0 0;">No further action is needed - you can close this page.</p>';
   } else if (kind === 'done') {
     extra =
       '<p style="color:' +

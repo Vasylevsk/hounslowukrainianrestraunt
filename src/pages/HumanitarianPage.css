@@ -1,12 +1,12 @@
 .app__hum-page {
-  min-height: 100vh;
-  background: var(--color-black);
+  background: transparent;
 }
 
 .app__hum-page_wrap {
   max-width: 920px;
   margin: 0 auto;
   padding: 6rem 1.5rem 4rem;
+  min-height: calc(100vh - var(--site-header-height, 72px));
 }
 
 .app__hum-hero {

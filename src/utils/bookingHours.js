@@ -25,7 +25,7 @@ export function hoursRowForDay(workingHours, dayName) {
 /** @returns {{ openMin: number, closeMin: number } | null } */
 export function parseHoursRange(hoursText) {
   if (!hoursText || CLOSED_RE.test(hoursText)) return null;
-  const m = String(hoursText).match(/(\d{1,2})\s*:\s*(\d{2})\s*[-–—]\s*(\d{1,2})\s*:\s*(\d{2})/);
+  const m = String(hoursText).match(/(\d{1,2})\s*:\s*(\d{2})\s*[---]\s*(\d{1,2})\s*:\s*(\d{2})/);
   if (!m) return null;
   const openMin = Number(m[1]) * 60 + Number(m[2]);
   const closeMin = Number(m[3]) * 60 + Number(m[4]);
@@ -166,7 +166,7 @@ export function hoursHintForDate(workingHours, dateStr) {
   const row = hoursRowForDay(workingHours, dayName);
   if (!row) return '';
   if (CLOSED_RE.test(row.hours)) {
-    return `${dayName}: closed — please pick another date.`;
+    return `${dayName}: closed - please pick another date.`;
   }
   return `${dayName}: ${row.hours}`;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
 import { Footer } from './container';
 import { Navbar, ScrollToTop, SEO } from './components';
@@ -28,6 +28,9 @@ const AppLayout = () => {
         <Route path="/booking" component={BookingPage} />
         <Route path="/banquet" component={BanquetPage} />
         <Route path="/menu" component={MenuPage} />
+        <Route path="/drinks">
+          <Redirect to="/menu#menu-bar" />
+        </Route>
         <Route path="/breakfast" component={BreakfastPage} />
         <Route path="/humanitarian-aid" component={HumanitarianPage} />
         <Route path="/admin" component={AdminPage} />

@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { defaultSiteContent, SITE_CONTENT_VERSION } from '../constants/siteDefaults';
+import { normalizeDashesDeep } from '../utils/normalizeText';
 
 const STORAGE_KEY = 'prosperity_site_content_v2';
 
@@ -8,16 +9,20 @@ function clone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
+function withNormalizedCopy(content) {
+  return normalizeDashesDeep(clone(content));
+}
+
 function loadFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return clone(defaultSiteContent);
+    if (!raw) return withNormalizedCopy(defaultSiteContent);
     const parsed = JSON.parse(raw);
-    if (!parsed || parsed.version !== SITE_CONTENT_VERSION) return clone(defaultSiteContent);
+    if (!parsed || parsed.version !== SITE_CONTENT_VERSION) return withNormalizedCopy(defaultSiteContent);
     if (!Array.isArray(parsed.workingHours) || !parsed.featuredMenu || !Array.isArray(parsed.fullMenu)) {
-      return clone(defaultSiteContent);
+      return withNormalizedCopy(defaultSiteContent);
     }
-    return {
+    return normalizeDashesDeep({
       ...clone(defaultSiteContent),
       ...parsed,
       workingHours: parsed.workingHours,
@@ -39,9 +44,11 @@ function loadFromStorage() {
         typeof parsed.breakfastIntro === 'string' ? parsed.breakfastIntro : defaultSiteContent.breakfastIntro,
       breakfastBadge:
         typeof parsed.breakfastBadge === 'string' ? parsed.breakfastBadge : defaultSiteContent.breakfastBadge,
-    };
+      drinksMenu: Array.isArray(parsed.drinksMenu) ? parsed.drinksMenu : defaultSiteContent.drinksMenu,
+      drinksIntro: typeof parsed.drinksIntro === 'string' ? parsed.drinksIntro : defaultSiteContent.drinksIntro,
+    });
   } catch {
-    return clone(defaultSiteContent);
+    return withNormalizedCopy(defaultSiteContent);
   }
 }
 
@@ -59,19 +66,21 @@ export function SiteContentProvider({ children }) {
   }, [content]);
 
   const patchContent = useCallback((partial) => {
-    setContent((prev) => ({ ...prev, ...partial }));
+    setContent((prev) => normalizeDashesDeep({ ...prev, ...partial }));
   }, []);
 
   const resetContent = useCallback(() => {
-    setContent(clone(defaultSiteContent));
+    setContent(withNormalizedCopy(defaultSiteContent));
   }, []);
 
   const replaceContent = useCallback((next) => {
-    setContent({
-      ...clone(defaultSiteContent),
-      ...next,
-      version: SITE_CONTENT_VERSION,
-    });
+    setContent(
+      normalizeDashesDeep({
+        ...clone(defaultSiteContent),
+        ...next,
+        version: SITE_CONTENT_VERSION,
+      })
+    );
   }, []);
 
   const value = useMemo(

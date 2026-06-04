@@ -143,7 +143,7 @@ const AdminBookings = () => {
                     <a href={`tel:${b.phone}`}>{b.phone}</a>
                   </td>
                   <td>{b.guests}</td>
-                  <td>{b.area || '—'}</td>
+                  <td>{b.area || '-'}</td>
                   <td>
                     <span className={statusClass(b.status)}>{b.status}</span>
                     {b.message ? (
@@ -182,7 +182,7 @@ const AdminBookings = () => {
                         </button>
                       </>
                     ) : (
-                      <span className="adm-muted">—</span>
+                      <span className="adm-muted">-</span>
                     )}
                   </td>
                 </tr>

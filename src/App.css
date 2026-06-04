@@ -8,17 +8,85 @@
   align-items: center;
 }
 
-.app__bg {
-  background: url('./assets/bg.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+/* One site-wide texture (fixes mobile gaps / “unloaded” strips between sections). */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  background-color: var(--color-black);
 }
 
-@media (max-width: 768px) {
-  .app__bg {
-    background-attachment: scroll;
+html {
+  overflow-x: clip;
+  overflow-y: scroll;
+  overscroll-behavior-y: none;
+}
+
+body {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+body.nav-overlay-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.app__site {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--color-black);
+  overflow-x: clip;
+}
+
+.app__site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--color-black);
+  background-image: url('./assets/bg.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.app__site > *:not(.app__site-bg):not(.app__navbar) {
+  position: relative;
+  z-index: 1;
+}
+
+.app__site > .app__navbar {
+  z-index: 1000;
+}
+
+.app__bg {
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Mobile: clean gradient instead of photo (texture loads poorly on phones) */
+@media screen and (max-width: 768px) {
+  .app__site {
+    background-color: #0a0a0a;
+  }
+
+  .app__site-bg {
+    position: absolute;
+    inset: 0;
+    min-height: unset;
+    height: auto;
+    background-image: none;
+    background-color: #0a0a0a;
+    background:
+      radial-gradient(ellipse 140% 70% at 50% -15%, rgba(220, 202, 135, 0.14), transparent 55%),
+      radial-gradient(ellipse 90% 50% at 100% 50%, rgba(154, 123, 46, 0.08), transparent 50%),
+      radial-gradient(ellipse 80% 45% at 0% 85%, rgba(220, 202, 135, 0.06), transparent 45%),
+      linear-gradient(180deg, #141210 0%, #0c0c0c 42%, #080808 100%);
   }
 }
 

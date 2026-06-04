@@ -39,7 +39,7 @@ export const PRESS_COVERAGE = [
 
 export const PRESS_BY_ID = Object.fromEntries(PRESS_COVERAGE.map((item) => [item.id, item]));
 
-/** Primary film — Twickenham community & convoys to Ukraine */
+/** Primary film - Twickenham community & convoys to Ukraine */
 export const HUMANITARIAN_FEATURED_VIDEO_EMBED = 'https://www.youtube.com/embed/bDCjk46SUaQ';
 export const HUMANITARIAN_FEATURED_VIDEO_URL = 'https://youtu.be/bDCjk46SUaQ';
 

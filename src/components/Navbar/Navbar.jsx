@@ -45,7 +45,6 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="app__navbar-links">
-          <li className="p__opensans"><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')}>Home</a></li>
           <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
           <li className="p__opensans"><Link to="/menu">Menu</Link></li>
           <li className="p__opensans"><Link to="/breakfast">Breakfast</Link></li>
@@ -63,7 +62,6 @@ const Navbar = () => {
             <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
             <MdOutlineRestaurantMenu fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
               <ul className="app__navbar-smallscreen_links">
-                <li className="p__opensans"><a href="#home" onClick={(e) => handleAnchorClick(e, '#home')}>Home</a></li>
                 <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
                 <li className="p__opensans"><Link to="/menu" onClick={() => setToggleMenu(false)}>Menu</Link></li>
                 <li className="p__opensans"><Link to="/breakfast" onClick={() => setToggleMenu(false)}>Breakfast</Link></li>

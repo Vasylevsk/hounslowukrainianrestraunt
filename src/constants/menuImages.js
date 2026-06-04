@@ -53,7 +53,7 @@ const menuDishImages = {
   Varenyky: varenyky,
 };
 
-/** Two studio shots for the galushky menu row (fillings vary — photos show two popular styles). */
+/** Two studio shots for the galushky menu row (fillings vary - photos show two popular styles). */
 export const ukrainianGalushkyGallery = [
   { src: galushkyClassic, label: 'Traditional' },
   { src: galushkySeafood, label: 'With seafood' },

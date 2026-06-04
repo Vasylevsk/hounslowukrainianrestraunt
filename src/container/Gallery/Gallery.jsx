@@ -2,12 +2,13 @@ import React from 'react';
 import { BsArrowLeftShort, BsArrowRightShort, BsInstagram, BsTicketPerforated } from 'react-icons/bs';
 
 import { SubHeading } from '../../components';
-import { EVENT_HIGHLIGHTS } from '../../constants/events';
+import { EVENT_HIGHLIGHTS, sortEventsByDate } from '../../constants/events';
 import { SOCIAL_LINKS } from '../../constants/social';
 import './Gallery.css';
 
 const Gallery = () => {
   const scrollRef = React.useRef(null);
+  const events = React.useMemo(() => sortEventsByDate(EVENT_HIGHLIGHTS), []);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -41,7 +42,7 @@ const Gallery = () => {
 
       <div className="app__gallery-images">
         <div className="app__gallery-images_container" ref={scrollRef}>
-          {EVENT_HIGHLIGHTS.map((event) => (
+          {events.map((event) => (
             <a
               key={event.id}
               href={event.href}
@@ -50,7 +51,7 @@ const Gallery = () => {
               className={`app__gallery-images_card flex__center ${
                 event.ended ? 'app__gallery-images_card--ended' : ''
               }`}
-              aria-label={`${event.title}${event.badge ? ` — ${event.badge}` : ''}`}
+              aria-label={`${event.title}${event.badge ? ` - ${event.badge}` : ''}`}
             >
               <img src={event.image} alt={event.alt} />
               {event.badge ? (

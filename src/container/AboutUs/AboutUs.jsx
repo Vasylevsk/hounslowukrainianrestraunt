@@ -27,9 +27,9 @@ const AboutUs = () => (
       <div className="app__aboutus-content_history">
         <h1 className="headtext__cormorant">Breakfast</h1>
         <img src={images.spoon} alt="about_spoon" className="spoon__img" />
-        <p className="p__opensans">Start your day with a proper Ukrainian breakfast — served until 4:00 PM.</p>
+        <p className="p__opensans">Start your day with a proper Ukrainian breakfast - served until 4:00 PM.</p>
         <p className="p__opensans">Full House and Green House platters, omelettes, skillets, potato pancakes, and sweet finishes.</p>
-        <p className="p__opensans">Hearty plates for a slow morning or a late brunch — cooked with care, just like at home.</p>
+        <p className="p__opensans">Hearty plates for a slow morning or a late brunch - cooked with care, just like at home.</p>
         <Link to="/breakfast" className="custom__button app__aboutus-button">
           View Breakfast Menu
         </Link>
