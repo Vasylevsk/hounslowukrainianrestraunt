@@ -3,6 +3,7 @@ import eventUkrainianCultural from '../assets/event/Ukrainian Cultural Event.jpe
 import eventJanna from '../assets/event/janna.png';
 import eventVictoria from '../assets/event/victoria.png';
 import eventChristmas from '../assets/event/christmas2026.jpg';
+import eventKupala from '../assets/event/kypala.jpeg';
 
 import { SOCIAL_LINKS } from './social';
 
@@ -29,6 +30,18 @@ export const EVENT_HIGHLIGHTS = [
     href: 'https://eventfirst.co.uk/event/zhanna-ltavska/',
     linkType: 'tickets',
     badge: 'On sale',
+    ended: false,
+  },
+  {
+    id: 'kupala-party',
+    image: eventKupala,
+    alt: '#KupalaParty — artisan market, masterclasses, live music and food in Kew',
+    title: '#KupalaParty',
+    subtitle: '21 June 2026 · 15:00–20:00 · Kew',
+    sortDate: '2026-06-21',
+    href: SOCIAL_LINKS.instagram,
+    linkType: 'instagram',
+    badge: 'See on Instagram',
     ended: false,
   },
   {
