@@ -1,6 +1,5 @@
 import eventUsyk from '../assets/event/USYK.jpeg';
 import eventUkrainianCultural from '../assets/event/Ukrainian Cultural Event.jpeg';
-import eventJanna from '../assets/event/janna.png';
 import eventVictoria from '../assets/event/victoria.png';
 import eventChristmas from '../assets/event/christmas2026.jpg';
 import eventKupala from '../assets/event/kypala.jpeg';
@@ -18,18 +17,6 @@ export const EVENT_HIGHLIGHTS = [
     href: 'https://www.instagram.com/p/DYj_kePCOY-/',
     linkType: 'instagram',
     badge: 'See on Instagram',
-    ended: false,
-  },
-  {
-    id: 'janna',
-    image: eventJanna,
-    alt: 'Zhanna Ltavska live concert at Prosperity Ukrainian Restaurant',
-    title: 'Zhanna Ltavska',
-    subtitle: '20 June 2026 · Live concert',
-    sortDate: '2026-06-20',
-    href: 'https://eventfirst.co.uk/event/zhanna-ltavska/',
-    linkType: 'tickets',
-    badge: 'On sale',
     ended: false,
   },
   {
