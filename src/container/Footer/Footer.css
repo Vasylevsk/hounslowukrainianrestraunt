@@ -109,19 +109,70 @@
     width: 100%;
     margin-top: 3rem;
     padding: 1.75rem 2rem 0.5rem;
-    text-align: center;
     box-sizing: border-box;
     border-top: 1px solid rgba(220, 202, 135, 0.12);
 }
 
-.footer__copyright p {
+.footer__copyright-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 2rem;
+    width: 100%;
+    max-width: 1100px;
     margin: 0 auto;
-    max-width: 36rem;
+}
+
+.footer__copyright-legal {
+    margin: 0;
+    text-align: left;
     text-transform: none;
     letter-spacing: 0.03em;
     color: rgba(255, 255, 255, 0.55);
     font-size: 14px;
     line-height: 1.55;
+}
+
+.footer__copyright-credit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-family: var(--font-alt);
+    font-size: 13px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.45);
+    transition: color 0.25s ease;
+}
+
+.footer__copyright-credit:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.footer__copyright-heart {
+    color: var(--color-golden);
+    flex-shrink: 0;
+    transform: translateY(1px);
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.footer__copyright-credit:hover .footer__copyright-heart {
+    color: #e8c96a;
+    transform: translateY(1px) scale(1.12);
+}
+
+.footer__copyright-brand {
+    color: rgba(220, 202, 135, 0.85);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: color 0.25s ease;
+}
+
+.footer__copyright-credit:hover .footer__copyright-brand {
+    color: var(--color-golden);
 }
 
 @media screen and (min-width: 2000px) {
@@ -160,11 +211,22 @@
         padding: 1.5rem 1.25rem 0.25rem;
     }
 
-    .footer__copyright p {
-        max-width: 16.5rem;
+    .footer__copyright-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.85rem;
+    }
+
+    .footer__copyright-legal {
+        text-align: center;
         font-size: 12px;
         line-height: 1.6;
         letter-spacing: 0.02em;
+    }
+
+    .footer__copyright-credit {
+        font-size: 12px;
     }
 }
 
