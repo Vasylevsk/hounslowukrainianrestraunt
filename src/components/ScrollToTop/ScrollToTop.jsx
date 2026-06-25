@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { hasAnalyticsConsent, trackPageView } from '../../utils/analytics';
+
 function readScrollOffsetPx() {
   const styles = getComputedStyle(document.documentElement);
   const header = parseFloat(styles.getPropertyValue('--site-header-height')) || 72;
@@ -8,18 +10,19 @@ function readScrollOffsetPx() {
   return header + menuNav + 8;
 }
 
-const GA_MEASUREMENT_ID = 'G-RB1B5L5NKG';
-
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
+  const pagePath = pathname + hash;
 
   useEffect(() => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('config', GA_MEASUREMENT_ID, {
-        page_path: pathname + hash,
-      });
-    }
-  }, [pathname, hash]);
+    if (!hasAnalyticsConsent()) return undefined;
+
+    trackPageView(pagePath);
+
+    const onReady = () => trackPageView(pagePath);
+    window.addEventListener('prosperity:analytics-ready', onReady);
+    return () => window.removeEventListener('prosperity:analytics-ready', onReady);
+  }, [pagePath]);
 
   useEffect(() => {
     if (hash) {
