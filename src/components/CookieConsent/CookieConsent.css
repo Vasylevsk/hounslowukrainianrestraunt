@@ -95,6 +95,17 @@
   text-transform: none;
 }
 
+.cookie-consent__policy-link {
+  color: rgba(220, 202, 135, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.cookie-consent__policy-link:hover {
+  color: var(--color-golden);
+}
+
 .cookie-consent__actions {
   display: flex;
   flex-direction: column;

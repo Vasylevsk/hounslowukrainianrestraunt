@@ -5,6 +5,7 @@ import { SiDeliveroo, SiUbereats } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
 import { FooterOverlay } from '../../components';
+import { FOOTER_LEGAL_LINKS } from '../../constants/legalContent';
 import { images } from '../../constants';
 import { SOCIAL_LINKS } from '../../constants/social';
 import { useSiteContent } from '../../context/SiteContentContext';
@@ -22,12 +23,13 @@ const Footer = () => {
         <h1 className="app__footer-headtext">Contact Us</h1>
         <p className="p__opensans"><a href="tel:+442045680606">020 4568 0606</a></p>
         <p className="p__opensans"><a href="tel:+447853514567">07853 514567</a></p>
-        <p className="p__opensans" style={{ marginTop: '1rem' }}>
-          <Link to="/humanitarian-aid">Humanitarian aid for Ukraine</Link>
-        </p>
-        <p className="p__opensans app__footer-press-line">
-          <Link to="/humanitarian-aid#press">BBC, press &amp; video</Link>
-        </p>
+        <nav className="app__footer-legal" aria-label="Legal">
+          {FOOTER_LEGAL_LINKS.map((link) => (
+            <Link key={link.to} to={link.to} className="app__footer-legal-link">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
 
       <div className="app__footer-links_logo">

@@ -12,6 +12,7 @@ import MenuPage from './pages/MenuPage';
 import BreakfastPage from './pages/BreakfastPage';
 import AdminPage from './pages/AdminPage';
 import HumanitarianPage from './pages/HumanitarianPage';
+import LegalPage from './pages/LegalPage';
 import './App.css';
 
 const AppLayout = () => {
@@ -33,6 +34,9 @@ const AppLayout = () => {
         </Route>
         <Route path="/breakfast" component={BreakfastPage} />
         <Route path="/humanitarian-aid" component={HumanitarianPage} />
+        <Route path="/privacy-policy" component={LegalPage} />
+        <Route path="/cookie-policy" component={LegalPage} />
+        <Route path="/terms-of-use" component={LegalPage} />
         <Route path="/admin" component={AdminPage} />
       </Switch>
       {!hideFooter && <Footer />}

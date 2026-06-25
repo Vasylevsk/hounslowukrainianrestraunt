@@ -49,6 +49,21 @@ export const SEO_BY_ROUTE = {
     description:
       'Prosperity for Ukraine: the story of Twickenham\'s humanitarian aid hub — 150 lorries with community volunteers, BBC & press coverage, photos, and film.',
   },
+  '/privacy-policy': {
+    title: `Privacy Policy | ${SITE_NAME}`,
+    description:
+      'Privacy Policy for Prosperity Ukrainian Restaurant, Twickenham. How we collect, use, and protect your personal data under UK GDPR.',
+  },
+  '/cookie-policy': {
+    title: `Cookie Policy | ${SITE_NAME}`,
+    description:
+      'Cookie Policy for prosperityua.uk — essential cookies and optional Google Analytics, and how to manage your preferences.',
+  },
+  '/terms-of-use': {
+    title: `Terms of Use | ${SITE_NAME}`,
+    description:
+      'Terms of Use for the Prosperity Ukrainian Restaurant website, including bookings, content, and acceptable use.',
+  },
   '/admin': {
     title: `Content | ${SITE_NAME_SHORT}`,
     description: 'Staff content editor for Prosperity Ukrainian Restaurant. Not indexed by search engines.',

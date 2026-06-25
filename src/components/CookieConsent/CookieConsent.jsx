@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   COOKIE_CONSENT,
@@ -75,7 +76,10 @@ const CookieConsent = () => {
           <p id="cookie-consent-desc" className="cookie-consent__text">
             We use essential cookies so the site works. With your permission, we also use analytics
             cookies to understand how guests explore our menu and pages — helping us improve
-            Prosperity online.
+            Prosperity online.{' '}
+            <Link to="/cookie-policy" className="cookie-consent__policy-link">
+              Cookie Policy
+            </Link>
           </p>
         </div>
 
