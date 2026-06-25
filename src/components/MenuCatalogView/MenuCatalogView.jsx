@@ -47,9 +47,105 @@ function observeResize(element, onResize) {
   };
 }
 
+function MenuFoodCategories({ categories, categoryIds }) {
+  return (
+    <div className="app__menu-categories">
+      {categories.map((category, categoryIndex) => (
+        <section
+          key={categoryIds[categoryIndex]}
+          id={categoryIds[categoryIndex]}
+          className="app__menu-category"
+        >
+          <div className="app__menu-category-head">
+            <h2 className="app__menu-category-title">{category.title}</h2>
+            <span className="app__menu-category-accent" aria-hidden />
+          </div>
+
+          <div className="app__menu-rows">
+            {category.items.map((item, itemIndex) => {
+              const gallery = Array.isArray(item.gallery) ? item.gallery.filter((p) => p?.src) : [];
+              const hasGallery = gallery.length > 0;
+              const resolvedImage = item.image || menuDishImages[item.name] || '';
+              const hasImage = Boolean(resolvedImage) || hasGallery;
+              const hasVariants = Array.isArray(item.variants) && item.variants.length > 0;
+              const hasPrice = Boolean(item.price && String(item.price).trim());
+
+              return (
+                <article
+                  key={`${item.name}-${itemIndex}`}
+                  className={`app__menu-row ${itemIndex % 2 === 1 ? 'app__menu-row--reverse' : ''}`}
+                >
+                  <div className="app__menu-row-text">
+                    <div className="app__menu-item-head">
+                      <h3 className="app__menu-item-name">{item.name}</h3>
+                      {hasPrice && !hasVariants ? (
+                        <p className="app__menu-item-price app__menu-item-price--head">
+                          {formatPriceDisplay(item.price)}
+                        </p>
+                      ) : null}
+                    </div>
+                    {item.description ? (
+                      <p className="app__menu-item-description">{item.description}</p>
+                    ) : null}
+                    {hasVariants ? (
+                      <ul className="app__menu-item-variants">
+                        {item.variants.map((variant, vi) => (
+                          <li key={vi} className="app__menu-item-variant">
+                            <span className="app__menu-item-variant-name">{variant.name}</span>
+                            <span className="app__menu-item-variant-price">
+                              {formatPriceDisplay(variant.price)}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : hasPrice ? (
+                      <p className="app__menu-item-price app__menu-item-price--below">
+                        {formatPriceDisplay(item.price)}
+                      </p>
+                    ) : null}
+                  </div>
+                  {hasGallery ? (
+                    <div
+                      className={`app__menu-row-visual app__menu-row-visual--gallery${
+                        gallery.length > 1 ? ' app__menu-row-visual--gallery-duo' : ''
+                      }`}
+                    >
+                      {gallery.map((photo, photoIndex) => (
+                        <figure key={photo.label || photoIndex} className="app__menu-row-photo">
+                          <img
+                            src={photo.src}
+                            alt={photo.label ? `${item.name} - ${photo.label}` : item.name}
+                            className="app__menu-row-img"
+                            loading="lazy"
+                          />
+                          {photo.label ? (
+                            <figcaption className="app__menu-row-photo-label">{photo.label}</figcaption>
+                          ) : null}
+                        </figure>
+                      ))}
+                    </div>
+                  ) : hasImage ? (
+                    <div className="app__menu-row-visual">
+                      <img src={resolvedImage} alt={item.name} className="app__menu-row-img" loading="lazy" />
+                    </div>
+                  ) : (
+                    <div className="app__menu-row-visual app__menu-row-visual--empty" aria-hidden>
+                      <span className="app__menu-row-placeholder-inner" />
+                    </div>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 const MenuCatalogView = ({
   subHeading,
-  title,
+  title = null,
   intro,
   badge,
   categories,
@@ -57,6 +153,10 @@ const MenuCatalogView = ({
   drinksCategories = null,
   drinksNavShortLabels = {},
   drinksSectionIdPrefix = 'menu-drink',
+  breakfastCategories = null,
+  breakfastNavShortLabels = {},
+  breakfastSectionIdPrefix = 'breakfast-cat',
+  breakfastBadge = null,
   sectionIdPrefix = 'menu-cat',
   navAriaLabel = 'Menu sections',
   secondaryLink,
@@ -64,7 +164,15 @@ const MenuCatalogView = ({
 }) => {
   const location = useLocation();
   const hasDrinks = Array.isArray(drinksCategories) && drinksCategories.length > 0;
-  const [menuZone, setMenuZone] = useState('food');
+  const hasBreakfast = Array.isArray(breakfastCategories) && breakfastCategories.length > 0;
+  const showZoneToggle = hasDrinks || hasBreakfast;
+  const [menuZone, setMenuZone] = useState(() => {
+    if (typeof window === 'undefined') return 'food';
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'menu-bar' || hash.startsWith('menu-drink')) return 'drinks';
+    if (hash === 'breakfast' || hash.startsWith('breakfast-cat')) return 'breakfast';
+    return 'food';
+  });
 
   const foodCategoryIds = useMemo(
     () => categories.map((cat, i) => categoryId(sectionIdPrefix, i, cat.title)),
@@ -79,77 +187,79 @@ const MenuCatalogView = ({
     [drinksCategories, drinksSectionIdPrefix, hasDrinks]
   );
 
-  const zoneCategories = menuZone === 'food' ? categories : drinksCategories;
-  const zoneCategoryIds = menuZone === 'food' ? foodCategoryIds : drinksCategoryIds;
-  const zoneNavLabels = menuZone === 'food' ? navShortLabels : drinksNavShortLabels;
+  const breakfastCategoryIds = useMemo(
+    () =>
+      hasBreakfast
+        ? breakfastCategories.map((cat, i) => categoryId(breakfastSectionIdPrefix, i, cat.title))
+        : [],
+    [breakfastCategories, breakfastSectionIdPrefix, hasBreakfast]
+  );
+
+  const zoneCategories = useMemo(() => {
+    if (menuZone === 'drinks') return drinksCategories || [];
+    if (menuZone === 'breakfast') return breakfastCategories || [];
+    return categories;
+  }, [menuZone, categories, drinksCategories, breakfastCategories]);
+
+  const zoneCategoryIds = useMemo(() => {
+    if (menuZone === 'drinks') return drinksCategoryIds;
+    if (menuZone === 'breakfast') return breakfastCategoryIds;
+    return foodCategoryIds;
+  }, [menuZone, foodCategoryIds, drinksCategoryIds, breakfastCategoryIds]);
+
+  const zoneNavLabels = useMemo(() => {
+    if (menuZone === 'drinks') return drinksNavShortLabels;
+    if (menuZone === 'breakfast') return breakfastNavShortLabels;
+    return navShortLabels;
+  }, [menuZone, navShortLabels, drinksNavShortLabels, breakfastNavShortLabels]);
 
   const navPinRef = useRef(null);
   const navAnchorRef = useRef(null);
-  const isNavFixedRef = useRef(false);
   const chipRefs = useRef([]);
+  const scrollLockRef = useRef(false);
+  const scrollUnlockTimerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isNavFixed, setIsNavFixed] = useState(false);
-  const [anchorHeight, setAnchorHeight] = useState(0);
+
+  const lockScrollSpy = useCallback((ms = 750) => {
+    scrollLockRef.current = true;
+    if (scrollUnlockTimerRef.current) {
+      window.clearTimeout(scrollUnlockTimerRef.current);
+    }
+    scrollUnlockTimerRef.current = window.setTimeout(() => {
+      scrollLockRef.current = false;
+      scrollUnlockTimerRef.current = null;
+    }, ms);
+  }, []);
 
   const getScrollOffset = useCallback(() => {
     const header = readHeaderOffsetPx();
     const menuNav = navPinRef.current?.offsetHeight ?? 0;
-    return header + menuNav + 8;
+    return header + menuNav + 12;
   }, []);
 
   useEffect(() => {
-    const nav = navPinRef.current;
-    const anchor = navAnchorRef.current;
     const navbar = document.querySelector('.app__navbar');
-    if (!nav || !anchor || !navbar) return undefined;
+    if (!navbar) return undefined;
 
-    let ticking = false;
-
-    const updateLayout = () => {
-      ticking = false;
-
+    const syncHeader = () => {
       const headerBottom = Math.round(navbar.getBoundingClientRect().bottom);
       if (headerBottom > 0) {
         document.documentElement.style.setProperty('--site-header-height', `${headerBottom}px`);
       }
-
-      const shouldFix = anchor.getBoundingClientRect().top <= headerBottom + 1;
-
-      if (shouldFix !== isNavFixedRef.current) {
-        if (shouldFix) {
-          setAnchorHeight(nav.offsetHeight);
-        }
-        isNavFixedRef.current = shouldFix;
-        setIsNavFixed(shouldFix);
-      } else if (shouldFix) {
-        setAnchorHeight((prev) => {
-          const next = nav.offsetHeight;
-          return prev === next ? prev : next;
-        });
-      }
     };
 
-    const scheduleUpdate = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(updateLayout);
-    };
-
-    updateLayout();
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-
-    const ro = new ResizeObserver(scheduleUpdate);
+    syncHeader();
+    const ro = new ResizeObserver(() => {
+      window.requestAnimationFrame(syncHeader);
+    });
     ro.observe(navbar);
-    ro.observe(nav);
-    ro.observe(anchor);
+    window.addEventListener('resize', syncHeader);
 
     return () => {
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
       ro.disconnect();
+      window.removeEventListener('resize', syncHeader);
     };
-  }, [zoneCategories, menuZone, hasDrinks]);
+  }, []);
 
   useEffect(() => {
     const navEl = navPinRef.current;
@@ -158,41 +268,58 @@ const MenuCatalogView = ({
     return observeResize(navEl, (height) => {
       document.documentElement.style.setProperty('--menu-nav-height', `${height}px`);
     });
-  }, [zoneCategories, menuZone, hasDrinks]);
+  }, [zoneCategories, menuZone, hasDrinks, hasBreakfast]);
 
   useEffect(() => {
-    if (!hasDrinks) return;
+    if (!showZoneToggle) return;
     const hash = location.hash.replace('#', '');
-    if (hash === 'menu-bar' || hash.startsWith('menu-drink')) {
+    if (hasDrinks && (hash === 'menu-bar' || hash.startsWith('menu-drink'))) {
       setMenuZone('drinks');
+    } else if (hasBreakfast && (hash === 'breakfast' || hash.startsWith('breakfast-cat'))) {
+      setMenuZone('breakfast');
+    } else if (hash === 'food') {
+      setMenuZone('food');
     }
-  }, [hasDrinks, location.hash]);
+  }, [showZoneToggle, location.hash, hasDrinks, hasBreakfast]);
 
   const scrollToSectionId = useCallback(
     (id) => {
       const el = document.getElementById(id);
       if (!el) return;
 
-      const top = el.getBoundingClientRect().top + window.scrollY - getScrollOffset();
-      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      lockScrollSpy(900);
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
-    [getScrollOffset]
+    [lockScrollSpy]
   );
 
   const scrollToCategory = useCallback(
     (index) => {
       const id = zoneCategoryIds[index];
       if (!id) return;
-      scrollToSectionId(id);
       setActiveIndex(index);
+      scrollMenuNavTabIntoView(chipRefs.current[index]);
+      scrollToSectionId(id);
     },
     [zoneCategoryIds, scrollToSectionId]
   );
 
-  const switchMenuZone = useCallback((zone) => {
-    setMenuZone(zone);
-    setActiveIndex(0);
-  }, []);
+  const switchMenuZone = useCallback(
+    (zone) => {
+      if (zone === menuZone) return;
+
+      lockScrollSpy(600);
+      setMenuZone(zone);
+      setActiveIndex(0);
+      chipRefs.current = [];
+
+      window.requestAnimationFrame(() => {
+        const anchor = navAnchorRef.current || document.getElementById('menu-bar');
+        anchor?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    },
+    [lockScrollSpy, menuZone]
+  );
 
   useEffect(() => {
     setActiveIndex(0);
@@ -200,33 +327,52 @@ const MenuCatalogView = ({
   }, [menuZone]);
 
   useEffect(() => {
-    scrollMenuNavTabIntoView(chipRefs.current[activeIndex]);
-  }, [activeIndex, menuZone]);
-
-  useEffect(() => {
     const sections = zoneCategoryIds.map((id) => document.getElementById(id)).filter(Boolean);
     if (!sections.length) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (scrollLockRef.current) return;
 
-        if (!visible.length) return;
+        const offset = getScrollOffset();
+        let nextIndex = -1;
+        let nearestTop = Infinity;
 
-        const idx = zoneCategoryIds.indexOf(visible[0].target.id);
-        if (idx >= 0) setActiveIndex(idx);
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const idx = zoneCategoryIds.indexOf(entry.target.id);
+          if (idx < 0) return;
+
+          const top = entry.boundingClientRect.top;
+          const distance = Math.abs(top - offset);
+          if (distance < nearestTop) {
+            nearestTop = distance;
+            nextIndex = idx;
+          }
+        });
+
+        if (nextIndex >= 0) {
+          setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
+        }
       },
       {
         rootMargin: `-${getScrollOffset()}px 0px -55% 0px`,
-        threshold: [0, 0.15, 0.35, 0.6],
+        threshold: [0, 0.12, 0.3, 0.5],
       }
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [zoneCategoryIds, getScrollOffset, menuZone]);
+
+  useEffect(
+    () => () => {
+      if (scrollUnlockTimerRef.current) {
+        window.clearTimeout(scrollUnlockTimerRef.current);
+      }
+    },
+    []
+  );
 
   const actionLinks =
     footerLinks?.length > 0
@@ -241,17 +387,22 @@ const MenuCatalogView = ({
         <div className="app__menu-page_content">
           <header className="app__menu-page_header">
             <SubHeading title={subHeading} />
-            <h1 className="headtext__cormorant app__menu-page_h1">{title}</h1>
-            {badge ? <p className="app__menu-page_badge">{badge}</p> : null}
-            {!hasDrinks && intro ? <p className="p__opensans app__menu-page_intro">{intro}</p> : null}
+            {title ? <h1 className="headtext__cormorant app__menu-page_h1">{title}</h1> : null}
+            {menuZone === 'breakfast' && breakfastBadge ? (
+              <p className="app__menu-page_badge">{breakfastBadge}</p>
+            ) : null}
+            {badge && !showZoneToggle ? <p className="app__menu-page_badge">{badge}</p> : null}
+            {!showZoneToggle && intro ? <p className="p__opensans app__menu-page_intro">{intro}</p> : null}
           </header>
 
-          {hasDrinks ? (
+          {showZoneToggle ? (
             <div
               id="menu-bar"
-              className="app__menu-zone-toggle app__menu-zone-toggle--bar"
+              className={`app__menu-zone-toggle app__menu-zone-toggle--bar${
+                hasDrinks && hasBreakfast ? ' app__menu-zone-toggle--triple' : ''
+              }`}
               role="tablist"
-              aria-label="Food or drinks menu"
+              aria-label="Food, drinks, or breakfast menu"
             >
               <button
                 type="button"
@@ -264,28 +415,39 @@ const MenuCatalogView = ({
               >
                 Food
               </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={menuZone === 'drinks'}
-                className={`app__menu-zone-toggle__btn${
-                  menuZone === 'drinks' ? ' app__menu-zone-toggle__btn--active' : ''
-                }`}
-                onClick={() => switchMenuZone('drinks')}
-              >
-                Drinks
-              </button>
+              {hasDrinks ? (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={menuZone === 'drinks'}
+                  className={`app__menu-zone-toggle__btn${
+                    menuZone === 'drinks' ? ' app__menu-zone-toggle__btn--active' : ''
+                  }`}
+                  onClick={() => switchMenuZone('drinks')}
+                >
+                  Drinks
+                </button>
+              ) : null}
+              {hasBreakfast ? (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={menuZone === 'breakfast'}
+                  className={`app__menu-zone-toggle__btn${
+                    menuZone === 'breakfast' ? ' app__menu-zone-toggle__btn--active' : ''
+                  }`}
+                  onClick={() => switchMenuZone('breakfast')}
+                >
+                  Breakfast
+                </button>
+              ) : null}
             </div>
           ) : null}
 
-          <div
-            ref={navAnchorRef}
-            className="app__menu-nav-anchor"
-            style={isNavFixed && anchorHeight > 0 ? { height: anchorHeight } : undefined}
-          >
+          <div ref={navAnchorRef} className="app__menu-nav-anchor">
             <nav
               ref={navPinRef}
-              className={`app__menu-nav${isNavFixed ? ' app__menu-nav--fixed' : ''}`}
+              className="app__menu-nav"
               aria-label={navAriaLabel}
             >
               <div className="app__menu-nav-inner">
@@ -312,97 +474,7 @@ const MenuCatalogView = ({
           </div>
 
           <div className={`app__menu-zone-panel${menuZone === 'food' ? '' : ' app__menu-zone-panel--hidden'}`}>
-            <div className="app__menu-categories">
-              {categories.map((category, categoryIndex) => (
-                <section
-                  key={foodCategoryIds[categoryIndex]}
-                  id={foodCategoryIds[categoryIndex]}
-                  className="app__menu-category"
-                >
-                  <div className="app__menu-category-head">
-                    <h2 className="app__menu-category-title">{category.title}</h2>
-                    <span className="app__menu-category-accent" aria-hidden />
-                  </div>
-
-                  <div className="app__menu-rows">
-                    {category.items.map((item, itemIndex) => {
-                      const gallery = Array.isArray(item.gallery) ? item.gallery.filter((p) => p?.src) : [];
-                      const hasGallery = gallery.length > 0;
-                      const resolvedImage = item.image || menuDishImages[item.name] || '';
-                      const hasImage = Boolean(resolvedImage) || hasGallery;
-                      const hasVariants = Array.isArray(item.variants) && item.variants.length > 0;
-                      const hasPrice = Boolean(item.price && String(item.price).trim());
-
-                      return (
-                        <article
-                          key={`${item.name}-${itemIndex}`}
-                          className={`app__menu-row ${itemIndex % 2 === 1 ? 'app__menu-row--reverse' : ''}`}
-                        >
-                          <div className="app__menu-row-text">
-                            <div className="app__menu-item-head">
-                              <h3 className="app__menu-item-name">{item.name}</h3>
-                              {hasPrice && !hasVariants ? (
-                                <p className="app__menu-item-price app__menu-item-price--head">
-                                  {formatPriceDisplay(item.price)}
-                                </p>
-                              ) : null}
-                            </div>
-                            {item.description ? (
-                              <p className="app__menu-item-description">{item.description}</p>
-                            ) : null}
-                            {hasVariants ? (
-                              <ul className="app__menu-item-variants">
-                                {item.variants.map((variant, vi) => (
-                                  <li key={vi} className="app__menu-item-variant">
-                                    <span className="app__menu-item-variant-name">{variant.name}</span>
-                                    <span className="app__menu-item-variant-price">
-                                      {formatPriceDisplay(variant.price)}
-                                    </span>
-                                  </li>
-                                ))}
-                              </ul>
-                            ) : hasPrice ? (
-                              <p className="app__menu-item-price app__menu-item-price--below">
-                                {formatPriceDisplay(item.price)}
-                              </p>
-                            ) : null}
-                          </div>
-                          {hasGallery ? (
-                            <div
-                              className={`app__menu-row-visual app__menu-row-visual--gallery${
-                                gallery.length > 1 ? ' app__menu-row-visual--gallery-duo' : ''
-                              }`}
-                            >
-                              {gallery.map((photo, photoIndex) => (
-                                <figure key={photo.label || photoIndex} className="app__menu-row-photo">
-                                  <img
-                                    src={photo.src}
-                                    alt={photo.label ? `${item.name} - ${photo.label}` : item.name}
-                                    className="app__menu-row-img"
-                                    loading="lazy"
-                                  />
-                                  {photo.label ? (
-                                    <figcaption className="app__menu-row-photo-label">{photo.label}</figcaption>
-                                  ) : null}
-                                </figure>
-                              ))}
-                            </div>
-                          ) : hasImage ? (
-                            <div className="app__menu-row-visual">
-                              <img src={resolvedImage} alt={item.name} className="app__menu-row-img" loading="lazy" />
-                            </div>
-                          ) : (
-                            <div className="app__menu-row-visual app__menu-row-visual--empty" aria-hidden>
-                              <span className="app__menu-row-placeholder-inner" />
-                            </div>
-                          )}
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-              ))}
-            </div>
+            <MenuFoodCategories categories={categories} categoryIds={foodCategoryIds} />
           </div>
 
           {hasDrinks ? (
@@ -412,6 +484,16 @@ const MenuCatalogView = ({
               }`}
             >
               <DrinksCategoryList categories={drinksCategories} sectionIdPrefix={drinksSectionIdPrefix} />
+            </div>
+          ) : null}
+
+          {hasBreakfast ? (
+            <div
+              className={`app__menu-zone-panel${
+                menuZone === 'breakfast' ? '' : ' app__menu-zone-panel--hidden'
+              }`}
+            >
+              <MenuFoodCategories categories={breakfastCategories} categoryIds={breakfastCategoryIds} />
             </div>
           ) : null}
 

@@ -18,7 +18,7 @@ export const defaultWorkingHours = [
 ];
 
 export const defaultFeaturedMenu = {
-  sectionSubTitle: 'Menu Highlights',
+  sectionSubTitle: 'Menu',
   sectionTitle: 'Prosperity Classics',
   leftTitle: 'Guest Favourites',
   rightTitle: 'Ukrainian Classics',

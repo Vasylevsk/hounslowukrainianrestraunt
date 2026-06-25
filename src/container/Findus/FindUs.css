@@ -1,4 +1,59 @@
-/* Find Us: embedded map + golden frame (matches site palette) */
+.app__findus-content {
+  width: 100%;
+  max-width: 38rem;
+}
+
+.app__findus-content .p__cormorant.app__findus-label {
+  color: var(--color-golden);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.app__findus-content .p__cormorant.app__findus-label:first-child {
+  margin-top: 0;
+}
+
+.app__findus-address {
+  margin: 0 0 0.25rem;
+}
+
+.app__findus-address a {
+  color: var(--color-golden);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.app__findus-address a:hover {
+  color: #f5e6d3;
+}
+
+.app__findus-hours {
+  margin: 0.15rem 0;
+}
+
+.app__findus-cta {
+  text-decoration: none;
+  display: inline-block;
+  width: fit-content;
+}
+
+.app__findus-cta--desktop {
+  margin-top: 1.75rem;
+}
+
+.app__findus-cta--mobile {
+  display: none;
+}
+
+.app__findus_map {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1151px) {
+  .app__findus_map {
+    align-items: center;
+  }
+}
 
 .app__findus-map {
   width: 80%;
@@ -27,30 +82,81 @@
   display: block;
 }
 
-.app__findus-map-caption {
-  margin-top: 0.85rem;
-  text-align: center;
-}
-
-.app__findus-map-link {
-  font-family: var(--font-alt);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-golden);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: color 0.25s ease, border-color 0.25s ease;
-}
-
-.app__findus-map-link:hover {
-  color: #f5efd3;
-  border-bottom-color: rgba(220, 202, 135, 0.6);
-}
-
 @media screen and (max-width: 1150px) {
+  .app__findus.app__wrapper {
+    align-items: stretch;
+    min-height: auto;
+  }
+
+  .app__findus_copy {
+    order: 1;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .app__findus_map {
+    order: 2;
+    width: 100%;
+    margin: 1.5rem 0 0 !important;
+    align-items: stretch;
+  }
+
   .app__findus-map {
     width: 100%;
     max-width: none;
+    margin: 0;
+  }
+
+  .app__findus-map-inner {
+    min-height: 240px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .app__findus-cta--desktop {
+    display: none;
+  }
+
+  .app__findus-cta--mobile {
+    display: inline-block;
+    margin-top: 1.25rem;
+  }
+
+  .app__findus-content .p__cormorant.app__findus-label {
+    margin-top: 1.15rem;
+  }
+
+  .app__findus-content .p__opensans {
+    margin: 0.2rem 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app__findus.section__padding {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .app__findus_map {
+    margin-top: 1.25rem !important;
+  }
+
+  .app__findus-map-inner {
+    min-height: 210px;
+  }
+
+  .app__findus-content .p__cormorant.app__findus-label {
+    margin-top: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .app__findus-cta--mobile {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .app__findus-map {
+    max-width: 640px;
   }
 }

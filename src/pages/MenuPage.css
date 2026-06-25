@@ -27,6 +27,11 @@
   margin-bottom: 1.25rem;
 }
 
+.app__menu-page_header .p__cormorant {
+  font-size: clamp(1.5rem, 3.5vw, 1.85rem);
+  line-height: 1.35;
+}
+
 .app__menu-page_h1 {
   margin-bottom: 0.5rem;
 }
@@ -118,6 +123,13 @@
   padding: 0.55rem 1.5rem;
   font-size: 0.95rem;
   line-height: 1.2;
+}
+
+.app__menu-zone-toggle--triple.app__menu-zone-toggle--bar .app__menu-zone-toggle__btn {
+  min-width: 6.25rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
 }
 
 .app__menu-zone-toggle__btn {
@@ -248,26 +260,19 @@
 
 .app__menu-nav-anchor {
   margin: 0 0 1.5rem;
+  scroll-margin-top: var(--site-header-height, 72px);
 }
 
-/* Category chips: in flow until scrolled, then fixed flush under navbar */
+/* Category chips: sticky under site header (no JS pin — avoids layout jumps) */
 .app__menu-nav {
-  position: relative;
+  position: sticky;
+  top: var(--site-header-height, 72px);
   z-index: 90;
   margin: 0;
   padding: 0;
   background: rgba(10, 10, 10, 0.98);
   border-bottom: 1px solid rgba(220, 202, 135, 0.18);
-}
-
-.app__menu-nav--fixed {
-  position: fixed;
-  left: var(--menu-gutter-x, 6rem);
-  right: var(--menu-gutter-x, 6rem);
-  width: auto;
-  top: var(--site-header-height, 72px);
-  margin: 0;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .app__menu-nav-inner {
@@ -276,8 +281,7 @@
   padding: 0.55rem 0;
 }
 
-body.nav-overlay-open .app__menu-nav,
-body.nav-overlay-open .app__menu-nav--fixed {
+body.nav-overlay-open .app__menu-nav {
   visibility: hidden;
   pointer-events: none;
 }
@@ -553,6 +557,10 @@ body.nav-overlay-open .app__menu-nav--fixed {
   text-transform: uppercase;
   text-align: center;
   color: rgba(220, 202, 135, 0.75);
+}
+
+.app__menu-category {
+  scroll-margin-top: calc(var(--site-header-height, 72px) + var(--menu-nav-height, 56px) + 16px);
 }
 
 .app__menu-page_actions {

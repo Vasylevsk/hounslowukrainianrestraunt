@@ -27,17 +27,17 @@ export const SEO_BY_ROUTE = {
   '/menu': {
     title: `Menu | ${SITE_NAME}`,
     description:
-      'Browse the Prosperity Ukrainian Restaurant menu: Ukrainian classics, soups, grilled dishes, desserts, and drinks. Prices and descriptions for our Twickenham, London location.',
+      'Browse food, drinks, and breakfast at Prosperity Ukrainian Restaurant, Twickenham: Ukrainian classics, soups, grilled dishes, breakfast until 4 PM, and bar favourites.',
   },
   '/breakfast': {
     title: `Breakfast Menu | ${SITE_NAME}`,
     description:
-      'Breakfast at Prosperity Ukrainian Restaurant, Twickenham: Full House, omelettes, skillets, pancakes, burgers, and desserts. Served until 4:00 PM.',
+      'Breakfast at Prosperity Ukrainian Restaurant, Twickenham - on our menu page. Full House, omelettes, skillets, pancakes, and more. Served until 4:00 PM.',
   },
   '/booking': {
     title: `Book a Table | ${SITE_NAME}`,
     description:
-      'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham — restaurant or lounge. Hookah in the lounge £27. Call 020 4568 0606 or book online.',
+      'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham — restaurant or lounge. Shisha in the lounge £27. Call 020 4568 0606 or book online.',
   },
   '/banquet': {
     title: `Banquets & Celebrations | ${SITE_NAME}`,
@@ -57,7 +57,7 @@ export const SEO_BY_ROUTE = {
   '/cookie-policy': {
     title: `Cookie Policy | ${SITE_NAME}`,
     description:
-      'Cookie Policy for prosperityua.uk — essential cookies and optional Google Analytics, and how to manage your preferences.',
+      'Cookie Policy for prosperityua.uk - essential cookies and optional Google Analytics, and how to manage your preferences.',
   },
   '/terms-of-use': {
     title: `Terms of Use | ${SITE_NAME}`,

@@ -3,12 +3,8 @@ import { useLocation } from 'react-router-dom';
 
 import { hasAnalyticsConsent, trackPageView } from '../../utils/analytics';
 
-function readScrollOffsetPx() {
-  const styles = getComputedStyle(document.documentElement);
-  const header = parseFloat(styles.getPropertyValue('--site-header-height')) || 72;
-  const menuNav = parseFloat(styles.getPropertyValue('--menu-nav-height')) || 0;
-  return header + menuNav + 8;
-}
+/** Zone tab hashes handled inside MenuCatalogView — not page scroll targets. */
+const MENU_ZONE_HASHES = new Set(['breakfast', 'food']);
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -25,20 +21,24 @@ const ScrollToTop = () => {
   }, [pagePath]);
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '');
-      const t = window.setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.getBoundingClientRect().top + window.pageYOffset - readScrollOffsetPx();
-          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-        }
-      }, 80);
-      return () => window.clearTimeout(t);
-    }
-    window.scrollTo(0, 0);
-    return undefined;
-  }, [pathname, hash]);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!hash) return undefined;
+
+    const id = hash.replace('#', '');
+    if (MENU_ZONE_HASHES.has(id)) return undefined;
+
+    const t = window.setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 120);
+
+    return () => window.clearTimeout(t);
+  }, [hash, pathname]);
 
   return null;
 };

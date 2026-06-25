@@ -22,10 +22,9 @@ const Gallery = () => {
   };
 
   return (
-    <div className="app__gallery flex__center">
+    <div className="app__gallery" id="events">
       <div className="app__gallery-content">
         <SubHeading title="Events" />
-        <h1 className="headtext__cormorant">Event Highlights</h1>
         <p className="p__opensans app__gallery-intro">
           Take a look at our recent celebrations, private parties, and live evenings at Prosperity.
         </p>
@@ -33,8 +32,7 @@ const Gallery = () => {
           href={SOCIAL_LINKS.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="custom__button"
-          style={{ textDecoration: 'none', display: 'inline-block' }}
+          className="custom__button app__gallery-cta app__gallery-cta--desktop"
         >
           See Events
         </a>
@@ -89,6 +87,17 @@ const Gallery = () => {
             aria-label="Scroll events right"
           />
         </div>
+      </div>
+
+      <div className="app__gallery-cta-wrap">
+        <a
+          href={SOCIAL_LINKS.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="custom__button lounge-promo__cta app__gallery-cta app__gallery-cta--mobile"
+        >
+          See Events
+        </a>
       </div>
     </div>
   );

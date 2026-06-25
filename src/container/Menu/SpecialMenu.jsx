@@ -8,13 +8,13 @@ import './SpecialMenu.css';
 
 const SpecialMenu = () => {
   const { content } = useSiteContent();
-  const { sectionSubTitle, sectionTitle, leftTitle, rightTitle, leftItems, rightItems } =
+  const { sectionTitle, leftTitle, rightTitle, leftItems, rightItems } =
     content.featuredMenu;
 
   return (
     <div className="app__specialMenu flex__center section__padding" id="menu">
       <div className="app__specialMenu-title">
-        <SubHeading title={sectionSubTitle || 'Menu Highlights'} />
+        <SubHeading title="Menu" />
         <h1 className="headtext__cormorant app__specialMenu-heading">
           {sectionTitle || 'Prosperity Classics'}
         </h1>
@@ -49,8 +49,8 @@ const SpecialMenu = () => {
         </div>
       </div>
 
-      <div style={{ marginTop: 15 }}>
-        <Link to="/menu" className="custom__button" style={{ textDecoration: 'none', display: 'inline-block' }}>
+      <div className="app__specialMenu-cta">
+        <Link to="/menu" className="custom__button app__specialMenu-cta-btn">
           View Full Menu
         </Link>
       </div>

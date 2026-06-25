@@ -126,6 +126,16 @@
     gap: 1rem;
 }
 
+.app__specialMenu-cta {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.app__specialMenu-cta-btn {
+    text-decoration: none;
+    display: inline-block;
+}
+
 .app__specialMenu .custom__button {
     margin-top: 2rem;
     transition: all 0.3s ease;
@@ -181,10 +191,15 @@
 }
 
 @media screen and (max-width: 1150px) {
+    .app__specialMenu-title {
+        margin-bottom: 1.5rem;
+    }
+
     .app__specialMenu-menu {
         flex-direction: column;
         align-items: center;
         width: 100%;
+        margin: 0.75rem 0 0;
     }
 
     .app__specialMenu-menu_img {
@@ -195,19 +210,51 @@
         overflow: hidden !important;
     }
 
-    /* Beat .flex__center { display: flex } on the column wrapper */
     .app__specialMenu-heading {
         display: none !important;
     }
 
-    .app__specialMenu-menu_cocktails.flex__center,
-    .app__specialMenu-menu_cocktails {
+    .app__specialMenu-menu_wine.flex__center,
+    .app__specialMenu-menu_wine {
         display: none !important;
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
         height: 0 !important;
         overflow: hidden !important;
+    }
+
+    .app__specialMenu-menu_cocktails.flex__center,
+    .app__specialMenu-menu_cocktails {
+        display: flex !important;
+        flex: none !important;
+        width: 100%;
+        max-width: 100%;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 1.5rem;
+    }
+
+    .app__specialMenu_menu_items {
+        margin: 1rem 0 0;
+        gap: 0.65rem;
+    }
+
+    .app__specialMenu-menu_heading {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        padding-bottom: 0.65rem;
+    }
+
+    .app__specialMenu-cta {
+        margin-top: 1.25rem;
+    }
+
+    .app__specialMenu .custom__button,
+    .app__specialMenu-cta-btn {
+        margin-top: 0 !important;
     }
 }
 
@@ -227,6 +274,24 @@
 }
 
 @media screen and (max-width: 650px) {
+    .app__specialMenu-title {
+        margin-bottom: 1rem;
+    }
+
+    .app__specialMenu-menu_heading {
+        font-size: 1.65rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+    }
+
+    .app__specialMenu-menu_cocktails {
+        padding: 1.25rem;
+    }
+
+    .app__specialMenu-cta {
+        margin-top: 1rem;
+    }
+
     .app__specialMenu-menu_img {
         width: 100%;
     }

@@ -14,10 +14,6 @@ const Booking = () => (
       <p className="p__opensans" style={{ marginBottom: '2rem' }}>
         Reserve your table at Prosperity Ukrainian Restaurant
       </p>
-      <p className="p__opensans" style={{ marginBottom: '2rem', color: '#DCCA87' }}>
-        Table reservations are available only during our opening hours.
-        For banquets or special events, please contact us directly.
-      </p>
 
       <BookingForm variant="compact" />
     </div>

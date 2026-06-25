@@ -240,12 +240,6 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
 
   return (
     <form className="app__booking-form" onSubmit={onSubmit} noValidate>
-      {!apiReady ? (
-        <p className="app__booking-notice p__opensans" role="note">
-          Online booking is being set up. Please call us to reserve a table.
-        </p>
-      ) : null}
-
       {error ? (
         <p className="app__booking-error p__opensans" role="alert">
           {error}

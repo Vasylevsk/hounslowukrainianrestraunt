@@ -166,11 +166,6 @@ select.app__booking-input option {
     color: #f5d0d0;
 }
 
-.app__booking-notice {
-    margin-bottom: 1rem;
-    color: var(--color-golden);
-}
-
 .app__booking-hours-hint {
     margin: -0.5rem 0 1rem;
     font-size: 14px;

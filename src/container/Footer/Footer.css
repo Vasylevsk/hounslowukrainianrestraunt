@@ -107,22 +107,19 @@
 
 .app__footer-legal {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
-  margin-top: 1.35rem;
-  padding-top: 1.15rem;
-  border-top: 1px solid rgba(220, 202, 135, 0.12);
-  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
 }
 
 .app__footer-legal-link {
   font-family: var(--font-alt);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(220, 202, 135, 0.82);
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: rgba(220, 202, 135, 0.78);
   text-decoration: none;
   transition: color 0.25s ease;
 }
@@ -131,9 +128,56 @@
   color: var(--color-white);
 }
 
+.app__footer-legal--desktop {
+  display: none;
+}
+
+.app__footer-legal--mobile {
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(220, 202, 135, 0.12);
+  width: 100%;
+}
+
+.app__footer-legal--mobile .app__footer-legal-link {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+}
+
+@media screen and (min-width: 1151px) {
+  .app__footer-links {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 1rem 2rem;
+  }
+
+  .app__footer-legal--mobile {
+    display: none;
+  }
+
+  .app__footer-legal--desktop {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    padding: 1.35rem 2rem 0;
+    border-top: 1px solid rgba(220, 202, 135, 0.12);
+    box-sizing: border-box;
+  }
+
+  .app__footer-legal--desktop .app__footer-legal-link {
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+}
+
 .footer__copyright {
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     padding: 1.75rem 2rem 0.5rem;
     box-sizing: border-box;
     border-top: 1px solid rgba(220, 202, 135, 0.12);
@@ -212,6 +256,12 @@
     }
 }
 
+@media screen and (min-width: 1151px) {
+  .footer__copyright {
+    margin-top: 1.25rem;
+  }
+}
+
 @media screen and (max-width: 1150px) {
     .app__footer-links {
         align-items: center;
@@ -227,9 +277,36 @@
     }
 }
 
+/* Overlay hidden on phones — drop the large top gap meant for the decorative image */
+@media screen and (max-width: 768px) {
+    .app__footer.section__padding {
+        padding-top: 1.25rem;
+        padding-bottom: 2rem;
+    }
+
+    .app__footer-links {
+        margin-top: 0.5rem;
+    }
+
+    .app__footer-links_contact,
+    .app__footer-links_logo,
+    .app__footer-links_work {
+        margin: 1.25rem 0;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .app__footer {
-        padding: 0 0 2rem 0;
+        padding: 0 0 1.5rem 0;
+    }
+
+    .app__footer.section__padding {
+        padding-top: 0.75rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .app__footer-links {
+        margin-top: 0;
     }
 
     .footer__copyright {

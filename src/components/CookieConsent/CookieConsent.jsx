@@ -75,7 +75,7 @@ const CookieConsent = () => {
           </h2>
           <p id="cookie-consent-desc" className="cookie-consent__text">
             We use essential cookies so the site works. With your permission, we also use analytics
-            cookies to understand how guests explore our menu and pages — helping us improve
+            cookies to understand how guests explore our menu and pages - helping us improve
             Prosperity online.{' '}
             <Link to="/cookie-policy" className="cookie-consent__policy-link">
               Cookie Policy

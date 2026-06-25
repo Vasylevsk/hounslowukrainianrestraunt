@@ -2,7 +2,7 @@ import { ORGANIZATION, SITE_NAME } from './seo';
 
 const BUSINESS_NAME = SITE_NAME;
 const SITE_URL = 'https://prosperityua.uk';
-const CONTACT_EMAIL = 'info@prosperityua.uk';
+const CONTACT_EMAIL = 'prosperitylondon@gmail.com';
 const LAST_UPDATED = 'June 2026';
 
 const sharedContact = {
@@ -60,10 +60,10 @@ export const LEGAL_PAGES = {
           'Under UK GDPR we rely on:',
         ],
         list: [
-          'Contract — to fulfil a booking or respond to your request.',
-          'Legitimate interests — to operate our restaurant and website securely and effectively.',
-          'Consent — for non-essential cookies and analytics.',
-          'Legal obligation — where the law requires us to keep certain records.',
+          'Contract - to fulfil a booking or respond to your request.',
+          'Legitimate interests - to operate our restaurant and website securely and effectively.',
+          'Consent - for non-essential cookies and analytics.',
+          'Legal obligation - where the law requires us to keep certain records.',
         ],
       },
       {

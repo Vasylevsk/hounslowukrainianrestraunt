@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { LoungePromo } from '../components';
-import { AboutUs, Chef, FindUs, Gallery, Header, HumanitarianTeaser, SpecialMenu } from '../container';
+import { AboutUs, BanquetTeaser, Chef, FindUs, Gallery, Header, HumanitarianTeaser, SpecialMenu } from '../container';
 
 const Home = () => {
   useEffect(() => {
@@ -11,11 +11,7 @@ const Home = () => {
       setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
-          const offsetTop = element.offsetTop - 80; // Account for navbar height
-          window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-          });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 100);
     }
@@ -24,13 +20,14 @@ const Home = () => {
   return (
     <>
       <Header />
-      <AboutUs />
       <SpecialMenu />
-      <Chef />
+      <AboutUs />
+      <BanquetTeaser />
       <LoungePromo />
+      <Chef />
       <Gallery />
-      <FindUs />
       <HumanitarianTeaser />
+      <FindUs />
     </>
   );
 };

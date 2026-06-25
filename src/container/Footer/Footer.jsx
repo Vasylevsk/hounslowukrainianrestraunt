@@ -14,8 +14,18 @@ import './Footer.css';
 const Footer = () => {
   const { content } = useSiteContent();
 
+  const legalNav = (className) => (
+    <nav className={`app__footer-legal ${className}`.trim()} aria-label="Legal">
+      {FOOTER_LEGAL_LINKS.map((link) => (
+        <Link key={link.to} to={link.to} className="app__footer-legal-link">
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  );
+
   return (
-  <div className="app__footer section__padding" id="contact">
+  <div className="app__footer section__padding" id="footer">
     <FooterOverlay />
 
     <div className="app__footer-links">
@@ -23,13 +33,6 @@ const Footer = () => {
         <h1 className="app__footer-headtext">Contact Us</h1>
         <p className="p__opensans"><a href="tel:+442045680606">020 4568 0606</a></p>
         <p className="p__opensans"><a href="tel:+447853514567">07853 514567</a></p>
-        <nav className="app__footer-legal" aria-label="Legal">
-          {FOOTER_LEGAL_LINKS.map((link) => (
-            <Link key={link.to} to={link.to} className="app__footer-legal-link">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
       </div>
 
       <div className="app__footer-links_logo">
@@ -59,8 +62,11 @@ const Footer = () => {
             {row.day}: {row.hours}
           </p>
         ))}
+        {legalNav('app__footer-legal--mobile')}
       </div>
     </div>
+
+    {legalNav('app__footer-legal--desktop')}
 
     <div className="footer__copyright">
       <div className="footer__copyright-inner">

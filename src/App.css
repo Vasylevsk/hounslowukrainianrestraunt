@@ -69,6 +69,11 @@ body.nav-overlay-open {
   background-image: none;
 }
 
+#about,
+#contact {
+  scroll-margin-top: var(--site-header-height, 72px);
+}
+
 /* Mobile: clean gradient instead of photo (texture loads poorly on phones) */
 @media screen and (max-width: 768px) {
   .app__site {
@@ -244,13 +249,13 @@ body.nav-overlay-open {
 
 @media screen and (max-width: 850px) {
   .section__padding {
-    padding: 4rem;
+    padding: 5rem 4rem;
   }
 }
 
 @media screen and (max-width: 650px) {
   .section__padding {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
   }
   
   .p__cormorant {

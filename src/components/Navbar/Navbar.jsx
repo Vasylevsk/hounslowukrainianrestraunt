@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
+
+import { NAV_CTA, NAV_LINKS } from '../../constants/navigation';
 import './Navbar.css';
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     if (toggleMenu) {
@@ -17,67 +20,102 @@ const Navbar = () => {
     return () => document.body.classList.remove('nav-overlay-open');
   }, [toggleMenu]);
 
-  const handleAnchorClick = (e, anchor) => {
-    e.preventDefault();
-    setToggleMenu(false);
+  const closeMenu = () => setToggleMenu(false);
 
-    if (location.pathname !== '/') {
-      // If not on home page, navigate to home with anchor
-      window.location.href = anchor;
-    } else {
-      // If on home page, scroll to anchor smoothly
-      const element = document.querySelector(anchor);
-      if (element) {
-        const offsetTop = element.offsetTop - 80; // Account for navbar height
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-      }
+  const scrollToAnchor = (anchor) => {
+    const element = document.querySelector(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
+  const handleAnchorClick = (e, anchor) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (location.pathname !== '/') {
+      history.push({ pathname: '/', hash: anchor.slice(1) });
+      return;
+    }
+
+    scrollToAnchor(anchor);
+  };
+
+  const renderNavItem = (link, onNavigate) => {
+    if (link.type === 'anchor') {
+      return (
+        <a href={link.to} onClick={(e) => handleAnchorClick(e, link.to)}>
+          {link.label}
+        </a>
+      );
+    }
+
+    return (
+      <Link to={link.to} onClick={onNavigate}>
+        {link.label}
+      </Link>
+    );
+  };
+
   return (
-    <nav className="app__navbar">
-        <div className="app__navbar-logo">
-          <Link to="/" className="app__navbar-logo-text">
-            PROSPERITY
-          </Link>
-        </div>
-        <ul className="app__navbar-links">
-          <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
-          <li className="p__opensans"><Link to="/menu">Menu</Link></li>
-          <li className="p__opensans"><Link to="/breakfast">Breakfast</Link></li>
-          <li className="p__opensans"><Link to="/banquet">Banquet</Link></li>
-          <li className="p__opensans"><Link to="/humanitarian-aid">Ukraine aid</Link></li>
-          <li className="p__opensans"><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a></li>
-        </ul>
-        <div className="app__navbar-login">
-          <Link to="/booking" className="p__opensans">Book Table</Link>
-        </div>
-        <div className="app__navbar-smallscreen">
-          <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
+    <nav className="app__navbar" aria-label="Main">
+      <div className="app__navbar-logo">
+        <Link to="/" className="app__navbar-logo-text">
+          PROSPERITY
+        </Link>
+      </div>
 
-          {toggleMenu && (
-            <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
-            <MdOutlineRestaurantMenu fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
-              <ul className="app__navbar-smallscreen_links">
-                <li className="p__opensans"><a href="#about" onClick={(e) => handleAnchorClick(e, '#about')}>About</a></li>
-                <li className="p__opensans"><Link to="/menu" onClick={() => setToggleMenu(false)}>Menu</Link></li>
-                <li className="p__opensans"><Link to="/breakfast" onClick={() => setToggleMenu(false)}>Breakfast</Link></li>
-                <li className="p__opensans"><Link to="/banquet" onClick={() => setToggleMenu(false)}>Banquet</Link></li>
-                <li className="p__opensans"><Link to="/humanitarian-aid" onClick={() => setToggleMenu(false)}>Ukraine aid</Link></li>
-                <li className="p__opensans"><a href="#contact" onClick={(e) => handleAnchorClick(e, '#contact')}>Contact</a></li>
-                <li className="p__opensans"><Link to="/booking" onClick={() => setToggleMenu(false)}>Book Table</Link></li>
-              </ul>
-            </div>
-          )}
+      <ul className="app__navbar-links">
+        {NAV_LINKS.map((link) => (
+          <li key={link.to} className="p__opensans">
+            {renderNavItem(link)}
+          </li>
+        ))}
+      </ul>
 
+      <div className="app__navbar-login">
+        <Link to={NAV_CTA.to} className="p__opensans app__navbar-cta">
+          {NAV_CTA.label}
+        </Link>
+      </div>
 
-        </div>
+      <div className="app__navbar-smallscreen">
+        <button
+          type="button"
+          className="app__navbar-menu-btn"
+          onClick={() => setToggleMenu(true)}
+          aria-label="Open menu"
+        >
+          <GiHamburgerMenu color="#fff" fontSize={27} />
+        </button>
+
+        {toggleMenu && (
+          <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
+            <button
+              type="button"
+              className="overlay__close"
+              onClick={closeMenu}
+              aria-label="Close menu"
+            >
+              <MdOutlineRestaurantMenu fontSize={27} />
+            </button>
+            <ul className="app__navbar-smallscreen_links">
+              {NAV_LINKS.map((link) => (
+                <li key={link.to} className="p__opensans">
+                  {renderNavItem(link, closeMenu)}
+                </li>
+              ))}
+              <li className="p__opensans app__navbar-mobile-cta">
+                <Link to={NAV_CTA.to} onClick={closeMenu} className="app__navbar-cta">
+                  {NAV_CTA.label}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     </nav>
   );
-}
-
+};
 
 export default Navbar;

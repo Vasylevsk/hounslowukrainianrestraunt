@@ -81,6 +81,12 @@
     transition: .5s ease;
 }
 
+.app__navbar-cta {
+    color: var(--color-golden);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
 .app__navbar-login a:hover {
     border-bottom: 1px solid var(--color-golden);
 }
@@ -158,6 +164,16 @@
 
 .app__navbar-smallscreen_links li:hover a {
     color: var(--color-white);
+}
+
+.app__navbar-mobile-cta {
+    margin-top: 0.5rem !important;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(220, 202, 135, 0.18);
+}
+
+.app__navbar-mobile-cta .app__navbar-cta {
+    font-size: 2rem;
 }
 
 @media screen and (min-width: 2000px) {
