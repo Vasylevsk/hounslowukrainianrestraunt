@@ -1,7 +1,7 @@
 /* Full-viewport hero slideshow — crossfade + continuous Ken Burns (no scale snap on switch) */
 
 .app__hero {
-  --hero-height: calc(100svh - var(--site-header-height, 72px));
+  --hero-height: calc(var(--app-vh, 100svh) - var(--site-header-height, 72px));
   --hero-slide-ms: 4500ms;
   --hero-fade-ms: 1400ms;
   --hero-ken-duration: 18s;
@@ -9,11 +9,10 @@
   width: 100%;
   height: var(--hero-height);
   min-height: 22rem;
-  max-height: calc(100svh - var(--site-header-height, 72px));
+  max-height: var(--hero-height);
   overflow: hidden;
   isolation: isolate;
   background: var(--color-black);
-  contain: layout style paint;
 }
 
 .app__hero-slides {
@@ -61,7 +60,6 @@
   transform-origin: center center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  will-change: transform;
   animation: app__hero-ken-burns var(--hero-ken-duration) ease-in-out infinite;
   animation-delay: calc(var(--hero-ken-delay, 0s) * -1);
 }
@@ -188,6 +186,17 @@
     flex: 1 1 10.5rem;
     min-width: 10.5rem;
     padding: 0.8rem 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app__hero-slide {
+    transition: opacity 1s ease;
+  }
+
+  .app__hero-slide-img {
+    animation: none;
+    transform: scale(1.06);
   }
 }
 

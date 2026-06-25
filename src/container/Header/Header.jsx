@@ -17,7 +17,9 @@ const Header = () => {
   const heroRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [scrollPaused, setScrollPaused] = useState(false);
+  const paused = hoverPaused || scrollPaused;
 
   const goNext = useCallback(() => {
     setActiveIndex((current) => (current + 1) % SLIDE_COUNT);
@@ -29,6 +31,16 @@ const Header = () => {
     load();
     mq.addEventListener('change', load);
     return () => mq.removeEventListener('change', load);
+  }, []);
+
+  useEffect(() => {
+    const setAppVh = () => {
+      document.documentElement.style.setProperty('--app-vh', `${window.innerHeight}px`);
+    };
+
+    setAppVh();
+    window.addEventListener('orientationchange', setAppVh);
+    return () => window.removeEventListener('orientationchange', setAppVh);
   }, []);
 
   useEffect(() => {
@@ -53,6 +65,21 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    let scrollEndTimer;
+    const onScroll = () => {
+      setScrollPaused(true);
+      window.clearTimeout(scrollEndTimer);
+      scrollEndTimer = window.setTimeout(() => setScrollPaused(false), 200);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.clearTimeout(scrollEndTimer);
+    };
+  }, []);
+
+  useEffect(() => {
     if (reduceMotion || paused || SLIDE_COUNT < 2) return undefined;
     const timer = window.setInterval(goNext, HOME_HERO_INTERVAL_MS);
     return () => window.clearInterval(timer);
@@ -70,8 +97,8 @@ const Header = () => {
       className={`app__hero${paused ? ' app__hero--paused' : ''}`}
       id="home"
       aria-label="Prosperity Ukrainian Restaurant"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
     >
       <div className="app__hero-slides" aria-hidden="true">
         {HOME_HERO_SLIDES.map((slide, index) => (
