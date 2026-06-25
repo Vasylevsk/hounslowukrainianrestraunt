@@ -8,8 +8,18 @@ function readScrollOffsetPx() {
   return header + menuNav + 8;
 }
 
+const GA_MEASUREMENT_ID = 'G-RB1B5L5NKG';
+
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        page_path: pathname + hash,
+      });
+    }
+  }, [pathname, hash]);
 
   useEffect(() => {
     if (hash) {
