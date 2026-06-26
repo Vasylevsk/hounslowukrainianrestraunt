@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { defaultWorkingHours } from '../../constants/siteDefaults';
+import { LOUNGE_SHISHA_ENABLED } from '../../constants/features';
 import { useSiteContent } from '../../context/SiteContentContext';
 import LoungePromo from '../LoungePromo/LoungePromo';
 import { createBooking, isBookingApiConfigured } from '../../services/bookingApi';
@@ -15,7 +16,7 @@ import {
 } from '../../utils/bookingHours';
 
 const EMPTY = {
-  area: '',
+  area: LOUNGE_SHISHA_ENABLED ? '' : 'Restaurant',
   name: '',
   email: '',
   phone: '',
@@ -27,7 +28,7 @@ const EMPTY = {
 
 const AREA_OPTIONS = [
   { value: 'Restaurant', label: 'Restaurant' },
-  { value: 'Lounge', label: 'Lounge' },
+  ...(LOUNGE_SHISHA_ENABLED ? [{ value: 'Lounge', label: 'Lounge' }] : []),
 ];
 
 function TimeField({ form, timeSlots, timeBounds, submitting, onChange, id, label, compact }) {
@@ -246,48 +247,54 @@ const BookingForm = ({ variant = 'full', showBackLink = false }) => {
         </p>
       ) : null}
 
-      {compact ? (
-        <select
-          name="area"
-          value={form.area}
-          onChange={onChange}
-          required
-          className="app__booking-input app__booking-input--area"
-          disabled={submitting}
-          style={{ marginBottom: '1rem' }}
-        >
-          <option value="">Restaurant or Lounge</option>
-          {AREA_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
-      ) : (
-        <div className="app__booking-form_field app__booking-form_field--area">
-          <label className="app__booking-label" htmlFor="booking-area">
-            Dining area
-          </label>
+      {LOUNGE_SHISHA_ENABLED ? (
+        compact ? (
           <select
-            id="booking-area"
             name="area"
             value={form.area}
             onChange={onChange}
             required
             className="app__booking-input app__booking-input--area"
             disabled={submitting}
+            style={{ marginBottom: '1rem' }}
           >
-            <option value="">Select Restaurant or Lounge</option>
+            <option value="">Restaurant or Lounge</option>
             {AREA_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>
                 {o.label}
               </option>
             ))}
           </select>
-        </div>
+        ) : (
+          <div className="app__booking-form_field app__booking-form_field--area">
+            <label className="app__booking-label" htmlFor="booking-area">
+              Dining area
+            </label>
+            <select
+              id="booking-area"
+              name="area"
+              value={form.area}
+              onChange={onChange}
+              required
+              className="app__booking-input app__booking-input--area"
+              disabled={submitting}
+            >
+              <option value="">Select Restaurant or Lounge</option>
+              {AREA_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )
+      ) : (
+        <input type="hidden" name="area" value="Restaurant" />
       )}
 
-      {compact && form.area === 'Lounge' ? <LoungePromo variant="inline" /> : null}
+      {LOUNGE_SHISHA_ENABLED && compact && form.area === 'Lounge' ? (
+        <LoungePromo variant="inline" />
+      ) : null}
 
       <div className="app__booking-form_row">
         {compact ? (

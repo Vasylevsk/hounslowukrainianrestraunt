@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { LOUNGE_SHISHA_ENABLED } from '../constants/features';
 import { LoungePromo } from '../components';
 import { AboutUs, BanquetTeaser, Chef, FindUs, Gallery, Header, HumanitarianTeaser, SpecialMenu } from '../container';
 
@@ -23,7 +24,7 @@ const Home = () => {
       <SpecialMenu />
       <AboutUs />
       <BanquetTeaser />
-      <LoungePromo />
+      {LOUNGE_SHISHA_ENABLED ? <LoungePromo /> : null}
       <Chef />
       <Gallery />
       <HumanitarianTeaser />

@@ -1,3 +1,5 @@
+import { LOUNGE_SHISHA_ENABLED } from './features';
+
 /** Central SEO copy and per-route titles (English, UK-focused). */
 
 export const SITE_NAME = 'Prosperity Ukrainian Restaurant';
@@ -36,8 +38,9 @@ export const SEO_BY_ROUTE = {
   },
   '/booking': {
     title: `Book a Table | ${SITE_NAME}`,
-    description:
-      'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham — restaurant or lounge. Shisha in the lounge £27. Call 020 4568 0606 or book online.',
+    description: LOUNGE_SHISHA_ENABLED
+      ? 'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham — restaurant or lounge. Shisha in the lounge £27. Call 020 4568 0606 or book online.'
+      : 'Reserve a table at Prosperity Ukrainian Restaurant, Twickenham. Call 020 4568 0606 or book online.',
   },
   '/banquet': {
     title: `Banquets & Celebrations | ${SITE_NAME}`,

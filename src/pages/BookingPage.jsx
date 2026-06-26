@@ -1,4 +1,5 @@
 import React from 'react';
+import { LOUNGE_SHISHA_ENABLED } from '../constants/features';
 import { LoungePromo, SubHeading, BookingForm } from '../components';
 import { images } from '../constants';
 import './BookingPage.css';
@@ -14,7 +15,7 @@ const BookingPage = () => (
             Reserve your table at Prosperity Ukrainian Restaurant
           </p>
 
-          <LoungePromo variant="inline" />
+          {LOUNGE_SHISHA_ENABLED ? <LoungePromo variant="inline" /> : null}
 
           <BookingForm variant="full" showBackLink />
         </div>
