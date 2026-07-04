@@ -75,7 +75,7 @@ const BanquetPage = () => (
         <div className="app__banquet-page_section">
           <h2 className="app__banquet-section-title">Our Menu</h2>
           <p className="p__opensans">
-            Traditional Ukrainian banquet dishes, from classics to grilled specialties, prepared with
+            Traditional Ukrainian banquet dishes, from classics to grilled specialities, prepared with
             authentic recipes and served with care.
           </p>
         </div>

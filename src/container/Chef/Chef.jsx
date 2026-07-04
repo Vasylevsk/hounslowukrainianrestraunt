@@ -22,7 +22,7 @@ const Chef = () => (
           </p>
         </div>
         <p className="p__opensans app__chef-content_text">
-          We honor the traditions of Ukrainian cuisine, bringing authentic flavors and time-honored recipes to your
+          We honour the traditions of Ukrainian cuisine, bringing authentic flavours and time-honoured recipes to your
           table. Every meal is prepared with passion, using the finest ingredients and traditional cooking methods
           passed down through generations.
         </p>

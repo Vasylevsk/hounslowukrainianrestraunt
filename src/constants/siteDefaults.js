@@ -3,7 +3,7 @@
 import { defaultDrinksIntro, defaultDrinksMenu } from './drinksMenu';
 import menuDishImages, { ukrainianGalushkyGallery } from './menuImages';
 
-export const SITE_CONTENT_VERSION = 17;
+export const SITE_CONTENT_VERSION = 18;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
@@ -44,7 +44,7 @@ export const defaultFeaturedMenu = {
 
 /** Canonical category order for the menu page (starters → mains → extras → desserts). */
 export const MENU_CATEGORY_ORDER = [
-  'Appetizers',
+  'Starters',
   'Salads',
   'Soups',
   'Main Courses',
@@ -66,7 +66,7 @@ export function sortMenuCategories(categories) {
 /** Full menu. Optional `image`: public URL e.g. /menu/dish.jpg. Optional `variants`: { name, price }[] */
 export const defaultFullMenu = [
   {
-    title: 'Appetizers',
+    title: 'Starters',
     items: [
       {
         name: 'Salo with Black Bread',
@@ -110,9 +110,9 @@ export const defaultFullMenu = [
         ...img(),
       },
       {
-        name: 'Warm Eggplant Salad',
+        name: 'Warm Aubergine Salad',
         price: '£9',
-        description: 'Mixed greens, cherry tomatoes, roasted eggplant, parmesan, dressing.',
+        description: 'Mixed greens, cherry tomatoes, roasted aubergine, parmesan, dressing.',
         ...img(),
       },
       {
@@ -163,7 +163,7 @@ export const defaultFullMenu = [
     title: 'Main Courses',
     items: [
       {
-        name: 'Caramelized Chicken Steak',
+        name: 'Caramelised Chicken Steak',
         price: '£12',
         description: 'Marinated chicken fillet, served with salad.',
         ...img(),
@@ -342,7 +342,7 @@ export const defaultFullMenu = [
   {
     title: 'Sides',
     items: [
-      { name: 'French Fries', price: '£4', description: '', ...img() },
+      { name: 'Chips', price: '£4', description: '', ...img() },
       { name: 'Rice', price: '£4', description: '', ...img() },
       { name: 'Rustic Potatoes', price: '£5', description: '', ...img() },
       { name: 'Potato Gratin or Mashed Potatoes', price: '£5', description: '', ...img() },
@@ -532,7 +532,7 @@ export const defaultBreakfastMenu = [
         name: 'Burger + Chips',
         price: '£14',
         description:
-          'Cheese, green salad, tomato, pickled cucumber or caramelized onion. Chicken or beef.',
+          'Cheese, green salad, tomato, pickled cucumber or caramelised onion. Chicken or beef.',
         ...img(),
       },
       {
