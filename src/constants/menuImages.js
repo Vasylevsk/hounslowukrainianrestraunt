@@ -1,7 +1,9 @@
 import banosh from '../assets/menu/Banosh.jpeg';
 import borscht from '../assets/menu/Borscht with Salo & Sour Cream.jpeg';
+import braisedPorkSteak from '../assets/menu/Braised Pork Steak.jpeg';
 import bukovynaLamb from '../assets/menu/Bukovyna-style Lamb.png';
 import cakeOfTheDay from '../assets/menu/Cake of the Day.png';
+import caramelisedChickenSteak from '../assets/menu/Caramelised Chicken Steak.jpeg';
 import chanakhy from '../assets/menu/Chanakhy.png';
 import cheburaky from '../assets/menu/Cheburaky.jpeg';
 import chickenKyiv from '../assets/menu/Chicken Kyiv.jpeg';
@@ -17,18 +19,22 @@ import potatoPancakes from '../assets/menu/Potato Pancakes, 5 pcs.png';
 import roastedCrispyQuail from '../assets/menu/Roasted Crispy Quail.png';
 import seasonalOkroshka from '../assets/menu/Seasonal Traditional Okroshka.png';
 import seasonalSoup from '../assets/menu/Seasonal Vegetable Cream Soup with Bruschetta.jpeg';
+import steamedCherryDumplings from '../assets/menu/Steamed cherry dumplings (3 pieces).jpeg';
 import stuffedCabbage from '../assets/menu/Stuffed Cabbage Rolls with Mushroom Sauce.png';
 import syrnyky from '../assets/menu/Syrnyky (Cheese Pancakes).jpeg';
 import galushkyClassic from '../assets/menu/Ukrainian Poltava Galushky.jpeg';
 import galushkySeafood from '../assets/menu/Ukrainian Poltava Galushky.png';
 import varenyky from '../assets/menu/Varenyky.jpeg';
+import verkhovynaSchnitzel from '../assets/menu/Verkhovyna-style Schnitzel.jpeg';
 
 /** Dish name → bundled photo (must match menu item `name` in siteDefaults). */
 const menuDishImages = {
   Banosh: banosh,
   'Borscht with Salo & Sour Cream': borscht,
+  'Braised Pork Steak': braisedPorkSteak,
   'Bukovyna-style Lamb': bukovynaLamb,
   'Cake of the Day': cakeOfTheDay,
+  'Caramelised Chicken Steak': caramelisedChickenSteak,
   Chanakhy: chanakhy,
   Cheburaky: cheburaky,
   'Chicken Kyiv': chickenKyiv,
@@ -46,11 +52,13 @@ const menuDishImages = {
   'Roasted Crispy Quail': roastedCrispyQuail,
   'Seasonal Traditional Okroshka': seasonalOkroshka,
   'Seasonal Vegetable Cream Soup with Bruschetta': seasonalSoup,
+  'Steamed cherry dumplings (3 pieces)': steamedCherryDumplings,
   'Stuffed Cabbage Rolls with Mushroom Sauce': stuffedCabbage,
   'Syrnyky (Cheese Pancakes)': syrnyky,
   'Ukrainian Poltava Galushky': galushkyClassic,
   'Ukrainian Poltava Galushky With seafood': galushkySeafood,
   Varenyky: varenyky,
+  'Verkhovyna-style Schnitzel': verkhovynaSchnitzel,
 };
 
 /** Two studio shots for the galushky menu row (fillings vary - photos show two popular styles). */
