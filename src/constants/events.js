@@ -3,11 +3,24 @@ import eventUkrainianCultural from '../assets/event/Ukrainian Cultural Event.jpe
 import eventVictoria from '../assets/event/victoria.png';
 import eventChristmas from '../assets/event/christmas2026.jpg';
 import eventKupala from '../assets/event/kypala.jpeg';
+import eventIndependenceDay from '../assets/event/Ukrainian Independence Day Festival.jpeg';
 
 import { SOCIAL_LINKS } from './social';
 
 /** Homepage event carousel items. Use sortDate (YYYY-MM-DD) for ordering. */
 export const EVENT_HIGHLIGHTS = [
+  {
+    id: 'independence-day-2026',
+    image: eventIndependenceDay,
+    alt: 'Ukrainian Independence Day Festival 2026 - Orlean Gardens, Twickenham',
+    title: 'Ukrainian Independence Day Festival',
+    subtitle: '5 September 2026 · 12:00-19:00 · Orlean Gardens, Twickenham',
+    sortDate: '2026-09-05',
+    href: 'https://www.eventbrite.co.uk/e/ukrainian-independence-day-festival-tickets-1997154116725',
+    linkType: 'tickets',
+    badge: 'Tickets',
+    ended: false,
+  },
   {
     id: 'ukrainian-cultural',
     image: eventUkrainianCultural,
