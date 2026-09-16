@@ -1,7 +1,17 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { DEFAULT_DESCRIPTION, getSeoForPath, KEYWORDS, ORGANIZATION, SITE_NAME } from '../../constants/seo';
+import { useSiteContent } from '../../context/SiteContentContext';
+import { defaultWorkingHours } from '../../constants/siteDefaults';
+import {
+  DEFAULT_DESCRIPTION,
+  getDefaultDescription,
+  getSeoForPath,
+  KEYWORDS,
+  openingHoursSpecification,
+  ORGANIZATION,
+  SITE_NAME,
+} from '../../constants/seo';
 
 function setMeta(name, content, isProperty = false) {
   if (!content) return;
@@ -40,7 +50,12 @@ function injectJsonLd(id, data) {
 
 const SEO = () => {
   const { pathname } = useLocation();
+  const { content } = useSiteContent();
   const isAdmin = pathname === '/admin';
+  const workingHours =
+    Array.isArray(content.workingHours) && content.workingHours.length > 0
+      ? content.workingHours
+      : defaultWorkingHours;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -48,8 +63,10 @@ const SEO = () => {
     const origin = window.location.origin;
     const url = `${origin}${pathname === '/' ? '/' : pathname}`;
     const { title, description } = getSeoForPath(pathname);
-    const desc = description || DEFAULT_DESCRIPTION;
+    const isHome = pathname === '/';
+    const desc = isHome ? getDefaultDescription(workingHours) : description || DEFAULT_DESCRIPTION;
     const imageUrl = `${origin}/favicon.webp`;
+    const hoursSpec = openingHoursSpecification(workingHours);
 
     document.title = title;
 
@@ -94,6 +111,7 @@ const SEO = () => {
           postalCode: ORGANIZATION.postalCode,
           addressCountry: ORGANIZATION.addressCountry,
         },
+        openingHoursSpecification: hoursSpec,
       });
 
       injectJsonLd('seo-website-jsonld', {
@@ -111,7 +129,7 @@ const SEO = () => {
       if (r) r.remove();
       if (w) w.remove();
     }
-  }, [pathname, isAdmin]);
+  }, [pathname, isAdmin, workingHours]);
 
   return null;
 };

@@ -12,7 +12,7 @@
     <title>Prosperity Ukrainian Restaurant | Twickenham, London</title>
     <meta
       name="description"
-      content="Prosperity Ukrainian Restaurant in Twickenham, London. Authentic Ukrainian cuisine, banquets, live music, and warm hospitality. Book a table at 59 York Street TW1 3LP."
+      content="Authentic Ukrainian cuisine in Twickenham. Open Tuesday–Friday 12:00–21:00, Saturday–Sunday 12:00–22:00. Closed on Mondays. Call 020 4568 0606."
     />
     <meta
       name="keywords"
@@ -29,7 +29,7 @@
     <meta property="og:title" content="Prosperity Ukrainian Restaurant | Twickenham, London" />
     <meta
       property="og:description"
-      content="Authentic Ukrainian cuisine in Twickenham. Banquets, live music, and warm hospitality. Book your table today."
+      content="Authentic Ukrainian cuisine in Twickenham. Open Tuesday–Friday 12:00–21:00, Saturday–Sunday 12:00–22:00. Closed on Mondays. Call 020 4568 0606."
     />
     <meta property="og:locale" content="en_GB" />
 
@@ -37,7 +37,7 @@
     <meta name="twitter:title" content="Prosperity Ukrainian Restaurant | Twickenham, London" />
     <meta
       name="twitter:description"
-      content="Authentic Ukrainian cuisine in Twickenham. Banquets, live music, and warm hospitality."
+      content="Authentic Ukrainian cuisine in Twickenham. Open Tuesday–Friday 12:00–21:00, Saturday–Sunday 12:00–22:00. Closed on Mondays. Call 020 4568 0606."
     />
 
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
@@ -45,6 +45,33 @@
 
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <script type="application/ld+json" id="seo-restaurant-jsonld">
+      {
+        "@context": "https://schema.org",
+        "@type": ["Restaurant", "LocalBusiness"],
+        "name": "Prosperity Ukrainian Restaurant",
+        "url": "https://prosperityua.uk",
+        "telephone": "+442045680606",
+        "servesCuisine": "Ukrainian",
+        "priceRange": "££",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "59 York Street",
+          "addressLocality": "Twickenham",
+          "postalCode": "TW1 3LP",
+          "addressCountry": "GB"
+        },
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "12:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "12:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "12:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "12:00", "closes": "21:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "12:00", "closes": "22:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "22:00" }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

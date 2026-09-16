@@ -1,12 +1,78 @@
 import { LOUNGE_SHISHA_ENABLED } from './features';
+import { defaultWorkingHours } from './siteDefaults';
 
 /** Central SEO copy and per-route titles (English, UK-focused). */
 
 export const SITE_NAME = 'Prosperity Ukrainian Restaurant';
 export const SITE_NAME_SHORT = 'Prosperity';
 
-export const DEFAULT_DESCRIPTION =
-  'Prosperity Ukrainian Restaurant in Twickenham, London. Authentic Ukrainian cuisine, banquets, live music, and warm hospitality. Book a table at 59 York Street TW1 3LP.';
+const CLOSED_RE = /closed/i;
+
+function dayRangeLabel(start, end) {
+  if (start === end) return start;
+  return `${start}–${end}`;
+}
+
+/** Compact hours line for meta descriptions, e.g. "Open Tuesday–Friday 12:00–21:00, Saturday–Sunday 12:00–22:00. Closed on Mondays". */
+export function hoursDescriptionLine(workingHours = defaultWorkingHours) {
+  if (!Array.isArray(workingHours) || workingHours.length === 0) return '';
+
+  const groups = [];
+  workingHours.forEach((row) => {
+    if (!row || !row.day) return;
+    const hours = String(row.hours || '').trim();
+    const prev = groups[groups.length - 1];
+    if (prev && prev.hours === hours) {
+      prev.end = row.day;
+    } else {
+      groups.push({ start: row.day, end: row.day, hours });
+    }
+  });
+
+  const openParts = [];
+  const closedParts = [];
+  groups.forEach((g) => {
+    const label = dayRangeLabel(g.start, g.end);
+    if (CLOSED_RE.test(g.hours)) {
+      closedParts.push(g.start === g.end && g.start === 'Monday' ? 'Mondays' : label);
+    } else {
+      openParts.push(`${label} ${g.hours.replace(/[---]/g, '–')}`);
+    }
+  });
+
+  const parts = [];
+  if (openParts.length) parts.push(`Open ${openParts.join(', ')}`);
+  if (closedParts.length) parts.push(`Closed on ${closedParts.join(' and ')}`);
+  return parts.join('. ');
+}
+
+export function openingHoursSpecification(workingHours = defaultWorkingHours) {
+  if (!Array.isArray(workingHours)) return [];
+  return workingHours.flatMap((row) => {
+    if (!row || !row.day) return [];
+    const hours = String(row.hours || '');
+    if (CLOSED_RE.test(hours)) return [];
+    const m = hours.match(/(\d{1,2})\s*:\s*(\d{2})\s*[---]\s*(\d{1,2})\s*:\s*(\d{2})/);
+    if (!m) return [];
+    return [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: row.day,
+        opens: `${String(m[1]).padStart(2, '0')}:${m[2]}`,
+        closes: `${String(m[3]).padStart(2, '0')}:${m[4]}`,
+      },
+    ];
+  });
+}
+
+export function getDefaultDescription(workingHours = defaultWorkingHours) {
+  const hours = hoursDescriptionLine(workingHours);
+  return hours
+    ? `Authentic Ukrainian cuisine in Twickenham. ${hours}. Call 020 4568 0606.`
+    : 'Authentic Ukrainian cuisine in Twickenham. Banquets, live music, and warm hospitality. Call 020 4568 0606.';
+}
+
+export const DEFAULT_DESCRIPTION = getDefaultDescription();
 
 export const KEYWORDS =
   'Ukrainian restaurant Twickenham, Ukrainian restaurant London, Prosperity restaurant, Ukrainian food UK, banquet hall Twickenham, book table Ukrainian restaurant, York Street restaurant';
@@ -23,7 +89,7 @@ export const ORGANIZATION = {
 /** Pathname (no query) -> { title, description } */
 export const SEO_BY_ROUTE = {
   '/': {
-    title: `${SITE_NAME} | Ukrainian Restaurant Twickenham, London`,
+    title: `${SITE_NAME} | Twickenham, London`,
     description: DEFAULT_DESCRIPTION,
   },
   '/menu': {
