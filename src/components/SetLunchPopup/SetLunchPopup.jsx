@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FiPhone } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 
@@ -51,7 +51,7 @@ const SetLunchPopup = () => {
     window.setTimeout(() => {
       setOpen(false);
       setClosing(false);
-    }, 280);
+    }, 260);
   }, []);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const SetLunchPopup = () => {
     const reveal = () => {
       if (shown) return;
       shown = true;
-      delayId = window.setTimeout(() => setOpen(true), 700);
+      delayId = window.setTimeout(() => setOpen(true), 600);
     };
 
     const tick = () => {
@@ -96,7 +96,6 @@ const SetLunchPopup = () => {
 
   useEffect(() => {
     if (!open) return undefined;
-    const prev = document.body.style.overflow;
     document.body.classList.add('set-lunch-open');
     const id = window.setTimeout(() => closeBtnRef.current?.focus(), 50);
     const onKey = (e) => {
@@ -107,23 +106,17 @@ const SetLunchPopup = () => {
       window.clearTimeout(id);
       window.removeEventListener('keydown', onKey);
       document.body.classList.remove('set-lunch-open');
-      document.body.style.overflow = prev;
     };
   }, [open, close]);
 
   if (isHidden || !open) return null;
 
-  const borscht = menuDishImages['Borscht with Salo & Sour Cream'];
-  const chicken = menuDishImages['Caramelised Chicken Steak'];
+  const photo = menuDishImages['Borscht with Salo & Sour Cream'];
 
   return (
-    <div
-      className={`set-lunch${closing ? ' set-lunch--closing' : ''}`}
-      role="presentation"
-      onClick={close}
-    >
-      <div
-        className="set-lunch__dialog"
+    <div className={`set-lunch${closing ? ' set-lunch--closing' : ''}`} role="presentation" onClick={close}>
+      <article
+        className="set-lunch__card"
         role="dialog"
         aria-modal="true"
         aria-labelledby="set-lunch-title"
@@ -137,58 +130,49 @@ const SetLunchPopup = () => {
           onClick={close}
           aria-label="Close set lunch offer"
         >
-          <MdClose size={22} />
+          <MdClose size={20} />
         </button>
 
-        <div className="set-lunch__media" aria-hidden="true">
-          <img className="set-lunch__photo set-lunch__photo--main" src={borscht} alt="" />
-          <img className="set-lunch__photo set-lunch__photo--side" src={chicken} alt="" />
-          <p className="set-lunch__badge">{SET_LUNCH.limit}</p>
+        <div className="set-lunch__hero">
+          <img src={photo} alt="" />
         </div>
 
-        <div className="set-lunch__copy">
+        <div className="set-lunch__body">
           <p className="set-lunch__eyebrow">{SET_LUNCH.eyebrow}</p>
           <h2 id="set-lunch-title" className="set-lunch__title">
             {SET_LUNCH.title}
           </h2>
           <img src={images.spoon} alt="" className="spoon__img set-lunch__spoon" />
           <p className="set-lunch__days">{SET_LUNCH.days}</p>
-          <p id="set-lunch-desc" className="set-lunch__tagline">
-            {SET_LUNCH.tagline}
+          <p className="set-lunch__tagline">{SET_LUNCH.tagline}</p>
+
+          <div className="set-lunch__offer" aria-label="Set lunch prices">
+            <div className="set-lunch__price">
+              <p className="set-lunch__amount">{SET_LUNCH.prices[0].amount}</p>
+              <p className="set-lunch__label">{SET_LUNCH.prices[0].label}</p>
+            </div>
+            <div className="set-lunch__rule" aria-hidden="true" />
+            <div className="set-lunch__price">
+              <p className="set-lunch__amount">{SET_LUNCH.prices[1].amount}</p>
+              <p className="set-lunch__label">{SET_LUNCH.prices[1].label}</p>
+              <p className="set-lunch__save">{SET_LUNCH.saveNote}</p>
+            </div>
+          </div>
+
+          <p id="set-lunch-desc" className="set-lunch__summary">
+            {SET_LUNCH.summary}
           </p>
 
-          <div className="set-lunch__prices">
-            {SET_LUNCH.prices.map((price) => (
-              <div
-                key={price.label}
-                className={`set-lunch__price${price.featured ? ' set-lunch__price--featured' : ''}`}
-              >
-                <p className="set-lunch__amount">{price.amount}</p>
-                <p className="set-lunch__label">{price.label}</p>
-                <p className="set-lunch__note">{price.note}</p>
-              </div>
-            ))}
-          </div>
-
-          <p className="set-lunch__detail">{SET_LUNCH.walkIn}</p>
-          <p className="set-lunch__detail">{SET_LUNCH.prepay}</p>
-
-          <div className="set-lunch__actions">
-            <a className="custom__button set-lunch__call" href={SET_LUNCH.phoneHref}>
-              <FiPhone aria-hidden />
-              {SET_LUNCH.phoneLabel}
-            </a>
-            <Link to="/menu" className="set-lunch__menu" onClick={close}>
-              View menu
-            </Link>
-          </div>
+          <a className="custom__button set-lunch__call" href={SET_LUNCH.phoneHref}>
+            <FiPhone aria-hidden />
+            {SET_LUNCH.phoneLabel}
+          </a>
 
           <a className="set-lunch__place" href={SET_LUNCH.mapsHref} target="_blank" rel="noopener noreferrer">
             {SET_LUNCH.place}
           </a>
-          <p className="set-lunch__closing">{SET_LUNCH.closing}</p>
         </div>
-      </div>
+      </article>
     </div>
   );
 };
