@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 
 import { Footer } from './container';
-import { Navbar, ScrollToTop, SEO, CookieConsent } from './components';
+import { Navbar, ScrollToTop, SEO, CookieConsent, SetLunchPopup } from './components';
 import { SiteContentProvider } from './context/SiteContentContext';
 import Home from './pages/Home';
 import BookingPage from './pages/BookingPage';
@@ -49,6 +49,7 @@ const App = () => (
     <Router>
       <ScrollToTop />
       <CookieConsent />
+      <SetLunchPopup />
       <AppLayout />
     </Router>
   </SiteContentProvider>

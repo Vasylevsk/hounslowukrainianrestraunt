@@ -7,6 +7,7 @@ import CookieConsent from './CookieConsent/CookieConsent';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
 import BookingForm from './BookingForm/BookingForm';
 import LoungePromo from './LoungePromo/LoungePromo';
+import SetLunchPopup from './SetLunchPopup/SetLunchPopup';
 
 export {
   SubHeading,
@@ -18,4 +19,5 @@ export {
   CookieConsent,
   BookingForm,
   LoungePromo,
+  SetLunchPopup,
 };
