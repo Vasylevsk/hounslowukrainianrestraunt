@@ -3,17 +3,17 @@
 import { defaultDrinksIntro, defaultDrinksMenu } from './drinksMenu';
 import menuDishImages, { ukrainianGalushkyGallery } from './menuImages';
 
-export const SITE_CONTENT_VERSION = 19;
+export const SITE_CONTENT_VERSION = 20;
 
 const img = (dishName) => ({ image: (dishName && menuDishImages[dishName]) || '' });
 
 export const defaultWorkingHours = [
   { day: 'Monday', hours: 'Closed' },
-  { day: 'Tuesday', hours: '17:00-21:00' },
+  { day: 'Tuesday', hours: '12:00-21:00' },
   { day: 'Wednesday', hours: '12:00-21:00' },
   { day: 'Thursday', hours: '12:00-21:00' },
   { day: 'Friday', hours: '12:00-21:00' },
-  { day: 'Saturday', hours: '09:00-22:00' },
+  { day: 'Saturday', hours: '12:00-22:00' },
   { day: 'Sunday', hours: '12:00-22:00' },
 ];
 
