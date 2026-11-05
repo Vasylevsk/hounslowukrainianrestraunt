@@ -6,6 +6,7 @@ import { MdClose } from 'react-icons/md';
 import { images } from '../../constants';
 import { SET_LUNCH_POPUP_ENABLED } from '../../constants/features';
 import menuDishImages from '../../constants/menuImages';
+import { matchPopupBlockingLunch } from '../../constants/matchDay';
 import { SET_LUNCH, SET_LUNCH_STORAGE_KEY } from '../../constants/setLunch';
 import { COOKIE_CONSENT, getCookieConsent } from '../../utils/analytics';
 import './SetLunchPopup.css';
@@ -43,7 +44,10 @@ const SetLunchPopup = () => {
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const closeBtnRef = useRef(null);
-  const isHidden = HIDDEN_PATHS.has(pathname) || !SET_LUNCH_POPUP_ENABLED;
+  const isHidden =
+    HIDDEN_PATHS.has(pathname) ||
+    !SET_LUNCH_POPUP_ENABLED ||
+    (matchPopupBlockingLunch() && !forcePreview());
 
   const close = useCallback(() => {
     if (!forcePreview()) persistDismissed();

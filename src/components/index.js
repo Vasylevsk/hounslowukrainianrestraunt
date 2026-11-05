@@ -8,6 +8,7 @@ import ScrollToTop from './ScrollToTop/ScrollToTop';
 import BookingForm from './BookingForm/BookingForm';
 import LoungePromo from './LoungePromo/LoungePromo';
 import SetLunchPopup from './SetLunchPopup/SetLunchPopup';
+import MatchDayPopup from './MatchDayPopup/MatchDayPopup';
 
 export {
   SubHeading,
@@ -20,4 +21,5 @@ export {
   BookingForm,
   LoungePromo,
   SetLunchPopup,
+  MatchDayPopup,
 };
