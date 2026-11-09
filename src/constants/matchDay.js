@@ -1,6 +1,6 @@
-/** England v Australia match-day offer, Sunday 8 November 2026. */
+/** England v Australia match-day offer, Sunday 8 November 2026. Ended Monday 9 November. */
 
-export const MATCH_DAY_POPUP_ENABLED = true;
+export const MATCH_DAY_POPUP_ENABLED = false;
 
 export const MATCH_DAY_STORAGE_KEY = 'prosperity_match_popup_eng_aus_2026';
 
